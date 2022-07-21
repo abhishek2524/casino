@@ -1,0 +1,43 @@
+@import "./../../../scss/colors";
+.navbar {
+  background-color: $primary-color !important;
+  height: 98px;
+  color: #fff !important;
+  padding: 0 180px !important;
+  position: sticky !important;
+  top: 0 !important;
+  z-index: 9999 !important;
+  .navbar-brand {
+    img {
+      height: 28px;
+      width: 110px;
+    }
+  }
+}
+.profileMainDiv {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .profileImg {
+    height: 60px;
+    width: 60px;
+    border-radius: 50%;
+    margin-right: 14px;
+    img {
+      width: 100% !important;
+      height: 100% !important;
+    }
+  }
+  .userDetail {
+    display: flex;
+    flex-direction: column;
+    .userName {
+      font-size: 16px;
+      font-weight: 500;
+    }
+    .userCode {
+      font-size: 12px;
+      font-weight: 300;
+    }
+  }
+}

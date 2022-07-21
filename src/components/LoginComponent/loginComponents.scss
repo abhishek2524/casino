@@ -1,0 +1,116 @@
+@import "../../scss/colors";
+
+.backgroundDiv {
+  height: 100vh;
+  width: 100vw;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 0;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  opacity: 0.81;
+  //   background-image: url("assets/images/sexy-woman-blac.png");
+}
+
+.loginMainDiv {
+  position: relative;
+  z-index: 1;
+  color: #fff;
+
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+
+  .leftSide {
+    display: flex;
+    // width: fit-content;
+    // background-color: green;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-right: 20%;
+    span {
+      margin-top: 42px;
+    }
+  }
+  .rightSide {
+    // width: fit-content;
+    // background-color: red;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-height: fit-content;
+    overflow-y: auto;
+    .loginForm {
+      position: relative;
+      max-width: 695px;
+      max-height: 824px;
+      width: fit-content;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      // background-color: green;
+      border-radius: 32px;
+      padding: 48px 48px 120px;
+      background-color: rgba(255, 255, 255, 0.6);
+      backdrop-filter: blur(10px);
+      form {
+        color: #000;
+        font-weight: 500;
+        font-size: 18px;
+      }
+      .header {
+        color: #000;
+        opacity: 0.7;
+        margin-bottom: 32px;
+      }
+      .signUpDiv {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        align-items: center;
+
+        .signupLink {
+          color: $primary-color;
+          margin-left: 5px;
+          text-decoration: none;
+          &:hover {
+            color: #000;
+          }
+        }
+      }
+      .form-group {
+        width: 491px;
+        margin-bottom: 32px;
+      }
+      .submitBtn {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        // margin-top: 32px;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        padding: 32px;
+        border-radius: 0 0 32px 32px;
+        .btn {
+          background-color: $primary-color;
+          height: 38px;
+          border: none;
+          box-shadow: none;
+          outline: none;
+          max-width: 357px;
+          width: 100%;
+        }
+      }
+    }
+  }
+}

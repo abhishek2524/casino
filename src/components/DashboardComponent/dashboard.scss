@@ -1,0 +1,34 @@
+.slide {
+  max-height: 415px;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 !important;
+  margin: 48px 0 !important;
+  position: relative;
+  img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: fill;
+  }
+  .slideText {
+    position: absolute;
+    color: #fff;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    .heading {
+      font-size: 48px;
+      font-weight: 400;
+      line-height: 48px;
+    }
+    .subHeading {
+      font-size: 24px;
+      font-weight: 300;
+    }
+  }
+}

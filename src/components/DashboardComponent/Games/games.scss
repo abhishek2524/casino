@@ -1,0 +1,28 @@
+.gameMainDiv {
+  h1 {
+    font-size: 32px;
+    margin-bottom: 24px !important;
+  }
+  .card {
+    height: 256px;
+    padding: 0;
+    margin: 0;
+    border: none;
+    overflow: hidden;
+    border-radius: 24px !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-right: 20px;
+    margin-bottom: 20px;
+    &:nth-child(4n) {
+      padding-right: 0 !important;
+    }
+    img {
+      height: 100% !important;
+      width: 100% !important;
+      object-fit: fill;
+      border-radius: 24px !important;
+    }
+  }
+}

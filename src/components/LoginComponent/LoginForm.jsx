@@ -2,10 +2,15 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 function LoginForm() {
+  const handleLogin = (e) => {
+    e.preventDefault();
+    window.sessionStorage.setItem("login", true);
+    window.location.reload();
+  };
   return (
     <div className="loginForm">
       <h1 className="header">Sign in</h1>
-      <form>
+      <form onSubmit={handleLogin}>
         <div class="form-group">
           <label for="exampleInputEmail1">Email address</label>
           <input

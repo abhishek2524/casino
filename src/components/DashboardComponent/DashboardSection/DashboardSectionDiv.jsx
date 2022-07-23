@@ -5,7 +5,7 @@ function DashboardSectionDiv() {
   return (
     <div className="row dashboardSectionDiv">
       <nav className="navbar navbar-expand-lg bg-dark">
-        <div className="container-fluid">
+        <div className="dashboard-header">
           <button
             className="navbar-toggler"
             type="button"

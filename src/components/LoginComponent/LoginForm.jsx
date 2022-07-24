@@ -12,21 +12,21 @@ function LoginForm() {
       <h1 className="header">Sign in</h1>
       <form onSubmit={handleLogin}>
         <div class="form-group">
-          <label for="exampleInputEmail1">Email address</label>
+          <label for="username">Username</label>
           <input
-            type="email"
+            type="text"
             class="form-control"
-            id="exampleInputEmail1"
-            aria-describedby="emailHelp"
-            placeholder="Enter email"
+            id="username"
+            aria-describedby="usernamer"
+            placeholder="Enter username"
           />
         </div>
         <div class="form-group">
-          <label for="exampleInputPassword1">Password</label>
+          <label for="password">Password</label>
           <input
             type="password"
             class="form-control"
-            id="exampleInputPassword1"
+            id="password"
             placeholder="Password"
           />
         </div>

@@ -7,7 +7,7 @@ function LoginComponents() {
     <div className="loginMainDiv">
       <div className="leftSide">
         <Link to="/">
-          <img src="assets/images/logo.svg" alt="" />
+          <img src="/assets/images/logo.svg" alt="" />
         </Link>
         <span>Best For Online Casino</span>
       </div>

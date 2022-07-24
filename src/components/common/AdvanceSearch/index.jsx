@@ -48,7 +48,7 @@ function AdvanceSearch(props) {
             popperPlacement="bottom-right"
             popperClassName="customPopper"
           />
-          <img src="assets/icons/cal.svg" className="calDiv" alt="cal" />
+          <img src="/assets/icons/cal.svg" className="calDiv" alt="cal" />
         </div>
         {!isSelectSearch && (
           <div className="w-100 endDate position-relative">
@@ -62,7 +62,7 @@ function AdvanceSearch(props) {
               popperPlacement="bottom-left"
               popperClassName="customPopper"
             />
-            <img src="assets/icons/cal.svg" className="calDiv" alt="cal" />
+            <img src="/assets/icons/cal.svg" className="calDiv" alt="cal" />
           </div>
         )}
         {isSelectSearch && (

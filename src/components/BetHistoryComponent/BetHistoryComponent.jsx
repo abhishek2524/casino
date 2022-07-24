@@ -12,7 +12,7 @@ function BetHistoryComponent() {
   const formatCell = (cell, row, rowIndex, formatExtraData) => {
     return (
       <div>
-        {cell} <img src="assets/icons/coins.svg" alt="" />
+        {cell} <img src="/assets/icons/coins.svg" alt="" />
       </div>
     );
   };

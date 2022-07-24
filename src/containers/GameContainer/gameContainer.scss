@@ -1,0 +1,42 @@
+@import "./../../scss/colors";
+.gameContainerStyle {
+  max-height: calc(100vh - 98px) !important;
+  // overflow: hidden;
+  // overflow-y: auto;
+  .contentDiv {
+    margin-left: 315px;
+    flex: 1;
+    padding-left: 44px;
+    // background-color: gray;
+  }
+}
+.gameSubheader {
+  background-color: $secondary-color;
+  color: #fff;
+  height: 54px;
+  display: flex;
+  align-items: center;
+  position: sticky;
+  top: 98px;
+  z-index: 2;
+  .container {
+    height: 100%;
+    .linkDiv {
+      height: 100%;
+      display: flex;
+      align-items: center;
+      .links {
+        // background-color: green;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        padding: 12px;
+        color: #fff;
+        text-decoration: none;
+      }
+      .active {
+        box-shadow: inset 0 2px rgba($color: #fff, $alpha: 0.7);
+      }
+    }
+  }
+}

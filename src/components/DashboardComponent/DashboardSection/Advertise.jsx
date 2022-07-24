@@ -5,7 +5,7 @@ function Advertise() {
     <div className="row">
       <div
         className="col-12 advertise position-relative"
-        style={{ backgroundImage: `url(assets/images/advertise.png)` }}
+        style={{ backgroundImage: `url(/assets/images/advertise.png)` }}
       >
         <div className="content">
           <div className="header text-center">Play Your Way and Experience</div>

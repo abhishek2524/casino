@@ -4,7 +4,7 @@ function DashboardContent() {
   return (
     <div className="dashboardContent">
       <div className="count">
-        <img src="assets/icons/up-arrow.svg" alt="" />
+        <img src="/assets/icons/up-arrow.svg" alt="" />
         <span>2.06x</span>
       </div>
       <div className="bet-payout-div">
@@ -22,7 +22,7 @@ function DashboardContent() {
           </div>
           <span className="max-count bet-count">
             Max bet : 44.3
-            <img src="assets/icons/coins.svg" alt="" />
+            <img src="/assets/icons/coins.svg" alt="" />
           </span>
         </div>
         <div className="payout-input input-div">
@@ -39,7 +39,7 @@ function DashboardContent() {
           </div>
           <span className="max-count">
             Max Profit : 44.3
-            <img src="assets/icons/coins.svg" alt="" />
+            <img src="/assets/icons/coins.svg" alt="" />
           </span>
         </div>
       </div>

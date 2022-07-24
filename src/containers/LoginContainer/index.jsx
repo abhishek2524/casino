@@ -7,7 +7,7 @@ function LoginContainer() {
       <LoginComponents />
       <div
         className="backgroundDiv"
-        style={{ backgroundImage: `url(assets/images/sexy-woman-blac.png)` }}
+        style={{ backgroundImage: `url(/assets/images/sexy-woman-blac.png)` }}
       />
     </>
   );

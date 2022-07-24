@@ -45,7 +45,7 @@ function DropdownOption() {
       <li className="LogoutBtn">
         <button className="btn btn-primary" onClick={handleLogout}>
           <img
-            src="assets/icons/logout.svg"
+            src="/assets/icons/logout.svg"
             alt="logout-icon"
             className="logoutIcon"
           />{" "}

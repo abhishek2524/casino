@@ -11,11 +11,15 @@ function ProfitLossComponent() {
   const customFormat = (cell, row) => {
     const status = row.status;
     let img = (
-      <img src="assets/icons/up-arrow.svg" className="rotate me-2" alt="loss" />
+      <img
+        src="/assets/icons/up-arrow.svg"
+        className="rotate me-2"
+        alt="loss"
+      />
     );
     if (status === "profit") {
       img = (
-        <img src="assets/icons/up-arrow.svg" className="me-2" alt="profit" />
+        <img src="/assets/icons/up-arrow.svg" className="me-2" alt="profit" />
       );
     }
     return (

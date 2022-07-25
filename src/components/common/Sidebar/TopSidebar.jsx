@@ -15,24 +15,24 @@ function TopSidebar() {
         <div className="count">2.06x</div>
         <div className="betInputDiv">
           <div className="inputField">
-            <label for="betDiv1" class="form-label">
+            <label htmlFor="betDiv1" className="form-label">
               Bet:
             </label>
             <input
               type="number"
               placeholder="Enter bet"
-              class="form-control"
+              className="form-control"
               id="betDiv1"
             />
           </div>
           <div className="inputField">
-            <label for="betDiv2" class="form-label">
+            <label htmlFor="betDiv2" className="form-label">
               Bet:
             </label>
             <input
               type="number"
               placeholder="Enter bet"
-              class="form-control"
+              className="form-control"
               id="betDiv2"
             />
           </div>

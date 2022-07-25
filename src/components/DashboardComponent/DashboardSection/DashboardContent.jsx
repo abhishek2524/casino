@@ -10,7 +10,7 @@ function DashboardContent() {
       <div className="bet-payout-div">
         <div className="bet-input input-div">
           <div className="form-group">
-            <label for="bet">Bet :</label>
+            <label htmlFor="bet">Bet :</label>
             <input
               min="0"
               type="number"
@@ -27,7 +27,7 @@ function DashboardContent() {
         </div>
         <div className="payout-input input-div">
           <div className="form-group">
-            <label for="payout">Payout :</label>
+            <label htmlFor="payout">Payout :</label>
             <input
               min="0"
               type="number"

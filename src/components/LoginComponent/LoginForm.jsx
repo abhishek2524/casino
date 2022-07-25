@@ -11,21 +11,21 @@ function LoginForm() {
     <div className="loginForm">
       <h1 className="header">Sign in</h1>
       <form onSubmit={handleLogin}>
-        <div class="form-group">
-          <label for="username">Username</label>
+        <div className="form-group">
+          <label htmlFor="username">Username</label>
           <input
             type="text"
-            class="form-control"
+            className="form-control"
             id="username"
             aria-describedby="usernamer"
             placeholder="Enter username"
           />
         </div>
-        <div class="form-group">
-          <label for="password">Password</label>
+        <div className="form-group">
+          <label htmlFor="password">Password</label>
           <input
             type="password"
-            class="form-control"
+            className="form-control"
             id="password"
             placeholder="Password"
           />
@@ -40,7 +40,7 @@ function LoginForm() {
           <Link to="/">Forgot Password?</Link>
         </div>
         <div className="submitBtn">
-          <button type="submit" class="btn btn-primary">
+          <button type="submit" className="btn btn-primary">
             Submit
           </button>
         </div>

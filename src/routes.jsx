@@ -1,7 +1,5 @@
 import { Routes, Route, Navigate } from "react-router-dom";
 import Layout from "./components/common/Layout";
-import DragonTigerGame from "./components/GameComponent/DragonTigerGame";
-import PlacedBet from "./components/PlacedBet";
 import BetHistoryContainer from "./containers/BetHistoryContainer";
 import ChangePasswordContainer from "./containers/ChangePasswordContainer";
 import DashboardContainer from "./containers/DashboardContainer";
@@ -30,11 +28,16 @@ function Routing() {
         <Route path="/unSettledBet" element={<UnSettledConatiner />} />
         <Route path="/setButtonValue" element={<SetButtonValueContainer />} />
         <Route path="/changePassword" element={<ChangePasswordContainer />} />
-        <Route path="/game" element={<GameContainer />}>
+        <Route path="/game/:gameName" element={<GameContainer />} />
+        <Route
+          path="/game/:gameName/:placedBet"
+          element={<GameContainer placeBet={true} />}
+        />
+        {/* <Route path="/game" element={<GameContainer />}>
           <Route path=":gameName" element={<DragonTigerGame />} />
           <Route path=":gameName/placeBet" element={<PlacedBet />} />
           <Route index element={<DragonTigerGame />} />
-        </Route>
+        </Route> */}
         <Route index element={<DashboardContainer />} />
       </Route>
       <Route path="contact" element={<Contact />} />

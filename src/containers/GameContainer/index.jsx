@@ -1,8 +1,12 @@
 import React from "react";
-import { NavLink, Outlet, useParams } from "react-router-dom";
+import { NavLink, useParams } from "react-router-dom";
 import Sidebar from "../../components/common/Sidebar";
+import GameComponent from "../../components/GameComponent";
+import PlacedBet from "./../../components/PlacedBet";
 import "./gameContainer.scss";
-function GameContainer() {
+function GameContainer(props) {
+  console.log("ooooooooooooo", props);
+  const { placeBet = false } = props;
   const params = useParams();
   const { gameName } = params;
   return (
@@ -10,12 +14,20 @@ function GameContainer() {
       <div className="gameSubheader">
         <div className="container">
           <div className="linkDiv">
-            <NavLink className="links" to={gameName ? gameName : "dragon"} end>
+            <NavLink
+              className="links"
+              to={gameName ? `/game/${gameName}` : "/game/dragon"}
+              end
+            >
               Game Name
             </NavLink>
             <NavLink
               className="links"
-              to={gameName ? `${gameName}/placeBet` : "dragon/placeBet"}
+              to={
+                gameName
+                  ? `/game/${gameName}/placeBet`
+                  : "/game/dragon/placeBet"
+              }
               end
             >
               PLACED BETS (0)
@@ -27,8 +39,10 @@ function GameContainer() {
       <div className="container p-0 gameContainerStyle">
         <div className="mt-3 d-flex">
           <Sidebar />
+
           <div className="contentDiv">
-            <Outlet />
+            {placeBet && <PlacedBet />}
+            {!placeBet && <GameComponent />}
           </div>
         </div>
       </div>

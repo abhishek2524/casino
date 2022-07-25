@@ -6,7 +6,7 @@ function ChangePasswordComponent() {
       <form className="resetPwdForm">
         <div className="row inputRow">
           <div className="col-12">
-            <label for="curPassword" class="form-label">
+            <label htmlFor="curPassword" className="form-label">
               Current Password
             </label>
             <input
@@ -19,7 +19,7 @@ function ChangePasswordComponent() {
         </div>
         <div className="row inputRow">
           <div className="col-6">
-            <label for="newPassword" class="form-label">
+            <label htmlFor="newPassword" className="form-label">
               New Password
             </label>
             <input
@@ -30,7 +30,7 @@ function ChangePasswordComponent() {
             />
           </div>
           <div className="col-6">
-            <label for="confirmPassword" class="form-label">
+            <label htmlFor="confirmPassword" className="form-label">
               Confirm Password
             </label>
             <input

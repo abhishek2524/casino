@@ -14,7 +14,7 @@ function Games() {
               className="col-lg-3 col-md-4 col-sm-6 gameCard position-relative"
               role="button"
               onClick={() => {
-                navigate("/game");
+                navigate("/game/dragon");
               }}
             >
               <img src="/assets/tempImages/games/games.png" alt="" />

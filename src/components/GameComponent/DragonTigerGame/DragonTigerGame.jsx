@@ -143,7 +143,7 @@ function DragonTigerGame() {
           </div>
           <div className="text-center">Min:100 Max:25000</div>
         </div>
-        <div className="col me-2">
+        <div className="col ms-2">
           <div className="text-center">2.00</div>
           <div className="d-flex flex-wrap">
             {new Array(12).fill(null).map(() => (

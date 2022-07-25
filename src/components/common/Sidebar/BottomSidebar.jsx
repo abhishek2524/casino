@@ -2,34 +2,51 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 
 function BottomSidebar() {
+  const gameLink = [
+    {
+      label: "20-20 Dragon Tiger",
+      link: "/game/dragon",
+    },
+    {
+      label: "Luck7 7 - B",
+      link: "/game/lucky7",
+    },
+    {
+      label: "20-20 Teenpatti",
+      link: "/game/teenpati",
+    },
+
+    {
+      label: "32 Cards",
+      link: "/game/32Card",
+    },
+    {
+      label: "Andar Bahar",
+      link: "/game/andarBahar",
+    },
+    {
+      label: "Casino queen",
+      link: "/game/queen",
+    },
+
+    {
+      label: "20-20 Poker",
+      link: "/game/poker",
+    },
+    {
+      label: "Race 20-20",
+      link: "/game/race20",
+    },
+  ];
   return (
     <div className="bottomDiv">
       <div className="header">Games</div>
       <div className="sideBarLinks">
-        <NavLink className="navLink" to="dragon">
-          20-20 Dragon Tiger
-        </NavLink>
-        <NavLink className="navLink" to="luck7">
-          Luck7 7 - B
-        </NavLink>
-        <NavLink className="navLink" to="teenpati">
-          20-20 Teenpatti
-        </NavLink>
-        <NavLink className="navLink" to="cards">
-          32 Cards
-        </NavLink>
-        <NavLink className="navLink" to="andarBahar">
-          Andar Bahar
-        </NavLink>
-        <NavLink className="navLink" to="queen">
-          Casino queen
-        </NavLink>
-        <NavLink className="navLink" to="poker">
-          20-20 Poker
-        </NavLink>
-        <NavLink className="navLink" to="race">
-          Race 20-20
-        </NavLink>
+        {gameLink.map(({ link, label }, index) => (
+          <NavLink key={index} className="navLink" to={link}>
+            {label}
+          </NavLink>
+        ))}
       </div>
     </div>
   );

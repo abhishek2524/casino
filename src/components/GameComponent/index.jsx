@@ -2,6 +2,7 @@ import React from "react";
 import { useParams } from "react-router-dom";
 import DragonTigerGame from "./DragonTigerGame";
 import Lucky7Game from "./Lucky7Game";
+import Teenpati from "./Teenpati";
 
 function GameComponent() {
   const param = useParams();
@@ -10,6 +11,7 @@ function GameComponent() {
     <>
       {gameName === "dragon" && <DragonTigerGame />}
       {gameName === "lucky7" && <Lucky7Game />}
+      {gameName === "teenpati" && <Teenpati />}
     </>
   );
 }

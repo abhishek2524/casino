@@ -18,7 +18,7 @@ function BottomSidebar() {
 
     {
       label: "32 Cards",
-      link: "/game/32Card",
+      link: "/game/card32",
     },
     {
       label: "Andar Bahar",

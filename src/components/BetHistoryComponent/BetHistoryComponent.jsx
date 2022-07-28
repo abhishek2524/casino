@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import AdvanceSearch from "../common/AdvanceSearch";
 import CustomTable from "../common/CustomTable";
-// import "bootstrap/dist/css/bootstrap.min.css";
 import "./betHistory.scss";
 
 function BetHistoryComponent() {

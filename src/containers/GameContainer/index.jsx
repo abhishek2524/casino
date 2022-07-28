@@ -1,39 +1,53 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { NavLink, useParams } from "react-router-dom";
 import Sidebar from "../../components/common/Sidebar";
+import CustomModal from "../../components/common/CustomModal";
 import GameComponent from "../../components/GameComponent";
 import PlacedBet from "./../../components/PlacedBet";
 import "./gameContainer.scss";
+import ViewRule from "./ViewRule";
 function GameContainer(props) {
-  console.log("ooooooooooooo", props);
+  const [showModal, setShowModal] = useState(false);
   const { placeBet = false } = props;
-  const params = useParams();
-  const { gameName } = params;
+  const param = useParams();
+  const { gameName = "dragon" } = param;
+  const availableGames = ["dragon", "lucky7", "teenpati", "card32"];
+
+  const openRuleModal = () => {
+    setShowModal(true);
+  };
+  const closeRuleModal = () => {
+    setShowModal(false);
+  };
+  useEffect(() => {
+    console.log("uuuuuuuuuuuu");
+  }, []);
+  const RuleComponent = ViewRule;
   return (
     <>
+      {showModal && (
+        <CustomModal show={showModal} handleHide={closeRuleModal}>
+          <RuleComponent />
+        </CustomModal>
+      )}
       <div className="gameSubheader">
-        <div className="container">
+        <div className="container d-flex justify-content-between align-items-center">
           <div className="linkDiv">
-            <NavLink
-              className="links"
-              to={gameName ? `/game/${gameName}` : "/game/dragon"}
-              end
-            >
+            <NavLink className="links" to={`/game/${gameName}`} end>
               Game Name
             </NavLink>
-            <NavLink
-              className="links"
-              to={
-                gameName
-                  ? `/game/${gameName}/placeBet`
-                  : "/game/dragon/placeBet"
-              }
-              end
-            >
+            <NavLink className="links" to={`/game/${gameName}/placeBet`} end>
               PLACED BETS (0)
             </NavLink>
           </div>
-          <div className="rules"></div>
+          <div className="rules">
+            {availableGames.includes(gameName) && (
+              <div role="button" onClick={openRuleModal}>
+                View Rules
+              </div>
+            )}
+            <div>Round ID: 22190775008</div>
+          </div>
         </div>
       </div>
       <div className="container p-0 gameContainerStyle">

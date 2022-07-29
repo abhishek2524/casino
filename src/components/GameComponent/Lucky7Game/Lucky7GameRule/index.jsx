@@ -1,7 +1,3 @@
-import React from "react";
-
-function Lucky7GameRule() {
-  return <div>Lucky7GameRule</div>;
-}
+import Lucky7GameRule from "./Lucky7GameRule";
 
 export default Lucky7GameRule;

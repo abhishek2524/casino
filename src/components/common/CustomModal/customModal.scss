@@ -20,6 +20,9 @@
     max-height: 760px;
     height: fit-content;
     overflow-y: auto;
+    &::-webkit-scrollbar {
+      display: none; /* Safari and Chrome */
+    }
   }
   .modalHeader {
     padding: 10px 12px;

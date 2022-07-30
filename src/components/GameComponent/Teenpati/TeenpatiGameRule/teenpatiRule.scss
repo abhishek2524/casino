@@ -31,6 +31,15 @@
       top: 0;
       left: 24px;
     }
+    @media screen and (max-width: 400px) {
+      margin-right: 0 !important;
+      width: 65px;
+      height: 56px;
+      .eachCard {
+        width: 2.5rem;
+        height: 3.5rem;
+      }
+    }
   }
   .sequenceDiv {
     margin-bottom: 32px;

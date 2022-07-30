@@ -19,9 +19,6 @@ function GameContainer(props) {
   const closeRuleModal = () => {
     setShowModal(false);
   };
-  useEffect(() => {
-    console.log("uuuuuuuuuuuu");
-  }, []);
   const RuleComponent = ViewRule;
   return (
     <>

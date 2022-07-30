@@ -1,7 +1,3 @@
-import React from "react";
-
-function Card32GameRule() {
-  return <div>Card32GameRule</div>;
-}
+import Card32GameRule from "./Card32GameRule";
 
 export default Card32GameRule;

@@ -76,6 +76,25 @@ function Lucky7GameRule() {
         </div>
       </div>
       <hr />
+      <div className="lastSecCardsDiv">
+        <div className="redBalckCard">
+          <img
+            className="redCard"
+            src="/assets/icons/lucky7Rule/redCard.svg"
+            alt="red-card"
+          />
+          <div className="payoutBtn">Payout 1.97</div>
+        </div>
+        <div className="redBalckCard">
+          <img
+            className="blackCard"
+            src="/assets/icons/lucky7Rule/blackCard.svg"
+            alt="black-card"
+          />
+          <div className="payoutBtn">Payout 1.97</div>
+        </div>
+      </div>
+      <hr />
       <div className="lastPayout">
         <div className="gameCards">
           {["A", "2", "3", "4", "5", "6", 7, 8, 9, "J", "Q", "K"].map(

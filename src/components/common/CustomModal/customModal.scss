@@ -55,4 +55,9 @@
       min-width: 100%;
     }
   }
+  @media screen and (max-height: 819px) {
+    .modal-content {
+      max-height: calc(100vh - 32px) !important;
+    }
+  }
 }

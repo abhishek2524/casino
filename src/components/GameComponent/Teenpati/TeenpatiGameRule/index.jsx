@@ -1,7 +1,3 @@
-import React from "react";
+import TeenpatiRule from "./TeenpatiRule";
 
-function TeenpatiGameRule() {
-  return <div>TeenpatiGameRule</div>;
-}
-
-export default TeenpatiGameRule;
+export default TeenpatiRule;

@@ -4,6 +4,7 @@ import BetHistoryContainer from "./containers/BetHistoryContainer";
 import ChangePasswordContainer from "./containers/ChangePasswordContainer";
 import DashboardContainer from "./containers/DashboardContainer";
 import GameContainer from "./containers/GameContainer";
+import GameResultContainer from "./containers/GameResultContainer";
 import LoginContainer from "./containers/LoginContainer";
 import ProfitLossContainer from "./containers/ProfitLossContainer";
 import SetButtonValueContainer from "./containers/SetButtonValueContainer";
@@ -33,11 +34,7 @@ function Routing() {
           path="/game/:gameName/:placedBet"
           element={<GameContainer placeBet={true} />}
         />
-        {/* <Route path="/game" element={<GameContainer />}>
-          <Route path=":gameName" element={<DragonTigerGame />} />
-          <Route path=":gameName/placeBet" element={<PlacedBet />} />
-          <Route index element={<DragonTigerGame />} />
-        </Route> */}
+        <Route path="/gameresult" element={<GameResultContainer />} />
         <Route index element={<DashboardContainer />} />
       </Route>
       <Route path="contact" element={<Contact />} />

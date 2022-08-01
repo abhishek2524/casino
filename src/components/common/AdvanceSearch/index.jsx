@@ -1,16 +1,16 @@
-import React from "react";
+import React, { useEffect } from "react";
 import ReactDatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import Select from "react-select";
 import "./advanceSearch.scss";
 
 function AdvanceSearch(props) {
-  const { isSelectSearch = false, selectOptions = [] } = props;
-  // const options = [
-  //   { value: "chocolate", label: "Chocolate" },
-  //   { value: "strawberry", label: "Strawberry" },
-  //   { value: "vanilla", label: "Vanilla" },
-  // ];
+  const {
+    isSelectSearch = false,
+    selectOptions = [],
+    onChange,
+    value = { value: "", label: "" },
+  } = props;
   const customStyle = {
     control: () => ({
       width: "100%",
@@ -32,6 +32,8 @@ function AdvanceSearch(props) {
       styles={customStyle}
       options={selectOptions}
       name="select"
+      value={value}
+      onChange={onChange}
     />
   );
   return (
@@ -42,7 +44,7 @@ function AdvanceSearch(props) {
             className="input"
             placeholderText="Select date"
             onChange={(e) => console.log(e)}
-            selected={new Date(0)}
+            selected={new Date()}
             showPopperArrow={false}
             name="startDate"
             popperPlacement="bottom-right"
@@ -56,7 +58,7 @@ function AdvanceSearch(props) {
               className="input "
               placeholderText="Select date"
               onChange={(e) => console.log(e)}
-              selected={new Date(0)}
+              selected={new Date()}
               showPopperArrow={false}
               name="endDate"
               popperPlacement="bottom-left"

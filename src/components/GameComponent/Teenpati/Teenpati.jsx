@@ -1,4 +1,5 @@
 import React from "react";
+import { NavLink } from "react-router-dom";
 import "./teenpati.scss";
 function Teenpati() {
   return (
@@ -91,7 +92,7 @@ function Teenpati() {
       <div className="resultDiv row">
         <div className="header">
           <span>Last Result</span>
-          <span>View all</span>
+          <NavLink to="/gameresult?gName=teenpati">View all</NavLink>
         </div>
         <div className="content">
           <span>A</span>

@@ -1,4 +1,5 @@
 import React from "react";
+import { NavLink } from "react-router-dom";
 import "./lucky7.scss";
 function Lucky7Game() {
   const EachCards = () => {
@@ -135,7 +136,7 @@ function Lucky7Game() {
       <div className="lastResultDiv row">
         <div className="header">
           <span>Last Result</span>
-          <span>View all</span>
+          <NavLink to="/gameresult?gName=lucky7">View all</NavLink>
         </div>
         <div className="content">
           <span>D</span>

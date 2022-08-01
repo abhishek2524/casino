@@ -1,4 +1,5 @@
 import React from "react";
+import { NavLink } from "react-router-dom";
 import "./card32Game.scss";
 
 function Card32Game() {
@@ -93,7 +94,7 @@ function Card32Game() {
       <div className="lastResultDiv row">
         <div className="header">
           <span>Last Result</span>
-          <span>View all</span>
+          <NavLink to="/gameresult?gName=card32">View all</NavLink>
         </div>
         <div className="content">
           <span>9</span>

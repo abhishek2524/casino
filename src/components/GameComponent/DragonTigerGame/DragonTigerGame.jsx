@@ -1,4 +1,5 @@
 import React from "react";
+import { NavLink } from "react-router-dom";
 import "./dragonTiger.scss";
 function DragonTigerGame() {
   const GameButtons = (btnProps) => {
@@ -157,7 +158,8 @@ function DragonTigerGame() {
       <div className="lastResultDiv row">
         <div className="header">
           <span>Last Result</span>
-          <span>View all</span>
+          {/* <span>View all</span> */}
+          <NavLink to="/gameresult?gName=dragon">View all</NavLink>
         </div>
         <div className="content">
           <span>D</span>

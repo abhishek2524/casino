@@ -12,6 +12,16 @@ function GameContainer(props) {
   const param = useParams();
   const { gameName = "dragon" } = param;
   const availableGames = ["dragon", "lucky7", "teenpati", "card32"];
+  const gameFullName = {
+    dragon: "20-20 Dragon Tiger",
+    lucky7: "Luck7 7 - B",
+    teenpati: "20-20 Teenpatti",
+    card32: "32 Cards",
+    andarBahar: "Andar Bahar",
+    queen: "Casino queen",
+    poker: "20-20 Poker",
+    race20: "Race 20-20",
+  };
 
   const openRuleModal = () => {
     setShowModal(true);
@@ -30,8 +40,12 @@ function GameContainer(props) {
       <div className="gameSubheader">
         <div className="container d-flex justify-content-between align-items-center">
           <div className="linkDiv">
-            <NavLink className="links" to={`/game/${gameName}`} end>
-              Game Name
+            <NavLink
+              className="links text-uppercase"
+              to={`/game/${gameName}`}
+              end
+            >
+              {gameFullName[gameName]}
             </NavLink>
             <NavLink className="links" to={`/game/${gameName}/placeBet`} end>
               PLACED BETS (0)

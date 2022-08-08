@@ -159,7 +159,9 @@ function DragonTigerGame() {
         <div className="header">
           <span>Last Result</span>
           {/* <span>View all</span> */}
-          <NavLink to="/gameresult?gName=dragon">View all</NavLink>
+          <NavLink to="/gameresult" state={{ path: "dragon" }}>
+            View all
+          </NavLink>
         </div>
         <div className="content">
           <span>D</span>

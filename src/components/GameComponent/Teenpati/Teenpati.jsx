@@ -92,7 +92,9 @@ function Teenpati() {
       <div className="resultDiv row">
         <div className="header">
           <span>Last Result</span>
-          <NavLink to="/gameresult?gName=teenpati">View all</NavLink>
+          <NavLink to="/gameresult" state={{ path: "teenpati" }}>
+            View all
+          </NavLink>
         </div>
         <div className="content">
           <span>A</span>

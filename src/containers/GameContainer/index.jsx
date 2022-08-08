@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { NavLink, useParams } from "react-router-dom";
 import Sidebar from "../../components/common/Sidebar";
-import CustomModal from "../../components/common/CustomModal";
+import CustomRuleModal from "../../components/common/CustomRuleModal";
 import GameComponent from "../../components/GameComponent";
 import PlacedBet from "./../../components/PlacedBet";
 import "./gameContainer.scss";
@@ -33,9 +33,9 @@ function GameContainer(props) {
   return (
     <>
       {showModal && (
-        <CustomModal show={showModal} handleHide={closeRuleModal}>
+        <CustomRuleModal show={showModal} handleHide={closeRuleModal}>
           <RuleComponent />
-        </CustomModal>
+        </CustomRuleModal>
       )}
       <div className="gameSubheader">
         <div className="container d-flex justify-content-between align-items-center">

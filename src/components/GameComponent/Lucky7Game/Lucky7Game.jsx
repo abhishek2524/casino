@@ -136,7 +136,9 @@ function Lucky7Game() {
       <div className="lastResultDiv row">
         <div className="header">
           <span>Last Result</span>
-          <NavLink to="/gameresult?gName=lucky7">View all</NavLink>
+          <NavLink to="/gameresult" state={{ path: "lucky7" }}>
+            View all
+          </NavLink>
         </div>
         <div className="content">
           <span>D</span>

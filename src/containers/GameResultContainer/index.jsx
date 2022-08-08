@@ -1,14 +1,15 @@
 import React, { useState } from "react";
-import { NavLink, useLocation, useParams } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import AdvanceSearch from "../../components/common/AdvanceSearch";
 import GameResultComponent from "../../components/GameResultComponent/GameResultComponent";
 import "./gameResult.scss";
+import ResultModal from "./ResultModal/ResultModal";
 function GameResultContainer() {
   const location = useLocation();
-  const param = new URLSearchParams(location.search);
+  const { path = undefined } = location.state;
   let gName = "dragon";
-  if (param.has("gName")) {
-    gName = param.get("gName");
+  if (path) {
+    gName = path;
   }
   const [gameName, setGameName] = useState(gName);
   const gameFullName = {
@@ -36,6 +37,9 @@ function GameResultContainer() {
   ];
   return (
     <>
+      <ResultModal>
+        <div className="">hi</div>
+      </ResultModal>
       <div className="gameSubheader">
         <div className="container">
           <NavLink className="links" to={`/game/${gameName}`} end>

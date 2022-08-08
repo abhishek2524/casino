@@ -94,7 +94,9 @@ function Card32Game() {
       <div className="lastResultDiv row">
         <div className="header">
           <span>Last Result</span>
-          <NavLink to="/gameresult?gName=card32">View all</NavLink>
+          <NavLink to="/gameresult" state={{ path: "card32" }}>
+            View all
+          </NavLink>
         </div>
         <div className="content">
           <span>9</span>

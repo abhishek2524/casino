@@ -1,11 +1,49 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
+import { connect } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
+import { addKeyObject } from "./../../reducers/localstorageSlice";
+import axios from "axios";
 
-function LoginForm() {
-  const handleLogin = (e) => {
-    e.preventDefault();
-    window.sessionStorage.setItem("login", true);
-    window.location.reload();
+function LoginForm(props) {
+  const { addKeyObject } = props;
+  const navigate = useNavigate();
+  const [loginDetail, setLoginDetail] = useState({
+    username: "",
+    password: "",
+  });
+  const [error, setError] = useState("");
+  const handleLogin = async (e) => {
+    try {
+      e.preventDefault();
+      console.log("handleSubmit", loginDetail);
+      const username = loginDetail.username;
+      const password = loginDetail.password;
+      if (!username || !password) {
+        setError("Please fill all fields.");
+        return;
+      }
+      const apiURL = `${process.env.REACT_APP_BACKEND_API}/user/login/`;
+      const res = await axios({
+        method: "post",
+        url: apiURL,
+        data: { username, password },
+      });
+      const { status, data } = res.data;
+      // console.log("res>>>>>>>>", status);
+      if (status === 1) {
+        console.log("success::::", data);
+        addKeyObject({ data: data.token });
+        Object.keys(data.token).map((key) =>
+          localStorage.setItem(key, data.token[key])
+        );
+
+        return navigate("/", { replace: true });
+      }
+      setError(data.msg);
+      return;
+    } catch (err) {
+      console.warn("error::", err);
+    }
   };
   return (
     <div className="loginForm">
@@ -19,6 +57,14 @@ function LoginForm() {
             id="username"
             aria-describedby="usernamer"
             placeholder="Enter username"
+            name="username"
+            value={loginDetail.username}
+            onChange={(e) =>
+              setLoginDetail((prev) => ({
+                ...prev,
+                [e.target.name]: e.target.value,
+              }))
+            }
           />
         </div>
         <div className="form-group">
@@ -27,17 +73,25 @@ function LoginForm() {
             type="password"
             className="form-control"
             id="password"
+            name="password"
             placeholder="Password"
+            onChange={(e) =>
+              setLoginDetail((prev) => ({
+                ...prev,
+                [e.target.name]: e.target.value,
+              }))
+            }
           />
+          {error && <div className="text-danger text-center mt-3">{error}</div>}
         </div>
         <div className="signUpDiv">
           <span>
             New User?{" "}
-            <Link to="/" className="signupLink">
+            <Link to="/register" className="signupLink">
               Create Account
             </Link>
           </span>
-          <Link to="/">Forgot Password?</Link>
+          <Link to="/forgotPwd">Forgot Password?</Link>
         </div>
         <div className="submitBtn">
           <button type="submit" className="btn btn-primary">
@@ -49,4 +103,10 @@ function LoginForm() {
   );
 }
 
-export default LoginForm;
+const mapStateToProps = ({ localstorage }) => ({
+  localstorage,
+});
+const mapDispatchToProps = {
+  addKeyObject,
+};
+export default connect(mapStateToProps, mapDispatchToProps)(LoginForm);

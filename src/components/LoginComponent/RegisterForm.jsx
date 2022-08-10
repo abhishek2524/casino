@@ -51,8 +51,8 @@ function RegisterForm() {
       setError("User already exists.Please login.");
       return;
     } catch (err) {
-      setError("User already exists.Please login.");
-      console.warn("error::", err.response);
+      setError(err?.response?.data?.error ?? "Something went wrong.");
+      // console.warn("error::", err.response);
     }
   };
   return (

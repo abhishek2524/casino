@@ -1,11 +1,14 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 function TopSidebar() {
   const img = <img src="/assets/icons/coins.svg" alt="coins" />;
-
+  const navigate = useNavigate();
   return (
     <div className="topDiv">
-      <div className="header">Dashboard</div>
+      <div className="header" role="button" onClick={() => navigate("/")}>
+        Dashboard
+      </div>
       <hr />
       <div className="content">
         <div className="exposureBalDiv">

@@ -7,6 +7,7 @@ import PlacedBet from "./../../components/PlacedBet";
 import "./gameContainer.scss";
 import ViewRule from "./ViewRule";
 function GameContainer(props) {
+  const [showSidebar, setShowSidebar] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const { placeBet = false } = props;
   const param = useParams();
@@ -29,6 +30,7 @@ function GameContainer(props) {
   const closeRuleModal = () => {
     setShowModal(false);
   };
+  const toggleSideBar = () => setShowSidebar(!showSidebar);
   const RuleComponent = ViewRule;
   return (
     <>
@@ -63,7 +65,24 @@ function GameContainer(props) {
       </div>
       <div className="container p-0 gameContainerStyle">
         <div className="mt-3 d-flex">
-          <Sidebar />
+          {!showSidebar && (
+            <div
+              className="sidebarHamburger"
+              role="button"
+              onClick={() => toggleSideBar()}
+            >
+              <img src="/assets/icons/hamburger-icon.svg" alt="" />
+            </div>
+          )}
+          {showSidebar && (
+            <div className="gameSidebarShowOnMobile">
+              <Sidebar toggleSideBar={toggleSideBar} />
+            </div>
+          )}
+
+          <div className="gameSidebarHideOnMobile">
+            <Sidebar />
+          </div>
 
           <div className="contentDiv">
             {placeBet && <PlacedBet />}

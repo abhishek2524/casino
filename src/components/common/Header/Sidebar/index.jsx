@@ -16,7 +16,7 @@ function Sidebar() {
     <div className="sidebarMainDiv">
       {!openSidebar && (
         <div className="hamburger" onClick={toggleHamburger}>
-          <img src="assets/icons/hamburger-icon.svg" alt="" />
+          <img src="/assets/icons/hamburger-icon.svg" alt="" />
         </div>
       )}
 

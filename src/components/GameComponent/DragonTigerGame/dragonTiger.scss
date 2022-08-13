@@ -1,8 +1,9 @@
 @import "./../../../scss/colors";
+@import "./../../../scss/mixins";
 .dragonGameDiv {
   .topSlideDiv {
     width: 100%;
-    height: 483px;
+    height: 292px;
     .topBanner {
       height: 100%;
       width: 100%;
@@ -184,6 +185,18 @@
         color: #fff;
         margin-right: 10px;
         padding: 0 0 2px 2px;
+      }
+    }
+  }
+}
+@media screen and (max-width: map-get($breakpoints,"mdl")) {
+  .dragonTieTigerDiv {
+    padding: 24px 0 !important;
+    .topDiv {
+      padding: 0;
+      margin: 0;
+      .gameBtn {
+        padding: 0;
       }
     }
   }

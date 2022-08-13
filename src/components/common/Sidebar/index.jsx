@@ -2,13 +2,22 @@ import React from "react";
 import BottomSidebar from "./BottomSidebar";
 import "./sidebar.scss";
 import TopSidebar from "./TopSidebar";
-function Sidebar() {
+function Sidebar(props) {
+  const { toggleSideBar = () => {} } = props;
   return (
     <div className="sidebarDiv">
+      <div className="closeArrow">
+        <img
+          src="/assets/icons/white-close-icon.svg"
+          role="button"
+          onClick={toggleSideBar}
+          alt=""
+        />
+      </div>
       <div>
         <TopSidebar />
         <hr />
-        <BottomSidebar />
+        <BottomSidebar toggleSideBar={toggleSideBar} />
       </div>
     </div>
   );

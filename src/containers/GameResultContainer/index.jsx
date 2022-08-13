@@ -37,9 +37,9 @@ function GameResultContainer() {
   ];
   return (
     <>
-      <ResultModal>
+      {/* <ResultModal>
         <div className="">hi</div>
-      </ResultModal>
+      </ResultModal> */}
       <div className="gameSubheader">
         <div className="container">
           <NavLink className="links" to={`/game/${gameName}`} end>

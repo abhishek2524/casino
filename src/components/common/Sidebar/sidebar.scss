@@ -1,4 +1,5 @@
 @import "./../../../scss/colors";
+@import "./../../../scss/mixins";
 .sidebarDiv {
   position: fixed;
 
@@ -85,5 +86,32 @@
         background-color: $primary-color;
       }
     }
+  }
+}
+.closeArrow {
+  display: none !important;
+  position: absolute;
+  right: 0;
+  top: 0;
+  margin: 16px;
+  width: 24px;
+  height: 24px;
+  font-size: 24px;
+  justify-content: center;
+  align-items: center;
+  img {
+    height: 100% !important;
+    width: 100% !important;
+  }
+}
+@media screen and(max-width:map-get($breakpoints,'lg')) {
+  .sidebarDiv {
+    max-height: 100vh;
+    max-width: 350px;
+    width: 100%;
+    border-radius: 0;
+  }
+  .closeArrow {
+    display: flex !important;
   }
 }

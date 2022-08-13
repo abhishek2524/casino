@@ -100,19 +100,19 @@ function DragonTigerGame() {
       <div className="row dragonTieTigerDiv">
         <div className="row topDiv">
           <GameButtons
-            colClass="gameBtn col-lg-5"
+            colClass="gameBtn col-5"
             btnText="Dragon"
             topCount="2"
             bottomCount="0"
           />
           <GameButtons
-            colClass="gameBtn col-lg-2"
+            colClass="gameBtn col-2"
             btnText="Tie"
             topCount="50"
             bottomCount="0"
           />
           <GameButtons
-            colClass="gameBtn col-lg-5"
+            colClass="gameBtn col-5"
             btnText="Tiger"
             topCount="2"
             bottomCount="0"

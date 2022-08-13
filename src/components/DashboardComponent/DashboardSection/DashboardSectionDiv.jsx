@@ -1,12 +1,48 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import DashboardContent from "./DashboardContent";
 
 function DashboardSectionDiv() {
   return (
     <div className="row dashboardSectionDiv">
-      <nav className="navbar navbar-expand-lg bg-dark">
+      <nav className="navbar ">
         <div className="dashboard-header">
-          <button
+          <ul className="navbar-nav">
+            <li className="nav-item dropdown">
+              <div
+                className="nav-link dropdown-toggle"
+                // href="/"
+                role="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                32 Cards
+              </div>
+              <ul className="dropdown-menu dashboard-dropdown">
+                <li>
+                  <Link className="dropdown-item" to="/">
+                    20-20 Dragon Tiger
+                  </Link>
+                </li>
+                <li>
+                  <Link className="dropdown-item" to="/">
+                    32 Cards
+                  </Link>
+                </li>
+                <li>
+                  <Link className="dropdown-item" to="/">
+                    Lucky 7 - B
+                  </Link>
+                </li>
+                <li>
+                  <Link className="dropdown-item" to="/">
+                    20-20 Teenpatti
+                  </Link>
+                </li>
+              </ul>
+            </li>
+          </ul>
+          {/* <button
             className="navbar-toggler"
             type="button"
             data-bs-toggle="collapse"
@@ -53,7 +89,7 @@ function DashboardSectionDiv() {
                 </ul>
               </li>
             </ul>
-          </div>
+          </div> */}
         </div>
       </nav>
       <DashboardContent />

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link, Outlet, useLocation } from "react-router-dom";
 import SubLinks from "../../UnSettledBetComponent/SubLinks/SubLinks";
 import MainHeader from "../Header";
+import Sidebar from "../Header/Sidebar";
 import "./layout.scss";
 function Layout() {
   const { pathname } = useLocation();
@@ -24,6 +25,7 @@ function Layout() {
   return (
     <>
       <MainHeader />
+      <Sidebar />
       {subHeader && (
         <div className="subHeader">
           <div className="container">

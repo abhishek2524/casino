@@ -1,4 +1,6 @@
 @import "./../../../scss/colors";
+@import "./../../../scss/mixins";
+
 .dashboardSection {
   display: flex;
   flex-direction: column;
@@ -48,6 +50,12 @@
     height: 98px;
     display: flex;
     align-items: center;
+    .dashboard-dropdown {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      height: fit-content;
+    }
   }
   .navbar {
     z-index: 0 !important;
@@ -155,5 +163,15 @@
     align-items: center;
     flex-direction: column;
     background: rgba(255, 255, 255, 0.2);
+  }
+}
+@media screen and (max-width: map-get($breakpoints,"mdl")) {
+  .dashboardSection {
+    padding: 0 24px;
+    .topSection {
+      h1 {
+        font-size: 21px !important;
+      }
+    }
   }
 }

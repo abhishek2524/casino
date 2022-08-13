@@ -1,4 +1,5 @@
 @import "./../../../scss/colors";
+@import "./../../../scss/mixins";
 .tableDiv {
   //   background-color: green;
   thead,
@@ -42,5 +43,29 @@
   .active .page-link {
     background-color: $secondary-color !important;
     box-shadow: none;
+  }
+}
+@media screen and (max-width: map-get($breakpoints,"sm")) {
+  .headerDiv {
+    th {
+      padding: 12px !important;
+    }
+  }
+  .tableBody {
+    .tableBodyRow {
+      td {
+        padding: 12px 10px !important;
+      }
+    }
+  }
+  .react-bootstrap-table-pagination {
+    display: flex;
+    width: 100%;
+    row-gap: 12px;
+    & > div {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
   }
 }

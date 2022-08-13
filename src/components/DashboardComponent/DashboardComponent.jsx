@@ -5,7 +5,7 @@ import Games from "./Games/Games";
 import DashboardSection from "./DashboardSection";
 function DashboardComponent() {
   return (
-    <div className="container">
+    <div className="container dashboard-container">
       <DashboardSlide />
       <Games />
       <DashboardSection />

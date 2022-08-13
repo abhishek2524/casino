@@ -17,7 +17,7 @@ function ChangePasswordComponent() {
             />
           </div>
         </div>
-        <div className="row inputRow">
+        <div className="row inputRow resetNewPwdFields">
           <div className="col-6">
             <label htmlFor="newPassword" className="form-label">
               New Password

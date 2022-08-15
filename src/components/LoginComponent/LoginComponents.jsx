@@ -10,8 +10,8 @@ function LoginComponents(props) {
   return (
     <div className="loginMainDiv">
       <div className="leftSide">
-        <Link to="/">
-          <img src="/assets/images/logo.svg" alt="" />
+        <Link className="loginLogo" to="/">
+          <img src="/logo.png" alt="" />
         </Link>
         <span>Best For Online Casino</span>
       </div>

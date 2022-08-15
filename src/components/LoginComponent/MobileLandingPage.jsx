@@ -14,7 +14,11 @@ function MobileLandingPage(props) {
         style={{
           backgroundImage: `url(/assets/images/mobile_landing_page.png)`,
         }}
-      />
+      >
+        <div className="logo">
+          <img src="/logo.png" alt="logo" />
+        </div>
+      </div>
 
       {(isSignUp || isForgotPwd || isLogin) && (
         <LoginComponents isSignUp={isSignUp} isForgotPwd={isForgotPwd} />

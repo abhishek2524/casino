@@ -85,7 +85,7 @@ function TopSidebar(props) {
         <div className="betInputDiv">
           <div className="inputField">
             <label htmlFor="betDiv1" className="form-label">
-              Bet:
+              Enter Amount:
             </label>
             <input
               disabled={!type ? true : false}

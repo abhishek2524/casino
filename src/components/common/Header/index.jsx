@@ -8,7 +8,7 @@ function MainHeader() {
     <nav className="navbar mainHeader navbar-expand-lg">
       <div className="container">
         <Link className="navbar-brand" to="/">
-          <img src="/assets/images/logo.svg" alt="" />
+          <img src="/logo.png" alt="" />
         </Link>
         <div className="d-flex headerDropDown">
           {/* <button

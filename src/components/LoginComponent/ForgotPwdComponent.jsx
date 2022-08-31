@@ -22,7 +22,7 @@ function ForgotPwdComponent() {
         setError("Please fill all fields.");
         return;
       }
-      const apiURL = `${process.env.REACT_APP_BACKEND_API}/user/forgot-password/`;
+      const apiURL = `${process.env.REACT_APP_BACKEND_API}/api/user/forgot-password/`;
       const res = await axios({
         method: "post",
         url: apiURL,
@@ -50,14 +50,13 @@ function ForgotPwdComponent() {
         setError("Please fill all fields.");
         return;
       }
-      const apiURL = `${process.env.REACT_APP_BACKEND_API}/user/verify-coupon/`;
+      const apiURL = `${process.env.REACT_APP_BACKEND_API}/api/user/verify-coupon/`;
       const res = await axios({
         method: "post",
         url: apiURL,
         data: { username, coupon },
       });
       const { status, data = {}, msg = "" } = res.data;
-      console.log("rrrrrrrrrrr", res.data);
       if (status === 1) {
         setUserId(data.id);
         setVerifyCoupon(true);

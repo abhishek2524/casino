@@ -16,7 +16,6 @@ function RegisterForm() {
   });
   const handleRegister = async (e) => {
     e.preventDefault();
-    console.log("rrrrrrrrrrr", formFields);
     try {
       const username = formFields.username;
       const password = formFields.password;
@@ -26,7 +25,7 @@ function RegisterForm() {
         setError("Please fill all fields.");
         return;
       }
-      const apiURL = `${process.env.REACT_APP_BACKEND_API}/user/register/`;
+      const apiURL = `${process.env.REACT_APP_BACKEND_API}/api/user/register/`;
       const res = await axios({
         method: "post",
         url: apiURL,

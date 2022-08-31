@@ -22,7 +22,7 @@ function Layout() {
   };
 
   useEffect(() => {
-    // console.log("eeeeeeeeeeee", pathname.includes("/betHistory"), pathname);
+    // console.log("path::", pathname.includes("/betHistory"), pathname);
     setSubHeader(getSubHeader(pathname));
   }, [pathname]);
   return (

@@ -22,20 +22,20 @@ function LoginForm(props) {
         setError("Please fill all fields.");
         return;
       }
-      const apiURL = `${process.env.REACT_APP_BACKEND_API}/user/login/`;
+      const apiURL = `${process.env.REACT_APP_BACKEND_API}/api/user/login/`;
       const res = await axios({
         method: "post",
         url: apiURL,
         data: { username, password },
       });
       const { status, data } = res.data;
-      // console.log("res>>>>>>>>", status);
       if (status === 1) {
         console.log("success::::", data);
-        addKeyObject({ data: data.token });
+        addKeyObject({ data: { ...data.token, user: data.user ?? "Anonmas" } });
         Object.keys(data.token).map((key) =>
           localStorage.setItem(key, data.token[key])
         );
+        localStorage.setItem("user", data.user);
 
         return navigate("/", { replace: true });
       }

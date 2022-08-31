@@ -1,7 +1,8 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 
-function BottomSidebar() {
+function BottomSidebar(props) {
+  const { toggleSideBar = () => {} } = props;
   const gameLink = [
     {
       label: "20-20 Dragon Tiger",
@@ -43,7 +44,12 @@ function BottomSidebar() {
       <div className="header">Games</div>
       <div className="sideBarLinks">
         {gameLink.map(({ link, label }, index) => (
-          <NavLink key={index} className="navLink" to={link}>
+          <NavLink
+            onClick={toggleSideBar}
+            key={index}
+            className="navLink"
+            to={link}
+          >
             {label}
           </NavLink>
         ))}

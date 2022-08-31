@@ -1,10 +1,14 @@
 @import "./../../scss/colors";
+@import "./../../scss/mixins";
 .setButtonValueDiv {
-  margin: 32px;
   padding: 32px 48px !important;
   border-radius: 12px;
   border: 1px solid #d1d1d1;
   position: relative;
+
+  max-width: 100%;
+  margin: 32px auto;
+  width: calc(100vw - 64px);
   .header {
     color: #000;
     font-size: 18px;
@@ -34,6 +38,22 @@
       padding: 24px;
       font-size: 16px;
       font-weight: 700;
+    }
+  }
+}
+@media screen and (max-width: map-get($breakpoints,"sm")) {
+  .setButtonValueDiv {
+    padding: 24px !important;
+    .valueForm {
+      .col-6 {
+        padding: 0;
+        &:nth-child(1) {
+          padding-right: 5px;
+        }
+        &:nth-child(2) {
+          padding-left: 5px;
+        }
+      }
     }
   }
 }

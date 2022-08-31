@@ -1,4 +1,5 @@
 @import "./../../../scss/colors";
+@import "./../../../scss/mixins";
 .subHeader {
   background-color: $secondary-color;
   color: #fff;
@@ -22,5 +23,25 @@
         }
       }
     }
+  }
+}
+
+@media screen and (max-width: map-get($breakpoints,"mdl")) {
+  .subHeader {
+    top: 0;
+    display: flex;
+    justify-content: center;
+    .container {
+      justify-content: center;
+      h1 {
+        font-size: 18px !important;
+      }
+    }
+  }
+}
+@media screen and (max-width: map-get($breakpoints,"sm")) {
+  .unSettledLink {
+    position: absolute;
+    bottom: 0;
   }
 }

@@ -1,4 +1,5 @@
 @import "./../../../scss/colors";
+@import "./../../../scss/mixins";
 .advanceSearch {
   display: flex;
   flex-direction: column;
@@ -46,5 +47,19 @@
   }
 }
 .customSelect {
-  height: 100%;
+  // height: 100%;
+  height: 54px;
+}
+@media screen and (max-width: map-get($breakpoints,"sm")) {
+  .customDates {
+    padding: 24px !important;
+    flex-direction: column;
+    row-gap: 12px;
+    .input {
+      width: 100% !important;
+    }
+    .endDate {
+      margin: 0 !important;
+    }
+  }
 }

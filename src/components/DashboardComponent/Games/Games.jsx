@@ -6,12 +6,13 @@ function Games() {
   return (
     <div className="gameMainDiv">
       <h1>Games</h1>
-      <div className="row">
+      <div className="row gameContainer">
         {new Array(8).fill(undefined).map((data, index) => {
           return (
             <div
               key={`index-${index}`}
-              className="col-lg-3 col-md-4 col-sm-6 gameCard position-relative"
+              className="col-6 col-lg-3 col-md-4 gameCard position-relative"
+              // className="col-lg-3 col-md-4 col-sm-6 col-xs-6 gameCard position-relative"
               role="button"
               onClick={() => {
                 navigate("/game/dragon");

@@ -1,3 +1,4 @@
+@import "./scss/mixins";
 .container-fluid {
   margin: 0 !important;
   padding: 0 !important;
@@ -11,4 +12,17 @@ h1 {
   font-size: 32px !important;
   padding: 0 !important;
   margin: 0 !important;
+}
+// @media screen and (max-width: map-get($breakpoints,"mdl")) {
+//   .container {
+//     margin: 0;
+//     padding: 0;
+//     max-width: fit-content;
+//   }
+// }
+.input-disabled {
+  background-color: lightgrey !important;
+  color: black !important;
+  opacity: 0.5 !important;
+  cursor: not-allowed;
 }

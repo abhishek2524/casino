@@ -4,7 +4,7 @@ import Profile from "./Profile";
 
 function DropdownOption() {
   const handleLogout = () => {
-    window.sessionStorage.clear();
+    localStorage.clear();
     window.location.reload();
   };
   return (

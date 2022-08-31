@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { Link, Outlet, useLocation } from "react-router-dom";
+import { Link, Outlet, useLocation, useParams } from "react-router-dom";
 import SubLinks from "../../UnSettledBetComponent/SubLinks/SubLinks";
 import MainHeader from "../Header";
+import Sidebar from "../Header/Sidebar";
 import "./layout.scss";
 function Layout() {
+  const param = useParams();
+  const { gameName = "" } = param;
   const { pathname } = useLocation();
   const [subHeader, setSubHeader] = useState("abc");
   const subHeaderObj = {
@@ -17,13 +20,15 @@ function Layout() {
   const getSubHeader = (path) => {
     return subHeaderObj[path];
   };
+
   useEffect(() => {
-    // console.log("eeeeeeeeeeee", pathname.includes("/betHistory"), pathname);
+    // console.log("path::", pathname.includes("/betHistory"), pathname);
     setSubHeader(getSubHeader(pathname));
   }, [pathname]);
   return (
     <>
       <MainHeader />
+      {!gameName && <Sidebar />}
       {subHeader && (
         <div className="subHeader">
           <div className="container">

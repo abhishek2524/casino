@@ -1,14 +1,86 @@
 import React from "react";
+import { connect } from "react-redux";
 import { NavLink } from "react-router-dom";
 import "./dragonTiger.scss";
-function DragonTigerGame() {
+import { updateGameType, resetAll } from "./../../../reducers/gameSlice";
+import { card_type } from "../../../utils/Utils";
+
+const cards_number_list = [
+  { value: 0, name: "A" },
+  { value: 1, name: "2" },
+  { value: 2, name: "3" },
+  { value: 3, name: "4" },
+  { value: 4, name: "5" },
+  { value: 5, name: "6" },
+  { value: 6, name: "7" },
+  { value: 7, name: "8" },
+  { value: 8, name: "9" },
+  { value: 9, name: "10" },
+  { value: 1, name: "J" },
+  { value: 1, name: "Q" },
+  { value: 1, name: "K" },
+];
+function DragonTigerGame(props) {
+  const { gamesData, updateGameType } = props;
+  const { isGameActive = undefined } = gamesData;
+  const handle_card_type_game = (gameBtnType) => {
+    console.log("handleGameButtonClick:::");
+    updateGameType({
+      type: "card_type",
+      value: card_type[gameBtnType.toLowerCase()],
+      amount: 0,
+    });
+  };
+
+  const handleCardNumber = (data, gameName) => {
+    console.log("handleCardNumber:::");
+    updateGameType({
+      type: gameName,
+      value: data.value,
+      amount: 0,
+    });
+  };
+
+  const handleCardColorGame = (gameName, color) => {
+    console.log("inside handleCardColorGame:::");
+    let colorGameName = "";
+    if (gameName === "DRAGON") {
+      colorGameName = "card_Dragon_color";
+    } else if (gameName === "TIGER") {
+      colorGameName = "card_Tiger_color";
+    }
+    const color_obj = { black: 1, red: 0 };
+    updateGameType({
+      type: colorGameName,
+      value: color_obj[color],
+      amount: 0,
+    });
+  };
+
+  const handleOEGame = (gameName, OEType) => {
+    console.log("handleOEGame:::");
+    let OEName = "";
+    if (gameName === "DRAGON") {
+      OEName = "card_Dragon_OE";
+    } else if (gameName === "TIGER") {
+      OEName = "card_Tiger_OE";
+    }
+    const OEVal = { odd: 1, even: 0 };
+    updateGameType({
+      type: OEName,
+      value: OEVal[OEType],
+      amount: 0,
+    });
+  };
   const GameButtons = (btnProps) => {
     return (
       <div className={btnProps.colClass}>
         <div className="text-center text">{btnProps.topCount}</div>
         <div className="position-relative">
-          <button className="btn btn-primary">{btnProps.btnText}</button>
-          <div className="lockImgDiv">
+          <button onClick={btnProps.onClick} className="btn btn-primary">
+            {btnProps.btnText}
+          </button>
+          <div className={!isGameActive && "lockImgDiv"}>
             <img src="/assets/icons/lock.svg" alt="lock" />
           </div>
         </div>
@@ -29,17 +101,51 @@ function DragonTigerGame() {
               btnText="Even"
               topCount="2"
               bottomCount="0"
+              onClick={() => handleOEGame(mainBtn, "even")}
             />
             <GameButtons
               colClass="gameBtn col-lg-6"
               btnText="Odd"
               topCount="2"
               bottomCount="0"
+              onClick={() => handleOEGame(mainBtn, "odd")}
             />
             <div className="text-end">Min:100 Max:25000</div>
           </div>
           <div className="row">
-            <GameButtons
+            <div className="gameBtn col-lg-6 cardIconBtn">
+              <div className="text-center text">2</div>
+              <div className="position-relative">
+                <button
+                  role={isGameActive ? "button" : ""}
+                  onClick={() => handleCardColorGame(mainBtn, "red")}
+                  className="btn"
+                >
+                  <img src="/assets/icons/btnCard1.svg" alt="btnCard" />
+                </button>
+                <div className={!isGameActive && "lockImgDiv"}>
+                  <img src="/assets/icons/lock.svg" alt="lock" />
+                </div>
+              </div>
+              <div className="text-center text">0</div>
+            </div>
+            <div className="gameBtn col-lg-6 cardIconBtn">
+              <div className="text-center text">2</div>
+              <div className="position-relative">
+                <button
+                  role={isGameActive ? "button" : ""}
+                  onClick={() => handleCardColorGame(mainBtn, "black")}
+                  className="btn"
+                >
+                  <img src="/assets/icons/btnCard2.svg" alt="btnCard" />
+                </button>
+                <div className={!isGameActive && "lockImgDiv"}>
+                  <img src="/assets/icons/lock.svg" alt="lock" />
+                </div>
+              </div>
+              <div className="text-center text">0</div>
+            </div>
+            {/* <GameButtons
               colClass="gameBtn col-lg-6"
               btnText="Even"
               topCount="2"
@@ -50,24 +156,30 @@ function DragonTigerGame() {
               btnText="Odd"
               topCount="2"
               bottomCount="0"
-            />
+            /> */}
+            <div></div>
             <div className="text-end">Min:100 Max:25000</div>
           </div>
         </div>
       </div>
     );
   };
-  const EachCards = () => {
+
+  const EachCards = ({ detail, gameName }) => {
     return (
-      <div className="cardSet">
+      <div
+        role={isGameActive ? "button" : ""}
+        onClick={() => isGameActive && handleCardNumber(detail, gameName)}
+        className="cardSet"
+      >
         <div className="eachCard">
-          <span>A</span>
+          <span>{detail.name}</span>
           <img
             className="cardImg"
             src="/assets/images/cards/cards-1.png"
             alt="card"
           />
-          <div className="lockDiv">
+          <div className={`lockDiv ${isGameActive && "d-none"}`}>
             <img src="/assets/icons/lock.svg" alt="card" />
           </div>
         </div>
@@ -100,22 +212,25 @@ function DragonTigerGame() {
       <div className="row dragonTieTigerDiv">
         <div className="row topDiv">
           <GameButtons
-            colClass="gameBtn col-lg-5"
+            colClass="gameBtn col-5"
             btnText="Dragon"
             topCount="2"
             bottomCount="0"
+            onClick={() => handle_card_type_game("Dragon")}
           />
           <GameButtons
-            colClass="gameBtn col-lg-2"
+            colClass="gameBtn col-2"
             btnText="Tie"
             topCount="50"
             bottomCount="0"
+            onClick={() => handle_card_type_game("Tie")}
           />
           <GameButtons
-            colClass="gameBtn col-lg-5"
+            colClass="gameBtn col-5"
             btnText="Tiger"
             topCount="2"
             bottomCount="0"
+            onClick={() => handle_card_type_game("Tiger")}
           />
         </div>
         <div className="row topDiv my-2">
@@ -124,6 +239,7 @@ function DragonTigerGame() {
             btnText="Pair"
             topCount="2"
             bottomCount="0"
+            onClick={() => handle_card_type_game("Pair")}
           />
         </div>
         <div className="text-end minMax">Min:100 Max:300000</div>
@@ -138,8 +254,8 @@ function DragonTigerGame() {
         <div className="col me-2">
           <div className="text-center">2.00</div>
           <div className="d-flex flex-wrap">
-            {new Array(12).fill(null).map(() => (
-              <EachCards />
+            {cards_number_list.map((card) => (
+              <EachCards detail={card} gameName="card_Dragon_number" />
             ))}
           </div>
           <div className="text-center">Min:100 Max:25000</div>
@@ -147,8 +263,8 @@ function DragonTigerGame() {
         <div className="col ms-2">
           <div className="text-center">2.00</div>
           <div className="d-flex flex-wrap">
-            {new Array(12).fill(null).map(() => (
-              <EachCards />
+            {cards_number_list.map((card) => (
+              <EachCards detail={card} gameName="card_Tiger_number" />
             ))}
           </div>
           <div className="text-center">Min:100 Max:25000</div>
@@ -176,4 +292,11 @@ function DragonTigerGame() {
   );
 }
 
-export default DragonTigerGame;
+const mapStateToProps = ({ gamesData }) => ({
+  gamesData,
+});
+const mapDispatchToProps = {
+  updateGameType,
+  resetAll,
+};
+export default connect(mapStateToProps, mapDispatchToProps)(DragonTigerGame);

@@ -1,4 +1,5 @@
 @import "../../scss/colors";
+@import "../../scss/mixins";
 
 .backgroundDiv {
   height: 100vh;
@@ -25,17 +26,26 @@
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
-
+  padding: 0 80px;
   .leftSide {
     display: flex;
     // width: fit-content;
     // background-color: green;
+    flex: 1;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin-right: 20%;
+    // margin-right: 20%;
+    .loginLogo {
+      width: 11em;
+      height: 7em;
+      img {
+        width: 100%;
+        height: 100%;
+      }
+    }
     span {
-      margin-top: 42px;
+      margin-top: 24px;
     }
   }
   .rightSide {
@@ -109,6 +119,145 @@
           outline: none;
           max-width: 357px;
           width: 100%;
+        }
+      }
+    }
+  }
+}
+.showOnMobile {
+  width: 100%;
+  height: 100%;
+  display: none;
+}
+.hideOnMobile {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.mobileLandingPageMain {
+  padding-top: 207px;
+  width: 100%;
+  height: 100%;
+  .mobileBackgroundDiv {
+    width: 100vw;
+    height: 207px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 0;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    .logo {
+      position: absolute;
+      height: 100%;
+      width: 100%;
+      background-color: rgba(0, 0, 0, 0.7);
+      img {
+        position: absolute;
+        top: 25%;
+        left: 25%;
+        width: 11em;
+        height: 7em;
+      }
+    }
+  }
+  .content {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 24px;
+    text-align: center;
+    .wrapper {
+      transform: translateY(-40px);
+      .header {
+        font-size: 30px;
+        line-height: 100%;
+      }
+      .desc {
+        font-size: 14px;
+        line-height: 100%;
+        margin: 24px 0;
+      }
+      .authButtons {
+        display: flex;
+        flex-direction: column;
+        row-gap: 16px;
+        justify-content: center;
+        align-items: center;
+        .btn {
+          max-width: 327px;
+          height: 48px;
+          width: 100%;
+        }
+        .btn-primary {
+          background-color: $primary-color;
+          outline: none;
+          border: none;
+          box-shadow: none;
+        }
+        .btn-secondary {
+          background-color: $secondary-color;
+          outline: none;
+          border: none;
+          box-shadow: none;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: map-get($breakpoints,"mdl")) {
+  .showOnMobile {
+    display: block;
+  }
+  .hideOnMobile {
+    display: none;
+  }
+  .loginMainDiv {
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    .leftSide {
+      display: none;
+    }
+    .rightSide {
+      width: 100%;
+      height: 100%;
+      text-align: center;
+      .loginForm {
+        padding: 24px;
+        width: 100%;
+        background: none;
+        backdrop-filter: none;
+      }
+      form {
+        width: 100%;
+        height: 100%;
+        position: relative;
+        height: fit-content;
+        padding-bottom: 36px;
+        .signUpDiv {
+          span {
+            position: absolute;
+            bottom: 0;
+          }
+        }
+        .form-group {
+          width: 100% !important;
+          text-align: start;
+        }
+        .submitBtn {
+          position: relative !important;
+          padding: 0 !important;
+          margin-top: 24px;
+          .btn {
+            max-width: 100% !important;
+          }
         }
       }
     }

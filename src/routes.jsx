@@ -1,3 +1,4 @@
+import { useSelector } from "react-redux";
 import { Routes, Route, Navigate } from "react-router-dom";
 import Layout from "./components/common/Layout";
 import BetHistoryContainer from "./containers/BetHistoryContainer";
@@ -12,12 +13,25 @@ import TransactionHistoryContainer from "./containers/TransactionHistoryContaine
 import UnSettledConatiner from "./containers/UnSettledContainer";
 const Contact = () => <h1>Contact</h1>;
 function Routing() {
-  const isLogin = window.sessionStorage.getItem("login");
+  const localstorage = useSelector((state) => state.localstorage);
+  const isLogin = localstorage.access ?? window.localStorage.getItem("access");
   return (
     <Routes>
       <Route
         path="/login"
         element={isLogin ? <Navigate to="/" /> : <LoginContainer />}
+      />
+      <Route
+        path="/register"
+        element={
+          isLogin ? <Navigate to="/" /> : <LoginContainer isSignUp={true} />
+        }
+      />
+      <Route
+        path="/forgotPwd"
+        element={
+          isLogin ? <Navigate to="/" /> : <LoginContainer isForgotPwd={true} />
+        }
       />
       <Route path="/" element={isLogin ? <Layout /> : <Navigate to="/login" />}>
         <Route path="/betHistory" element={<BetHistoryContainer />} />

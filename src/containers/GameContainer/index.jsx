@@ -8,7 +8,11 @@ import "./gameContainer.scss";
 import ViewRule from "./ViewRule";
 import { w3cwebsocket as W3CWebsocket } from "websocket";
 import { connect } from "react-redux";
-import { updateGameStatus, resetAll } from "./../../reducers/gameSlice";
+import {
+  updateGameStatus,
+  resetAll,
+  updateGameType,
+} from "./../../reducers/gameSlice";
 import axios from "axios";
 import { useRef } from "react";
 
@@ -82,6 +86,13 @@ function GameContainer(props) {
       wss.current.close();
     };
   }, []);
+  useEffect(() => {
+    if (wss.current) {
+      setInterval(() => {
+        updateGameStatus({ isGameActive: !gamesData.isGameActive });
+      }, 10000);
+    }
+  }, [gamesData.isGameActive]);
   const handleBetPlacedSocket = (data) => {
     try {
       const { betAmount } = data;
@@ -94,6 +105,7 @@ function GameContainer(props) {
       };
       console.log("handleBetPlacedSocket::::", reqData);
       wss.current.send(JSON.stringify(reqData));
+      resetAll();
     } catch (error) {
       console.log("error while sending", error);
     }
@@ -166,6 +178,7 @@ const mapStateToProps = ({ gamesData }) => ({
 });
 const mapDispatchToProps = {
   updateGameStatus,
+  updateGameType,
   resetAll,
 };
 

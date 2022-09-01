@@ -10,8 +10,8 @@ function Profile() {
         <img src="/assets/tempImages/avatar.svg" alt="" />
       </div>
       <div className="userDetails">
-        <div className="userName text-capitalize">{localstorage.user}</div>
-        <div className="userCode">rahul09 | casino1089</div>
+        <div className="userName text-capitalize">Abhi434</div>
+        <div className="userCode">abhi | 5462A234</div>
       </div>
     </div>
   );

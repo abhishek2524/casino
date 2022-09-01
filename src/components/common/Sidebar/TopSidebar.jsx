@@ -9,7 +9,7 @@ function TopSidebar(props) {
   const { updateGameType, gamesData } = props;
   const { type = undefined, amount = 0 } = gamesData.gameType;
   const { handleBetPlacedSocket = undefined } = props;
-  const [betAmount, setBetAmount] = useState(0);
+  const [betAmount, setBetAmount] = useState(amount);
   const [error, setError] = useState(false);
   const handleBid = () => {
     console.log("handleBid::::::");
@@ -20,14 +20,15 @@ function TopSidebar(props) {
     handleBetPlacedSocket({
       betAmount,
     });
+    setBetAmount(0);
     updateGameType({
       amount: betAmount,
     });
   };
 
-  useEffect(() => {
-    setBetAmount(amount);
-  }, [amount]);
+  // useEffect(() => {
+  //   setBetAmount(betAmount);
+  // }, []);
   const img = <img src="/assets/icons/coins.svg" alt="coins" />;
   const navigate = useNavigate();
   return (

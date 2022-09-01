@@ -19,8 +19,11 @@ export const gamesDataSlice = createSlice({
       const { payload } = action;
       state.gameType = { ...state.gameType, ...payload };
     },
-    resetAll() {
-      return initValue;
+    resetAll(state) {
+      return {
+        ...state,
+        gameType: { type: undefined, value: undefined, amount: 0 },
+      };
     },
   },
 });

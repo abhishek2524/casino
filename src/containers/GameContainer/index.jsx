@@ -16,7 +16,15 @@ import {
 } from "./../../reducers/gameDataSlice";
 import axios from "axios";
 import { useRef } from "react";
+import Notification from "../../components/common/Notification";
+import { toast } from "react-toastify";
 
+class NotifyClass {
+  constructor(text, type) {
+    this.notifyText = text;
+    this.notifyType = type;
+  }
+}
 function GameContainer(props) {
   const {
     type = undefined,
@@ -51,6 +59,21 @@ function GameContainer(props) {
   };
   const toggleSideBar = () => setShowSidebar(!showSidebar);
   const RuleComponent = ViewRule;
+  const handleNotification = (data) => {
+    const text = data.notifyText;
+    const type = data.notifyType;
+    // toast("Wow so easy!");
+    toast[type](text, {
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "colored",
+    });
+  };
 
   const fetchSectionId = async () => {
     const apiURL = `${process.env.REACT_APP_BACKEND_API}/game/dragon_tiger_session/`;
@@ -91,6 +114,11 @@ function GameContainer(props) {
       wss.current.close();
     };
   }, []);
+
+  // useEffect(() => {
+  //   const notifyObj = new NotifyClass("Hi", "success");
+  //   handleNotification(notifyObj);
+  // }, []);
   // useEffect(() => {
   //   if (wss.current) {
   //     setInterval(() => {
@@ -113,6 +141,8 @@ function GameContainer(props) {
         data: "jo",
       };
       console.log("handleBetPlacedSocket::::", reqData);
+      const notifyObj = new NotifyClass("Bid Placed", "success");
+      handleNotification(notifyObj);
       wss.current.send(JSON.stringify(reqData));
       resetGameType();
     } catch (error) {
@@ -151,7 +181,8 @@ function GameContainer(props) {
           </div>
         </div>
       </div>
-      <div className="container p-0 gameContainerStyle">
+      <div className="container p-0 gameContainerStyle position-relative">
+        <Notification />
         <div className="mt-3 d-flex">
           {!showSidebar && (
             <div

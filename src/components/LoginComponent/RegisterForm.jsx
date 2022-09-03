@@ -40,12 +40,12 @@ function RegisterForm() {
       });
       const { status, data } = res.data;
       if (status === 1) {
-        disptach(addKeyObject({ data: data.token }));
-        Object.keys(data.token).map((key) =>
-          localStorage.setItem(key, data.token[key])
-        );
+        // disptach(addKeyObject({ data: data.token }));
+        // Object.keys(data.token).map((key) =>
+        //   localStorage.setItem(key, data.token[key])
+        // );
 
-        return navigate("/", { replace: true });
+        return navigate("/login", { replace: true });
       }
       setError("User already exists.Please login.");
       return;

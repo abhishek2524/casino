@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { NavLink } from "react-router-dom";
 import "./dragonTiger.scss";
-import { updateGameType, resetAll } from "./../../../reducers/gameSlice";
+import { updateGameType, resetAll } from "./../../../reducers/gameDataSlice";
 import { card_type } from "../../../utils/Utils";
 
 const cards_number_list = [

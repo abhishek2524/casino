@@ -8,20 +8,27 @@ import "./gameContainer.scss";
 import ViewRule from "./ViewRule";
 import { w3cwebsocket as W3CWebsocket } from "websocket";
 import { connect } from "react-redux";
-import { updateGameStatus, resetAll } from "./../../reducers/gameSlice";
+import {
+  updateGameStatus,
+  resetGameType,
+  updateGameType,
+  updateSessionId,
+} from "./../../reducers/gameDataSlice";
 import axios from "axios";
 import { useRef } from "react";
 
 function GameContainer(props) {
-  const { gamesData } = props;
   const {
     type = undefined,
     value = undefined,
     amount = 0,
-  } = gamesData.gameType;
+    isGameActive = false,
+    updateSessionId,
+    sessionId,
+  } = props;
   const [showSidebar, setShowSidebar] = useState(false);
   const [showModal, setShowModal] = useState(false);
-  const { placeBet = false, updateGameStatus, resetAll } = props;
+  const { placeBet = false, updateGameStatus, resetGameType } = props;
   const param = useParams();
   const { gameName = "dragon" } = param;
   const availableGames = ["dragon", "lucky7", "teenpati", "card32"];
@@ -46,7 +53,7 @@ function GameContainer(props) {
   const RuleComponent = ViewRule;
 
   const fetchSectionId = async () => {
-    const apiURL = `${process.env.REACT_APP_BACKEND_API}/game/dragon_tiger_section/`;
+    const apiURL = `${process.env.REACT_APP_BACKEND_API}/game/dragon_tiger_session/`;
     const res = await axios({
       method: "GET",
       url: apiURL,
@@ -56,7 +63,9 @@ function GameContainer(props) {
       },
       // data: { username, password },
     });
-    console.log("sectionId", res);
+    if (res.status === 200) {
+      return updateSessionId({ sessionId: res.data });
+    }
   };
   let wss = useRef(null);
   useEffect(() => {
@@ -71,7 +80,7 @@ function GameContainer(props) {
       if (data) {
         if (data.isGameActive !== "undefined") {
           updateGameStatus({ isGameActive: data.isGameActive });
-          // fetchSectionId();
+          fetchSectionId();
         }
       }
     };
@@ -82,6 +91,13 @@ function GameContainer(props) {
       wss.current.close();
     };
   }, []);
+  // useEffect(() => {
+  //   if (wss.current) {
+  //     setInterval(() => {
+  //       updateGameStatus({ isGameActive: !isGameActive });
+  //     }, 10000);
+  //   }
+  // }, [isGameActive]);
   const handleBetPlacedSocket = (data) => {
     try {
       const { betAmount } = data;
@@ -89,11 +105,16 @@ function GameContainer(props) {
         return;
       }
       const reqData = {
-        [type]: value,
+        [type]: value.toString(),
         [`${type}_amount`]: betAmount,
+        section_id: sessionId.toString(),
+        Dragon: "[1,2]",
+        Tiger: "[1,2]",
+        data: "jo",
       };
       console.log("handleBetPlacedSocket::::", reqData);
       wss.current.send(JSON.stringify(reqData));
+      resetGameType();
     } catch (error) {
       console.log("error while sending", error);
     }
@@ -162,11 +183,17 @@ function GameContainer(props) {
 }
 
 const mapStateToProps = ({ gamesData }) => ({
-  gamesData,
+  type: gamesData.gameType.type,
+  value: gamesData.gameType.value,
+  amount: gamesData.gameType.amount,
+  isGameActive: gamesData.isGameActive,
+  sessionId: gamesData.sessionId,
 });
 const mapDispatchToProps = {
   updateGameStatus,
-  resetAll,
+  updateGameType,
+  resetGameType,
+  updateSessionId,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(GameContainer);

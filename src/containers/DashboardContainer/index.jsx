@@ -4,7 +4,7 @@ import DashboardComponent from "../../components/DashboardComponent/DashboardCom
 function DashboardContainer() {
   return (
     <>
-      <div className="d-flex flex-column">
+      <div className="d-flex flex-column bg-lightgray">
         <DashboardComponent />
       </div>
     </>

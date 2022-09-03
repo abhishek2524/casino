@@ -115,3 +115,10 @@
     display: flex !important;
   }
 }
+.disabled-link {
+  cursor: not-allowed;
+  background-color: initial !important;
+  &:hover {
+    background-color: grey !important;
+  }
+}

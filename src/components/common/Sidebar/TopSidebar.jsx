@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import { useState } from "react";
 import { connect } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { updateGameType } from "./../../../reducers/gameSlice";
+import { updateGameType } from "./../../../reducers/gameDataSlice";
 
 function TopSidebar(props) {
   const { updateGameType, gamesData } = props;

@@ -2,7 +2,8 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initValue = {
   isGameActive: false,
-  gameName: "",
+  gameName: undefined,
+  sessionId: undefined,
   gameType: { type: undefined, value: undefined, amount: 0 },
 };
 
@@ -19,15 +20,28 @@ export const gamesDataSlice = createSlice({
       const { payload } = action;
       state.gameType = { ...state.gameType, ...payload };
     },
-    resetAll(state) {
+    resetGameType(state) {
       return {
         ...state,
         gameType: { type: undefined, value: undefined, amount: 0 },
       };
     },
+    updateSessionId(state, action) {
+      const { payload } = action;
+      const { sessionId = undefined } = payload;
+      state.sessionId = sessionId;
+    },
+    resetAll() {
+      return initValue;
+    },
   },
 });
 
-export const { updateGameStatus, resetAll, updateGameType } =
-  gamesDataSlice.actions;
+export const {
+  updateGameStatus,
+  resetAll,
+  updateGameType,
+  resetGameType,
+  updateSessionId,
+} = gamesDataSlice.actions;
 export default gamesDataSlice.reducer;

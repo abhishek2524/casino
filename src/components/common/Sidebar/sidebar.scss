@@ -86,6 +86,22 @@
         background-color: $primary-color;
       }
     }
+    .LogoutBtn {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 10px;
+      .btn {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100% !important;
+        font-weight: 500;
+        .logoutIcon {
+          margin-right: 8px;
+        }
+      }
+    }
   }
 }
 .closeArrow {

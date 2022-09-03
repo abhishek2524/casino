@@ -6,6 +6,10 @@ import { updateGames } from "./../../../reducers/gamesSlice";
 
 function BottomSidebar(props) {
   const { active_games, games } = props;
+  const handleLogout = () => {
+    localStorage.clear();
+    window.location.reload();
+  };
   const fetchGameData = async () => {
     const apiURL = `${process.env.REACT_APP_BACKEND_API}/data/gameData/`;
     const res = await axios({
@@ -85,6 +89,16 @@ function BottomSidebar(props) {
             {data.game_name}
           </NavLink>
         ))}
+        <div className="LogoutBtn">
+          <button className="btn btn-primary bg-primary" onClick={handleLogout}>
+            <img
+              src="/assets/icons/logout.svg"
+              alt="logout-icon"
+              className="logoutIcon"
+            />{" "}
+            Logout
+          </button>
+        </div>
       </div>
     </div>
   );

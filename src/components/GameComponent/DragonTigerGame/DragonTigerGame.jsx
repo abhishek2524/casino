@@ -16,9 +16,9 @@ const cards_number_list = [
   { value: 7, name: "8" },
   { value: 8, name: "9" },
   { value: 9, name: "10" },
-  { value: 1, name: "J" },
-  { value: 1, name: "Q" },
-  { value: 1, name: "K" },
+  { value: 10, name: "J" },
+  { value: 11, name: "Q" },
+  { value: 12, name: "K" },
 ];
 function DragonTigerGame(props) {
   const { gamesData, updateGameType } = props;
@@ -190,7 +190,12 @@ function DragonTigerGame(props) {
   return (
     <div className="dragonGameDiv">
       <div className="topSlideDiv position-relative">
-        <img className="topBanner" src="/assets/images/dragonGame.png" alt="" />
+        <div className="topBanner">
+          <video width="320" height="240" controls>
+            <source src="/assets/video/dragontiger.mp4" type="video/mp4" />
+          </video>
+        </div>
+        {/* <img className="topBanner" src="/assets/images/dragonGame.png" alt="" /> */}
         <div className="cards">
           <img
             className="card"

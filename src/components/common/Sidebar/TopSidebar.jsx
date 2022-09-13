@@ -7,6 +7,7 @@ import { updateGameType } from "./../../../reducers/gameDataSlice";
 
 function TopSidebar(props) {
   const { updateGameType, gamesData } = props;
+  const { isGameActive = false } = gamesData;
   const { type = undefined, amount = 0 } = gamesData.gameType;
   const { handleBetPlacedSocket = undefined } = props;
   const [betAmount, setBetAmount] = useState(amount);
@@ -74,7 +75,7 @@ function TopSidebar(props) {
     //   </div>
     // </div>
 
-    <div className="topDiv">
+    <div className="topDiv hideOnMobile">
       <div className="header">Place Bet</div>
       <hr />
       <div className="content">
@@ -89,10 +90,12 @@ function TopSidebar(props) {
               Enter Amount:
             </label>
             <input
-              disabled={!type ? true : false}
+              disabled={!(type && isGameActive) ? true : false}
               type="number"
               placeholder="Enter bet"
-              className={`form-control text-light ${!type && "input-disabled"}`}
+              className={`form-control text-light ${
+                !(type && isGameActive) && "input-disabled"
+              }`}
               id="betDiv1"
               value={betAmount}
               min={0}
@@ -107,19 +110,21 @@ function TopSidebar(props) {
             <button
               className="btn btn-primary w-100"
               onClick={handleBid}
-              disabled={!type ? true : false}
+              disabled={!(type && isGameActive) ? true : false}
             >
               Submit
             </button>
           </div>
         </div>
       </div>
+      <hr />
     </div>
   );
 }
 
 const mapStateToProps = ({ gamesData }) => ({
   gamesData,
+  isGameActive: gamesData.isGameActive,
 });
 const mapDispatchToProps = {
   updateGameType,

@@ -23,6 +23,8 @@ const cards_number_list = [
 function DragonTigerGame(props) {
   const { gamesData, updateGameType } = props;
   const { isGameActive = undefined } = gamesData;
+  const { type: _gameType = undefined, value: _gameValue = undefined } =
+    gamesData.gameType;
   const handle_card_type_game = (gameBtnType) => {
     console.log("handleGameButtonClick:::");
     updateGameType({
@@ -77,10 +79,13 @@ function DragonTigerGame(props) {
       <div className={btnProps.colClass}>
         <div className="text-center text">{btnProps.topCount}</div>
         <div className="position-relative">
-          <button onClick={btnProps.onClick} className="btn btn-primary">
+          <button
+            onClick={btnProps.onClick}
+            className={`btn btn-primary ${btnProps.btnColor}`}
+          >
             {btnProps.btnText}
           </button>
-          <div className={!isGameActive && "lockImgDiv"}>
+          <div className={!isGameActive ? "lockImgDiv" : "d-none"}>
             <img src="/assets/icons/lock.svg" alt="lock" />
           </div>
         </div>
@@ -88,7 +93,13 @@ function DragonTigerGame(props) {
       </div>
     );
   };
-  const OddEvenGameComponent = ({ mainBtn, group, ...rest }) => {
+  const OddEvenGameComponent = ({
+    mainBtn,
+    group,
+    isOEBtnActive,
+    isColorBtnActive,
+    ...rest
+  }) => {
     return (
       <div className={`col ${group === "1" ? "me-2" : "ms-2"}`}>
         <div className="row">
@@ -102,6 +113,7 @@ function DragonTigerGame(props) {
               topCount="2"
               bottomCount="0"
               onClick={() => handleOEGame(mainBtn, "even")}
+              btnColor={isOEBtnActive && _gameValue === 0 && "bg-info"}
             />
             <GameButtons
               colClass="gameBtn col-lg-6"
@@ -109,6 +121,7 @@ function DragonTigerGame(props) {
               topCount="2"
               bottomCount="0"
               onClick={() => handleOEGame(mainBtn, "odd")}
+              btnColor={isOEBtnActive && _gameValue === 1 && "bg-info"}
             />
             <div className="text-end">Min:100 Max:25000</div>
           </div>
@@ -119,7 +132,9 @@ function DragonTigerGame(props) {
                 <button
                   role={isGameActive ? "button" : ""}
                   onClick={() => handleCardColorGame(mainBtn, "red")}
-                  className="btn"
+                  className={`btn ${
+                    isColorBtnActive && _gameValue === 0 && "bg-info"
+                  }`}
                 >
                   <img src="/assets/icons/btnCard1.svg" alt="btnCard" />
                 </button>
@@ -135,7 +150,9 @@ function DragonTigerGame(props) {
                 <button
                   role={isGameActive ? "button" : ""}
                   onClick={() => handleCardColorGame(mainBtn, "black")}
-                  className="btn"
+                  className={`btn ${
+                    isColorBtnActive && _gameValue === 1 && "bg-info"
+                  }`}
                 >
                   <img src="/assets/icons/btnCard2.svg" alt="btnCard" />
                 </button>
@@ -165,14 +182,18 @@ function DragonTigerGame(props) {
     );
   };
 
-  const EachCards = ({ detail, gameName }) => {
+  const EachCards = ({ detail, gameName, isCardActive }) => {
     return (
       <div
         role={isGameActive ? "button" : ""}
         onClick={() => isGameActive && handleCardNumber(detail, gameName)}
         className="cardSet"
       >
-        <div className="eachCard">
+        <div
+          className={`eachCard ${
+            isCardActive && _gameValue === detail.value && "bg-info"
+          }`}
+        >
           <span>{detail.name}</span>
           <img
             className="cardImg"
@@ -191,7 +212,7 @@ function DragonTigerGame(props) {
     <div className="dragonGameDiv">
       <div className="topSlideDiv position-relative">
         <div className="topBanner">
-          <video width="320" height="240" controls>
+          <video width="320" height="240" autoPlay loop muted>
             <source src="/assets/video/dragontiger.mp4" type="video/mp4" />
           </video>
         </div>
@@ -222,6 +243,9 @@ function DragonTigerGame(props) {
             topCount="2"
             bottomCount="0"
             onClick={() => handle_card_type_game("Dragon")}
+            btnColor={
+              _gameType === "card_type" && _gameValue === -1 ? "bg-info" : ""
+            }
           />
           <GameButtons
             colClass="gameBtn col-2"
@@ -229,6 +253,9 @@ function DragonTigerGame(props) {
             topCount="50"
             bottomCount="0"
             onClick={() => handle_card_type_game("Tie")}
+            btnColor={
+              _gameType === "card_type" && _gameValue === 0 ? "bg-info" : ""
+            }
           />
           <GameButtons
             colClass="gameBtn col-5"
@@ -236,6 +263,9 @@ function DragonTigerGame(props) {
             topCount="2"
             bottomCount="0"
             onClick={() => handle_card_type_game("Tiger")}
+            btnColor={
+              _gameType === "card_type" && _gameValue === 1 ? "bg-info" : ""
+            }
           />
         </div>
         <div className="row topDiv my-2">
@@ -245,14 +275,27 @@ function DragonTigerGame(props) {
             topCount="2"
             bottomCount="0"
             onClick={() => handle_card_type_game("Pair")}
+            btnColor={
+              _gameType === "card_type" && _gameValue === 2 ? "bg-info" : ""
+            }
           />
         </div>
         <div className="text-end minMax">Min:100 Max:300000</div>
       </div>
 
       <div className="row oddEvenDiv">
-        <OddEvenGameComponent group="1" mainBtn="DRAGON" />
-        <OddEvenGameComponent group="2" mainBtn="TIGER" />
+        <OddEvenGameComponent
+          group="1"
+          mainBtn="DRAGON"
+          isOEBtnActive={_gameType === "card_Dragon_OE"}
+          isColorBtnActive={_gameType === "card_Dragon_color"}
+        />
+        <OddEvenGameComponent
+          group="2"
+          mainBtn="TIGER"
+          isOEBtnActive={_gameType === "card_Tiger_OE"}
+          isColorBtnActive={_gameType === "card_Tiger_color"}
+        />
       </div>
 
       <div className="row displayCardsDiv">
@@ -260,7 +303,11 @@ function DragonTigerGame(props) {
           <div className="text-center">2.00</div>
           <div className="d-flex flex-wrap">
             {cards_number_list.map((card) => (
-              <EachCards detail={card} gameName="card_Dragon_number" />
+              <EachCards
+                detail={card}
+                gameName="card_Dragon_number"
+                isCardActive={_gameType === "card_Dragon_number"}
+              />
             ))}
           </div>
           <div className="text-center">Min:100 Max:25000</div>
@@ -269,7 +316,11 @@ function DragonTigerGame(props) {
           <div className="text-center">2.00</div>
           <div className="d-flex flex-wrap">
             {cards_number_list.map((card) => (
-              <EachCards detail={card} gameName="card_Tiger_number" />
+              <EachCards
+                detail={card}
+                gameName="card_Tiger_number"
+                isCardActive={_gameType === "card_Tiger_number"}
+              />
             ))}
           </div>
           <div className="text-center">Min:100 Max:25000</div>
@@ -287,7 +338,7 @@ function DragonTigerGame(props) {
         <div className="content">
           <span>D</span>
           <span>D</span>
-          <span className="text-danger">T</span>
+          <span className="text-primary">T</span>
           <span>D</span>
           <span>D</span>
           <span>D</span>

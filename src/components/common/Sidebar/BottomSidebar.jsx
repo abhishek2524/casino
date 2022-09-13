@@ -66,7 +66,8 @@ function BottomSidebar(props) {
   ];
   return (
     <div className="bottomDiv">
-      <div className="header">Games</div>
+      <div className="header mb-3">Games</div>
+
       <div className="sideBarLinks">
         {/* {gameLink.map(({ link, label }, index) => (
           <NavLink

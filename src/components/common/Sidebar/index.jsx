@@ -16,7 +16,6 @@ function Sidebar(props) {
       </div>
       <div>
         <TopSidebar handleBetPlacedSocket={props.handleBetPlacedSocket} />
-        <hr />
         <BottomSidebar toggleSideBar={toggleSideBar} />
       </div>
     </div>

@@ -18,6 +18,7 @@ import axios from "axios";
 import { useRef } from "react";
 import Notification from "../../components/common/Notification";
 import { toast } from "react-toastify";
+import BetInputField from "../../components/GameComponent/DragonTigerGame/BetInputField";
 
 class NotifyClass {
   constructor(text, type) {
@@ -98,8 +99,8 @@ function GameContainer(props) {
       console.log("wss connected");
     };
     wss.current.onmessage = (message) => {
-      console.log("socket msg received", JSON.parse(message.data));
       const data = JSON.parse(message.data);
+      console.log("socket msg received", data.data);
       if (data) {
         if (data.data === "bid done") {
           const notifyObj = new NotifyClass("Bid Placed", "success");
@@ -109,11 +110,14 @@ function GameContainer(props) {
           updateGameStatus({ isGameActive: data.isGameActive });
           fetchSectionId();
         }
+        if (data.data.isGameActive !== undefined) {
+          updateGameStatus({ isGameActive: data.data.isGameActive });
+        }
       }
     };
-    // wss.onclose = () => {
-    //   console.log("wss connection closed");
-    // };
+    wss.onclose = () => {
+      console.log("wss connection closed");
+    };
     return () => {
       wss.current.close();
     };
@@ -157,6 +161,13 @@ function GameContainer(props) {
 
   return (
     <>
+      {isGameActive && type && window.innerWidth < 993 && (
+        <BetInputField
+          handleBetPlacedSocket={handleBetPlacedSocket}
+          show={true}
+        />
+      )}
+
       {showModal && (
         <CustomRuleModal show={showModal} handleHide={closeRuleModal}>
           <RuleComponent />

@@ -138,3 +138,11 @@
     background-color: grey !important;
   }
 }
+@media screen and (max-width: map-get($breakpoints,"lg")) {
+  .hideOnMobile {
+    display: none !important;
+  }
+  .header {
+    padding: 12px 12px 0 !important;
+  }
+}

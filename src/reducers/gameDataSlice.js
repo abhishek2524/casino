@@ -14,7 +14,13 @@ export const gamesDataSlice = createSlice({
     updateGameStatus(state, action) {
       const { payload } = action;
       console.log("inside updateGameStatus", payload);
-      return { ...state, ...payload };
+      if (state.isGameActive !== payload.isGameActive) {
+        state.isGameActive = payload.isGameActive;
+        if (payload.isGameActive === false) {
+          state.gameType = { type: undefined, value: undefined, amount: 0 };
+        }
+      }
+      return state;
     },
     updateGameType(state, action) {
       const { payload } = action;

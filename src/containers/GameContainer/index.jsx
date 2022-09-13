@@ -65,7 +65,7 @@ function GameContainer(props) {
     // toast("Wow so easy!");
     toast[type](text, {
       position: "top-right",
-      autoClose: 5000,
+      autoClose: 3000,
       hideProgressBar: false,
       closeOnClick: true,
       pauseOnHover: true,
@@ -101,7 +101,11 @@ function GameContainer(props) {
       console.log("socket msg received", JSON.parse(message.data));
       const data = JSON.parse(message.data);
       if (data) {
-        if (data.isGameActive !== "undefined") {
+        if (data.data === "bid done") {
+          const notifyObj = new NotifyClass("Bid Placed", "success");
+          handleNotification(notifyObj);
+        }
+        if (data.isGameActive !== undefined) {
           updateGameStatus({ isGameActive: data.isGameActive });
           fetchSectionId();
         }
@@ -138,11 +142,12 @@ function GameContainer(props) {
         section_id: sessionId.toString(),
         Dragon: "[1,2]",
         Tiger: "[1,2]",
-        data: "jo",
+        data: "dummy data",
+        token: localStorage.getItem("access"),
       };
       console.log("handleBetPlacedSocket::::", reqData);
-      const notifyObj = new NotifyClass("Bid Placed", "success");
-      handleNotification(notifyObj);
+      // const notifyObj = new NotifyClass("Bid Placed", "success");
+      // handleNotification(notifyObj);
       wss.current.send(JSON.stringify(reqData));
       resetGameType();
     } catch (error) {

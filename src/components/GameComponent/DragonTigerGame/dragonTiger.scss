@@ -219,3 +219,23 @@
     }
   }
 }
+
+@media screen and (max-width: map-get($breakpoints,"sm")) {
+  .topSlideDiv {
+    .cards {
+      padding: 12px !important;
+      .card {
+        height: 50px !important;
+        width: 35px !important;
+        &:first-child {
+          margin-right: 8px !important;
+        }
+      }
+    }
+    .countNumber {
+      .digit {
+        font-size: 24px !important;
+      }
+    }
+  }
+}

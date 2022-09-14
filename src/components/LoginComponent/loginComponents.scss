@@ -211,7 +211,7 @@
   }
 }
 
-@media screen and (max-width: map-get($breakpoints,"mdl")) {
+@media screen and (max-width: map-get($breakpoints,"lg")) {
   .showOnMobile {
     display: block;
   }

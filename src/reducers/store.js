@@ -8,4 +8,8 @@ export const store = configureStore({
     gamesData: gamesDataSlice,
     games: gamesSlice,
   },
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: false,
+    }),
 });

@@ -97,21 +97,23 @@ function GameContainer(props) {
 
     wss.current.onopen = () => {
       console.log("wss connected");
+      fetchSectionId();
     };
     wss.current.onmessage = (message) => {
       const data = JSON.parse(message.data);
       console.log("socket msg received", data.data);
       if (data) {
-        if (data.data === "bid done") {
-          const notifyObj = new NotifyClass("Bid Placed", "success");
-          handleNotification(notifyObj);
-        }
         if (data.isGameActive !== undefined) {
           updateGameStatus({ isGameActive: data.isGameActive });
-          fetchSectionId();
         }
-        if (data.data.isGameActive !== undefined) {
-          updateGameStatus({ isGameActive: data.data.isGameActive });
+        if (data.data) {
+          if (data.data.status === 1) {
+            const notifyObj = new NotifyClass(data.data.msg, "success");
+            handleNotification(notifyObj);
+          }
+          if (data.data.isGameActive !== undefined) {
+            updateGameStatus({ isGameActive: data.data.isGameActive });
+          }
         }
       }
     };
@@ -141,13 +143,13 @@ function GameContainer(props) {
         return;
       }
       const reqData = {
-        [type]: value.toString(),
+        [type]: value?.toString() ?? null,
         [`${type}_amount`]: betAmount,
-        section_id: sessionId.toString(),
+        section_id: sessionId?.toString() ?? null,
         Dragon: "[1,2]",
         Tiger: "[1,2]",
         data: "dummy data",
-        token: localStorage.getItem("access"),
+        token: localStorage.getItem("access") ?? null,
       };
       console.log("handleBetPlacedSocket::::", reqData);
       // const notifyObj = new NotifyClass("Bid Placed", "success");

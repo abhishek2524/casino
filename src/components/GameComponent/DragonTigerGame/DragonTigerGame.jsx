@@ -4,6 +4,7 @@ import { NavLink } from "react-router-dom";
 import "./dragonTiger.scss";
 import { updateGameType, resetAll } from "./../../../reducers/gameDataSlice";
 import { card_type } from "../../../utils/Utils";
+import Timer from "./Timer";
 
 const cards_number_list = [
   { value: 0, name: "A" },
@@ -229,10 +230,11 @@ function DragonTigerGame(props) {
             alt="cards"
           />
         </div>
-        <div className="countNumber">
+        {/* <div className="countNumber">
           <div className="digit">0</div>
           <div className="digit">1</div>
-        </div>
+        </div> */}
+        <Timer />
       </div>
 
       <div className="row dragonTieTigerDiv">

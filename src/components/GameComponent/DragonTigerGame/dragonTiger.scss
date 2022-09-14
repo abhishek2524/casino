@@ -239,3 +239,23 @@
     }
   }
 }
+$count-height: 60px;
+$count-width: 45px;
+
+.customCounter {
+  position: absolute !important;
+  bottom: 18px;
+  right: 18px;
+  .tick-flip-panel-text-wrapper {
+    font-size: 44px;
+  }
+  .tick-flip-card,
+  .tick-flip {
+    height: $count-height !important;
+    width: $count-width !important;
+  }
+  .tick-flip-panel {
+    background-color: white !important;
+    color: #000;
+  }
+}

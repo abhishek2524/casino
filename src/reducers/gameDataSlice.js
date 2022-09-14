@@ -4,6 +4,7 @@ const initValue = {
   isGameActive: false,
   gameName: undefined,
   sessionId: undefined,
+  isTimerActive: false,
   gameType: { type: undefined, value: undefined, amount: 0 },
 };
 
@@ -40,6 +41,12 @@ export const gamesDataSlice = createSlice({
     resetAll() {
       return initValue;
     },
+    startTimer(state) {
+      state.isTimerActive = true;
+    },
+    stopTimer(state) {
+      state.isTimerActive = false;
+    },
   },
 });
 
@@ -49,5 +56,7 @@ export const {
   updateGameType,
   resetGameType,
   updateSessionId,
+  startTimer,
+  stopTimer,
 } = gamesDataSlice.actions;
 export default gamesDataSlice.reducer;

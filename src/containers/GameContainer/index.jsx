@@ -13,6 +13,8 @@ import {
   resetGameType,
   updateGameType,
   updateSessionId,
+  startTimer,
+  stopTimer,
 } from "./../../reducers/gameDataSlice";
 import axios from "axios";
 import { useRef } from "react";
@@ -34,6 +36,8 @@ function GameContainer(props) {
     isGameActive = false,
     updateSessionId,
     sessionId,
+    startTimer,
+    stopTimer,
   } = props;
   const [showSidebar, setShowSidebar] = useState(false);
   const [showModal, setShowModal] = useState(false);
@@ -103,16 +107,22 @@ function GameContainer(props) {
       const data = JSON.parse(message.data);
       console.log("socket msg received", data.data);
       if (data) {
-        if (data.isGameActive !== undefined) {
-          updateGameStatus({ isGameActive: data.isGameActive });
-        }
+        // if (data.isGameActive !== undefined) {
+        //   updateGameStatus({ isGameActive: data.isGameActive });
+        // }// lock untill new session starts
         if (data.data) {
           if (data.data.status === 1) {
             const notifyObj = new NotifyClass(data.data.msg, "success");
             handleNotification(notifyObj);
           }
           if (data.data.isGameActive !== undefined) {
-            updateGameStatus({ isGameActive: data.data.isGameActive });
+            updateSessionId({ sessionId: data.data.session });
+            if (data.data.isGameActive && data.data.time === 20) {
+              updateGameStatus({ isGameActive: data.data.isGameActive });
+              startTimer();
+            } else if (!data.data.isGameActive) {
+              updateGameStatus({ isGameActive: data.data.isGameActive });
+            }
           }
         }
       }
@@ -138,6 +148,15 @@ function GameContainer(props) {
   // }, [isGameActive]);
   const handleBetPlacedSocket = (data) => {
     try {
+      if (wss.current.readyState === WebSocket.CLOSED) {
+        localStorage.clear();
+        const notifyObj = new NotifyClass("Session Expired.", "error");
+        handleNotification(notifyObj);
+        setTimeout(() => {
+          window.location.reload();
+        }, 4000);
+        return;
+      }
       const { betAmount } = data;
       if (!type && !betAmount && !value) {
         return;
@@ -195,7 +214,7 @@ function GameContainer(props) {
                 View Rules
               </div>
             )}
-            <div>Round ID: 22190775008</div>
+            <div>Round ID: {sessionId}</div>
           </div>
         </div>
       </div>
@@ -243,6 +262,8 @@ const mapDispatchToProps = {
   updateGameType,
   resetGameType,
   updateSessionId,
+  startTimer,
+  stopTimer,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(GameContainer);

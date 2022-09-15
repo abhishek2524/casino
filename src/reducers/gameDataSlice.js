@@ -5,6 +5,8 @@ const initValue = {
   gameName: undefined,
   sessionId: undefined,
   isTimerActive: false,
+  dragonArr: [],
+  tigerArr: [],
   gameType: { type: undefined, value: undefined, amount: 0 },
 };
 
@@ -47,6 +49,19 @@ export const gamesDataSlice = createSlice({
     stopTimer(state) {
       state.isTimerActive = false;
     },
+    updateDragon(state, action) {
+      const { payload } = action;
+      // console.log("updating Dragon", payload);
+      const { dragonArr = [] } = payload;
+
+      state.dragonArr = dragonArr;
+    },
+    updateTiger(state, action) {
+      const { payload } = action;
+      // console.log("updating Tiger", payload);
+      const { tigerArr = [] } = payload;
+      state.tigerArr = tigerArr;
+    },
   },
 });
 
@@ -58,5 +73,7 @@ export const {
   updateSessionId,
   startTimer,
   stopTimer,
+  updateDragon,
+  updateTiger,
 } = gamesDataSlice.actions;
 export default gamesDataSlice.reducer;

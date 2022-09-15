@@ -3,7 +3,11 @@ import { connect } from "react-redux";
 import { NavLink } from "react-router-dom";
 import "./dragonTiger.scss";
 import { updateGameType, resetAll } from "./../../../reducers/gameDataSlice";
-import { card_type } from "../../../utils/Utils";
+import {
+  card_type,
+  card_type_name,
+  card_value_name,
+} from "../../../utils/Utils";
 import Timer from "./Timer";
 
 const cards_number_list = [
@@ -22,7 +26,7 @@ const cards_number_list = [
   { value: 12, name: "K" },
 ];
 function DragonTigerGame(props) {
-  const { gamesData, updateGameType } = props;
+  const { gamesData, updateGameType, dragonArr = [], tigerArr = [] } = props;
   const { isGameActive = undefined } = gamesData;
   const { type: _gameType = undefined, value: _gameValue = undefined } =
     gamesData.gameType;
@@ -219,16 +223,36 @@ function DragonTigerGame(props) {
         </div>
         {/* <img className="topBanner" src="/assets/images/dragonGame.png" alt="" /> */}
         <div className="cards">
-          <img
-            className="card"
-            src="/assets/images/cards/Queen_of_Hearts.png"
-            alt="cards"
-          />
-          <img
-            className="card"
-            src="/assets/images/cards/playing-card-ba.png"
-            alt="cards"
-          />
+          {dragonArr.length === 0 ? (
+            <img
+              className="card"
+              src="/assets/images/cards/playing-card-ba.png"
+              alt="cards"
+            />
+          ) : (
+            <img
+              className="card"
+              src={`/assets/cards/${card_type_name[dragonArr[0]]}${
+                card_value_name[dragonArr[1]]
+              }.png`}
+              alt="cards"
+            />
+          )}
+          {tigerArr.length === 0 ? (
+            <img
+              className="card"
+              src="/assets/images/cards/playing-card-ba.png"
+              alt="cards"
+            />
+          ) : (
+            <img
+              className="card"
+              src={`/assets/cards/${card_type_name[tigerArr[0]]}${
+                card_value_name[tigerArr[1]]
+              }.png`}
+              alt="cards"
+            />
+          )}
         </div>
         {/* <div className="countNumber">
           <div className="digit">0</div>
@@ -352,6 +376,8 @@ function DragonTigerGame(props) {
 
 const mapStateToProps = ({ gamesData }) => ({
   gamesData,
+  dragonArr: gamesData.dragonArr,
+  tigerArr: gamesData.tigerArr,
 });
 const mapDispatchToProps = {
   updateGameType,

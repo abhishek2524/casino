@@ -3,10 +3,13 @@ import Tick from "@pqina/flip";
 import "@pqina/flip/dist/flip.min.css";
 import { useState } from "react";
 import { connect } from "react-redux";
-import { stopTimer } from "./../../../../reducers/gameDataSlice";
+import {
+  stopTimer,
+  updateGameStatus,
+} from "./../../../../reducers/gameDataSlice";
 
 const Timer = (props) => {
-  const { gameTimer = false, stopTimer } = props;
+  const { gameTimer = false, stopTimer, updateGameStatus } = props;
   const unlockTime = 20;
   const [value, setValue] = useState(gameTimer ? unlockTime : "0" + 0);
   const divRef = useRef();
@@ -14,6 +17,9 @@ const Timer = (props) => {
   const timer = () =>
     setValue((prevVal) => {
       const newVal = prevVal - 1;
+      if (newVal === 3) {
+        updateGameStatus({ isGameActive: false });
+      }
       if (newVal < 10) {
         return "0" + newVal;
       }
@@ -70,6 +76,7 @@ const mapStateToProps = ({ gamesData }) => ({
 });
 const mapDispatchToProps = {
   stopTimer,
+  updateGameStatus,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Timer);

@@ -15,6 +15,8 @@ import {
   updateSessionId,
   startTimer,
   stopTimer,
+  updateTiger,
+  updateDragon,
 } from "./../../reducers/gameDataSlice";
 import axios from "axios";
 import { useRef } from "react";
@@ -38,6 +40,10 @@ function GameContainer(props) {
     sessionId,
     startTimer,
     stopTimer,
+    dragonArr,
+    tigerArr,
+    updateTiger,
+    updateDragon,
   } = props;
   const [showSidebar, setShowSidebar] = useState(false);
   const [showModal, setShowModal] = useState(false);
@@ -111,18 +117,42 @@ function GameContainer(props) {
         //   updateGameStatus({ isGameActive: data.isGameActive });
         // }// lock untill new session starts
         if (data.data) {
-          if (data.data.status === 1) {
-            const notifyObj = new NotifyClass(data.data.msg, "success");
+          // if (data.data.status === 1) {
+          //   const notifyObj = new NotifyClass(data.data.msg, "success");
+          //   handleNotification(notifyObj);
+          // }
+          if (data.data.notification) {
+            const notifyObj = new NotifyClass(
+              data.data.notification.msg,
+              data.data.notification.notifyType
+            );
             handleNotification(notifyObj);
           }
           if (data.data.isGameActive !== undefined) {
             updateSessionId({ sessionId: data.data.session });
-            if (data.data.isGameActive && data.data.time === 20) {
+            if (data.data.isGameActive && data.data.time === 17) {
               updateGameStatus({ isGameActive: data.data.isGameActive });
               startTimer();
             } else if (!data.data.isGameActive) {
               updateGameStatus({ isGameActive: data.data.isGameActive });
             }
+          }
+          if (data.data.Dragon) {
+            if (
+              JSON.stringify(dragonArr) !== JSON.stringify(data.data.Dragon)
+            ) {
+              // console.log("Update Dragon:;");
+              updateDragon({ dragonArr: data.data.Dragon });
+            }
+            updateDragon({ dragonArr: data.data.Dragon });
+          }
+
+          if (data.data.Tiger) {
+            if (JSON.stringify(tigerArr) !== JSON.stringify(data.data.Tiger)) {
+              // console.log("Update Tiger:;");
+              updateTiger({ tigerArr: data.data.Tiger });
+            }
+            updateTiger({ tigerArr: data.data.Tiger });
           }
         }
       }
@@ -256,6 +286,8 @@ const mapStateToProps = ({ gamesData }) => ({
   amount: gamesData.gameType.amount,
   isGameActive: gamesData.isGameActive,
   sessionId: gamesData.sessionId,
+  dragonArr: gamesData.dragonArr,
+  tigerArr: gamesData.tigerArr,
 });
 const mapDispatchToProps = {
   updateGameStatus,
@@ -264,6 +296,8 @@ const mapDispatchToProps = {
   updateSessionId,
   startTimer,
   stopTimer,
+  updateDragon,
+  updateTiger,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(GameContainer);

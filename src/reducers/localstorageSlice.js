@@ -15,8 +15,14 @@ export const localStorageSlice = createSlice({
       const { payload } = action;
       return { ...state, ...payload };
     },
+    updateKeyObject(state, action) {
+      const { payload } = action;
+      console.log("updateKey::", payload);
+      return { ...state, ...payload };
+    },
   },
 });
 
-export const { addKeyObject, readAllKeys } = localStorageSlice.actions;
+export const { addKeyObject, readAllKeys, updateKeyObject } =
+  localStorageSlice.actions;
 export default localStorageSlice.reducer;

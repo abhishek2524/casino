@@ -43,6 +43,7 @@
   .active .page-link {
     background-color: $secondary-color !important;
     box-shadow: none;
+    color: #fff;
   }
 }
 @media screen and (max-width: map-get($breakpoints,"sm")) {

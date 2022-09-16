@@ -35,7 +35,7 @@ function Sidebar() {
                 navigate("/");
               }}
             >
-              <Profile />
+              <Profile dropdown={true} />
             </div>
             <hr />
             <ul className="sidebar-items">

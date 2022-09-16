@@ -17,13 +17,17 @@ import {
   stopTimer,
   updateTiger,
   updateDragon,
+  updatePastWin,
+  resetAll,
 } from "./../../reducers/gameDataSlice";
+import { updateKeyObject } from "./../../reducers/localstorageSlice";
 import axios from "axios";
 import { useRef } from "react";
 import Notification from "../../components/common/Notification";
 import { toast } from "react-toastify";
 import BetInputField from "../../components/GameComponent/DragonTigerGame/BetInputField";
-
+import Profile from "../../components/common/Header/Profile";
+import { fetchExpToken } from "../../utils/Utils";
 class NotifyClass {
   constructor(text, type) {
     this.notifyText = text;
@@ -44,6 +48,11 @@ function GameContainer(props) {
     tigerArr,
     updateTiger,
     updateDragon,
+    updatePastWin,
+    resetAll,
+    localstorage,
+    updateKeyObject,
+    placedBetCount,
   } = props;
   const [showSidebar, setShowSidebar] = useState(false);
   const [showModal, setShowModal] = useState(false);
@@ -154,6 +163,14 @@ function GameContainer(props) {
             }
             updateTiger({ tigerArr: data.data.Tiger });
           }
+
+          if (data.data.past_wins) {
+            updatePastWin({ past_win: data.data.past_wins });
+          }
+
+          if (data.data.exposure_token) {
+            updateKeyObject({ exposure_token: data.data.exposure_token });
+          }
         }
       }
     };
@@ -162,6 +179,7 @@ function GameContainer(props) {
     };
     return () => {
       wss.current.close();
+      resetAll();
     };
   }, []);
 
@@ -209,7 +227,21 @@ function GameContainer(props) {
       console.log("error while sending", error);
     }
   };
+  const fetchToken = async () => {
+    const res = await fetchExpToken();
 
+    const { status, data } = res;
+    if (status === 200) {
+      updateKeyObject(data);
+      return;
+    }
+    return;
+  };
+  useEffect(() => {
+    if (!localstorage.token || !localstorage.exposure_token) {
+      fetchToken();
+    }
+  }, []);
   return (
     <>
       {isGameActive && type && window.innerWidth < 993 && (
@@ -225,6 +257,9 @@ function GameContainer(props) {
         </CustomRuleModal>
       )}
       <div className="gameSubheader">
+        <div className="gameMobileHeader">
+          <Profile />
+        </div>
         <div className="container d-flex justify-content-between align-items-center">
           <div className="linkDiv">
             <NavLink
@@ -235,7 +270,7 @@ function GameContainer(props) {
               {gameFullName[gameName]}
             </NavLink>
             <NavLink className="links" to={`/game/${gameName}/placeBet`} end>
-              PLACED BETS (0)
+              PLACED BETS ({placedBetCount})
             </NavLink>
           </div>
           <div className="rules">
@@ -280,7 +315,7 @@ function GameContainer(props) {
   );
 }
 
-const mapStateToProps = ({ gamesData }) => ({
+const mapStateToProps = ({ gamesData, localstorage }) => ({
   type: gamesData.gameType.type,
   value: gamesData.gameType.value,
   amount: gamesData.gameType.amount,
@@ -288,6 +323,8 @@ const mapStateToProps = ({ gamesData }) => ({
   sessionId: gamesData.sessionId,
   dragonArr: gamesData.dragonArr,
   tigerArr: gamesData.tigerArr,
+  placedBetCount: gamesData.placedBet.count,
+  localstorage,
 });
 const mapDispatchToProps = {
   updateGameStatus,
@@ -298,6 +335,9 @@ const mapDispatchToProps = {
   stopTimer,
   updateDragon,
   updateTiger,
+  updatePastWin,
+  resetAll,
+  updateKeyObject,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(GameContainer);

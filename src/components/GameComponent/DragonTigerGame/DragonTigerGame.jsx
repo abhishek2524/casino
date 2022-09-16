@@ -2,13 +2,18 @@ import React from "react";
 import { connect } from "react-redux";
 import { NavLink } from "react-router-dom";
 import "./dragonTiger.scss";
-import { updateGameType, resetAll } from "./../../../reducers/gameDataSlice";
+import {
+  updateGameType,
+  updatePlacedBet,
+} from "./../../../reducers/gameDataSlice";
 import {
   card_type,
   card_type_name,
   card_value_name,
+  fetchPlacedBet,
 } from "../../../utils/Utils";
 import Timer from "./Timer";
+import { useEffect } from "react";
 
 const cards_number_list = [
   { value: 0, name: "A" },
@@ -26,7 +31,15 @@ const cards_number_list = [
   { value: 12, name: "K" },
 ];
 function DragonTigerGame(props) {
-  const { gamesData, updateGameType, dragonArr = [], tigerArr = [] } = props;
+  const {
+    gamesData,
+    updateGameType,
+    dragonArr = [],
+    tigerArr = [],
+    past_win = [],
+    placedBet,
+    updatePlacedBet,
+  } = props;
   const { isGameActive = undefined } = gamesData;
   const { type: _gameType = undefined, value: _gameValue = undefined } =
     gamesData.gameType;
@@ -213,6 +226,23 @@ function DragonTigerGame(props) {
       </div>
     );
   };
+
+  const fetchBet = async () => {
+    const res = await fetchPlacedBet();
+
+    const { status, data } = res;
+    if (status === 200) {
+      updatePlacedBet({ data });
+      return;
+    }
+    return;
+  };
+
+  useEffect(() => {
+    if (!placedBet.count) {
+      fetchBet();
+    }
+  }, []);
   return (
     <div className="dragonGameDiv">
       <div className="topSlideDiv position-relative">
@@ -357,17 +387,25 @@ function DragonTigerGame(props) {
         <div className="header">
           <span>Last Result</span>
           {/* <span>View all</span> */}
-          <NavLink to="/gameresult" state={{ path: "dragon" }}>
+          {/* <NavLink to="/gameresult" state={{ path: "dragon" }}>
             View all
-          </NavLink>
+          </NavLink> */}
         </div>
         <div className="content">
-          <span>D</span>
+          {past_win.map((data, index) => (
+            <span
+              key={`result-${index}`}
+              className={data.toUpperCase() === "Tie" && "text-primary"}
+            >
+              {data.charAt(0).toUpperCase()}
+            </span>
+          ))}
+          {/* <span>D</span>
           <span>D</span>
           <span className="text-primary">T</span>
           <span>D</span>
           <span>D</span>
-          <span>D</span>
+          <span>D</span> */}
         </div>
       </div>
     </div>
@@ -378,9 +416,11 @@ const mapStateToProps = ({ gamesData }) => ({
   gamesData,
   dragonArr: gamesData.dragonArr,
   tigerArr: gamesData.tigerArr,
+  past_win: gamesData.past_win,
+  placedBet: gamesData.placedBet,
 });
 const mapDispatchToProps = {
   updateGameType,
-  resetAll,
+  updatePlacedBet,
 };
 export default connect(mapStateToProps, mapDispatchToProps)(DragonTigerGame);

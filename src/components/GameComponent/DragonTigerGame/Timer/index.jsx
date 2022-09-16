@@ -7,18 +7,37 @@ import {
   stopTimer,
   updateGameStatus,
 } from "./../../../../reducers/gameDataSlice";
+import { updateKeyObject } from "../../../../reducers/localstorageSlice";
+import { fetchExpToken } from "../../../../utils/Utils";
 
 const Timer = (props) => {
-  const { gameTimer = false, stopTimer, updateGameStatus } = props;
+  const {
+    gameTimer = false,
+    stopTimer,
+    updateGameStatus,
+    updateKeyObject,
+  } = props;
   const unlockTime = 20;
   const [value, setValue] = useState(gameTimer ? unlockTime : "0" + 0);
   const divRef = useRef();
   const tickRef = useRef();
+  const fetchToken = async () => {
+    const res = await fetchExpToken();
+
+    const { status, data } = res;
+    if (status === 200) {
+      updateKeyObject(data);
+      return;
+    }
+    return;
+  };
+
   const timer = () =>
     setValue((prevVal) => {
       const newVal = prevVal - 1;
       if (newVal === 3) {
         updateGameStatus({ isGameActive: false });
+        fetchToken();
       }
       if (newVal < 10) {
         return "0" + newVal;
@@ -77,6 +96,7 @@ const mapStateToProps = ({ gamesData }) => ({
 const mapDispatchToProps = {
   stopTimer,
   updateGameStatus,
+  updateKeyObject,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Timer);

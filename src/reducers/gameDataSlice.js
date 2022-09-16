@@ -5,8 +5,10 @@ const initValue = {
   gameName: undefined,
   sessionId: undefined,
   isTimerActive: false,
+  past_win: [],
   dragonArr: [],
   tigerArr: [],
+  placedBet: { count: 0, data: [] },
   gameType: { type: undefined, value: undefined, amount: 0 },
 };
 
@@ -62,6 +64,17 @@ export const gamesDataSlice = createSlice({
       const { tigerArr = [] } = payload;
       state.tigerArr = tigerArr;
     },
+    updatePastWin(state, action) {
+      const { payload } = action;
+      const { past_win = [] } = payload;
+      state.past_win = past_win;
+    },
+    updatePlacedBet(state, action) {
+      const { payload } = action;
+      const { data = [] } = payload;
+      state.placedBet.count = data.length;
+      state.placedBet.data = data;
+    },
   },
 });
 
@@ -75,5 +88,7 @@ export const {
   stopTimer,
   updateDragon,
   updateTiger,
+  updatePastWin,
+  updatePlacedBet,
 } = gamesDataSlice.actions;
 export default gamesDataSlice.reducer;

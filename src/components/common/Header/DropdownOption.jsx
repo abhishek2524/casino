@@ -9,7 +9,7 @@ function DropdownOption() {
   };
   return (
     <ul className="dropdown-menu headerDropdown">
-      <Profile />
+      <Profile dropdown={true} />
       <hr />
       <li>
         <Link className="dropdown-item" to="/betHistory">

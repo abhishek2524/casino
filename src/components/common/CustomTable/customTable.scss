@@ -55,6 +55,7 @@
   .tableBody {
     .tableBodyRow {
       td {
+        text-transform: capitalize;
         padding: 12px 10px !important;
       }
     }

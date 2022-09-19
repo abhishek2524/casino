@@ -49,15 +49,9 @@ function PlacedBet(props) {
       { dataField: "gamePLayed", text: "Game", sort: true },
       {
         dataField: "gameAmount",
-        text: "Payout",
+        text: "Bid Amount",
         sort: true,
         formatter: formatPayload,
-      },
-      {
-        dataField: "gameWinStatus",
-        text: "Profit/ Loss",
-        sort: true,
-        formatter: formatCell,
       },
     ]);
 

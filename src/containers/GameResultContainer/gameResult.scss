@@ -46,6 +46,7 @@
 @media screen and(max-width:map-get($breakpoints,'mdl')) {
   .gameSubheader {
     .container {
+      box-shadow: inset 0px -1px 8px rgb(255 255 255 / 30%);
       display: flex;
       justify-content: center;
     }

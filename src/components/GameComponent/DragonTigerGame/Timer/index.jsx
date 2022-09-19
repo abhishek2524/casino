@@ -37,7 +37,7 @@ const Timer = (props) => {
       const newVal = prevVal - 1;
       if (newVal === 3) {
         updateGameStatus({ isGameActive: false });
-        fetchToken();
+        // fetchToken();
       }
       if (newVal < 10) {
         return "0" + newVal;

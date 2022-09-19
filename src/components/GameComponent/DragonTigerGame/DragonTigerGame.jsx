@@ -128,7 +128,7 @@ function DragonTigerGame(props) {
             <GameButtons
               colClass="gameBtn col-lg-6"
               btnText="Even"
-              topCount="2"
+              topCount="2.10"
               bottomCount="0"
               onClick={() => handleOEGame(mainBtn, "even")}
               btnColor={isOEBtnActive && _gameValue === 0 && "bg-info"}
@@ -136,7 +136,7 @@ function DragonTigerGame(props) {
             <GameButtons
               colClass="gameBtn col-lg-6"
               btnText="Odd"
-              topCount="2"
+              topCount="1.79"
               bottomCount="0"
               onClick={() => handleOEGame(mainBtn, "odd")}
               btnColor={isOEBtnActive && _gameValue === 1 && "bg-info"}
@@ -145,7 +145,7 @@ function DragonTigerGame(props) {
           </div>
           <div className="row">
             <div className="gameBtn col-lg-6 cardIconBtn">
-              <div className="text-center text">2</div>
+              <div className="text-center text">1.95</div>
               <div className="position-relative">
                 <button
                   role={isGameActive ? "button" : ""}
@@ -163,7 +163,7 @@ function DragonTigerGame(props) {
               <div className="text-center text">0</div>
             </div>
             <div className="gameBtn col-lg-6 cardIconBtn">
-              <div className="text-center text">2</div>
+              <div className="text-center text">1.95</div>
               <div className="position-relative">
                 <button
                   role={isGameActive ? "button" : ""}
@@ -296,7 +296,7 @@ function DragonTigerGame(props) {
           <GameButtons
             colClass="gameBtn col-5"
             btnText="Dragon"
-            topCount="2"
+            topCount="2.00"
             bottomCount="0"
             onClick={() => handle_card_type_game("Dragon")}
             btnColor={
@@ -306,7 +306,7 @@ function DragonTigerGame(props) {
           <GameButtons
             colClass="gameBtn col-2"
             btnText="Tie"
-            topCount="50"
+            topCount="50.00"
             bottomCount="0"
             onClick={() => handle_card_type_game("Tie")}
             btnColor={
@@ -316,7 +316,7 @@ function DragonTigerGame(props) {
           <GameButtons
             colClass="gameBtn col-5"
             btnText="Tiger"
-            topCount="2"
+            topCount="2.00"
             bottomCount="0"
             onClick={() => handle_card_type_game("Tiger")}
             btnColor={
@@ -328,7 +328,7 @@ function DragonTigerGame(props) {
           <GameButtons
             colClass="gameBtn col-lg-12"
             btnText="Pair"
-            topCount="2"
+            topCount="12.00"
             bottomCount="0"
             onClick={() => handle_card_type_game("Pair")}
             btnColor={
@@ -356,7 +356,7 @@ function DragonTigerGame(props) {
 
       <div className="row displayCardsDiv">
         <div className="col me-2">
-          <div className="text-center">2.00</div>
+          <div className="text-center">12.00</div>
           <div className="d-flex flex-wrap">
             {cards_number_list.map((card) => (
               <EachCards
@@ -369,7 +369,7 @@ function DragonTigerGame(props) {
           <div className="text-center">Min:100 Max:25000</div>
         </div>
         <div className="col ms-2">
-          <div className="text-center">2.00</div>
+          <div className="text-center">12.00</div>
           <div className="d-flex flex-wrap">
             {cards_number_list.map((card) => (
               <EachCards

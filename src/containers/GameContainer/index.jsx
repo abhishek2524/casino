@@ -110,6 +110,16 @@ function GameContainer(props) {
       return updateSessionId({ sessionId: res.data });
     }
   };
+  const fetchToken = async () => {
+    const res = await fetchExpToken();
+
+    const { status, data } = res;
+    if (status === 200) {
+      updateKeyObject(data);
+      return;
+    }
+    return;
+  };
   let wss = useRef(null);
   useEffect(() => {
     wss.current = new W3CWebsocket(process.env.REACT_APP_WS_API);
@@ -140,6 +150,7 @@ function GameContainer(props) {
           if (data.data.isGameActive !== undefined) {
             updateSessionId({ sessionId: data.data.session });
             if (data.data.isGameActive && data.data.time === 17) {
+              fetchToken();
               updateGameStatus({ isGameActive: data.data.isGameActive });
               startTimer();
             } else if (!data.data.isGameActive) {
@@ -227,16 +238,7 @@ function GameContainer(props) {
       console.log("error while sending", error);
     }
   };
-  const fetchToken = async () => {
-    const res = await fetchExpToken();
 
-    const { status, data } = res;
-    if (status === 200) {
-      updateKeyObject(data);
-      return;
-    }
-    return;
-  };
   useEffect(() => {
     if (!localstorage.token || !localstorage.exposure_token) {
       fetchToken();
@@ -258,6 +260,11 @@ function GameContainer(props) {
       )}
       <div className="gameSubheader">
         <div className="gameMobileHeader">
+          <div className="logo">
+            <NavLink to="/">
+              <img src="/logo.png" alt="" />
+            </NavLink>
+          </div>
           <Profile />
         </div>
         <div className="container d-flex justify-content-between align-items-center">

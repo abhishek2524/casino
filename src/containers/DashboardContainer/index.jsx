@@ -4,6 +4,8 @@ import { connect } from "react-redux";
 import DashboardComponent from "../../components/DashboardComponent/DashboardComponent";
 import { fetchExpToken } from "./../../utils/Utils";
 import { updateKeyObject } from "./../../reducers/localstorageSlice";
+import Profile from "../../components/common/Header/Profile";
+import { NavLink } from "react-router-dom";
 
 function DashboardContainer(props) {
   const { updateKeyObject } = props;
@@ -23,6 +25,16 @@ function DashboardContainer(props) {
   return (
     <>
       <div className="d-flex flex-column bg-lightgray">
+        <div className="dashBoardSubheader">
+          <div className="logo">
+            <NavLink to="/">
+              <img src="/logo.png" alt="" />
+            </NavLink>
+          </div>
+          <div className="dashboardMobileHeader">
+            <Profile />
+          </div>
+        </div>
         <DashboardComponent />
       </div>
     </>

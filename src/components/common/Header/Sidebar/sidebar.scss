@@ -76,5 +76,9 @@
 @media screen and (max-width: map-get($breakpoints,"mdl")) {
   .sidebarMainDiv {
     display: block;
+    .hamburger {
+      margin: 0;
+      transform: translate(50%, 50%);
+    }
   }
 }

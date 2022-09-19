@@ -14,6 +14,20 @@ import axios from "axios";
 //   return false;
 // };
 
+export const card_type = {
+  dragon: -1,
+  tiger: 1,
+  tie: 0,
+  pair: 2,
+};
+
+const card_value_type = {
+  "-1": "dragon",
+  1: "tiger",
+  0: "tie",
+  2: "pair",
+};
+
 export const fetchExpToken = async () => {
   try {
     const apiURL = `${process.env.REACT_APP_BACKEND_API}/api/user/token`;
@@ -31,7 +45,7 @@ export const fetchExpToken = async () => {
     }
     return res;
   } catch (err) {
-    console.log("Error while fetching token::", err);
+    console.log("Error while fetching token::", err.response.data);
   }
 };
 
@@ -53,31 +67,33 @@ export const fetchPlacedBet = async () => {
             gameAmount = null,
             gameWinStatus = null;
           if (d.card_type !== "False") {
-            gamePLayed = "Card_Type";
+            gamePLayed = card_value_type[d.card_type];
             gameAmount = d.card_type_amount.toString();
             gameWinStatus = d.card_type_is_win ? "Won" : "Loss";
           } else if (d.card_Dragon_OE !== "False") {
-            gamePLayed = "Dragon_OE";
+            gamePLayed = d.card_Dragon_OE == 0 ? "Dragon Even" : "Dragon Odd";
             gameAmount = d.card_Dragon_OE_amount.toString();
             gameWinStatus = d.card_Dragon_OE_is_win ? "Won" : "Loss";
           } else if (d.card_Tiger_OE !== "False") {
-            gamePLayed = "Tiger_OE";
+            gamePLayed = d.card_Tiger_OE == 0 ? "Tiger Even" : "Tiger Odd";
             gameAmount = d.card_Tiger_OE_amount.toString();
             gameWinStatus = d.card_Tiger_OE_is_win ? "Won" : "Loss";
           } else if (d.card_Dragon_color !== "False") {
-            gamePLayed = "Dragon_color";
+            gamePLayed =
+              d.card_Dragon_color == 0 ? "Dragon Red" : "Dragon Black";
             gameAmount = d.card_Dragon_color_amount.toString();
             gameWinStatus = d.card_Dragon_color_is_win ? "Won" : "Loss";
           } else if (d.card_Tiger_color !== "False") {
-            gamePLayed = "Tiger_color";
+            gamePLayed =
+              d.card_Tiger_color == 0 ? "Dragon Red" : "Dragon Black";
             gameAmount = d.card_Tiger_color_amount.toString();
             gameWinStatus = d.card_Tiger_color_is_win ? "Won" : "Loss";
           } else if (d.card_Dragon_number !== "False") {
-            gamePLayed = "Dragon_number";
+            gamePLayed = `Dragon Card ${card_value_name[d.card_Dragon_number]}`;
             gameAmount = d.card_Dragon_number_amount.toString();
             gameWinStatus = d.card_Dragon_number_is_win ? "Won" : "Loss";
           } else if (d.card_Tiger_number !== "False") {
-            gamePLayed = "Tiger_number";
+            gamePLayed = `Tiger Card ${card_value_name[d.card_Tiger_number]}`;
             gameAmount = d.card_Tiger_number_amount.toString();
             gameWinStatus = d.card_Tiger_number_is_win ? "Won" : "Loss";
           }
@@ -95,15 +111,13 @@ export const fetchPlacedBet = async () => {
     }
     return res;
   } catch (err) {
-    console.log("Error while fetching token::", err);
+    console.log("Error while fetching token1::", err.response);
+    if (err.response.status === 401) {
+      localStorage.clear();
+      window.location.reload();
+      return;
+    }
   }
-};
-
-export const card_type = {
-  dragon: -1,
-  tiger: 1,
-  tie: 0,
-  pair: 2,
 };
 
 export const card_type_name = {

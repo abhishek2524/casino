@@ -7,29 +7,17 @@ import {
   updatePlacedBet,
 } from "./../../../reducers/gameDataSlice";
 import {
+  cards_number_list,
   card_type,
   card_type_name,
   card_value_name,
+  color_obj,
   fetchPlacedBet,
+  OEVal,
 } from "../../../utils/Utils";
 import Timer from "./Timer";
 import { useEffect } from "react";
 
-const cards_number_list = [
-  { value: 0, name: "A" },
-  { value: 1, name: "2" },
-  { value: 2, name: "3" },
-  { value: 3, name: "4" },
-  { value: 4, name: "5" },
-  { value: 5, name: "6" },
-  { value: 6, name: "7" },
-  { value: 7, name: "8" },
-  { value: 8, name: "9" },
-  { value: 9, name: "10" },
-  { value: 10, name: "J" },
-  { value: 11, name: "Q" },
-  { value: 12, name: "K" },
-];
 function DragonTigerGame(props) {
   const {
     gamesData,
@@ -69,7 +57,6 @@ function DragonTigerGame(props) {
     } else if (gameName === "TIGER") {
       colorGameName = "card_Tiger_color";
     }
-    const color_obj = { black: 1, red: 0 };
     updateGameType({
       type: colorGameName,
       value: color_obj[color],
@@ -85,7 +72,6 @@ function DragonTigerGame(props) {
     } else if (gameName === "TIGER") {
       OEName = "card_Tiger_OE";
     }
-    const OEVal = { odd: 1, even: 0 };
     updateGameType({
       type: OEName,
       value: OEVal[OEType],
@@ -156,7 +142,7 @@ function DragonTigerGame(props) {
                 >
                   <img src="/assets/icons/btnCard1.svg" alt="btnCard" />
                 </button>
-                <div className={!isGameActive && "lockImgDiv"}>
+                <div className={!isGameActive ? "lockImgDiv" : "d-none"}>
                   <img src="/assets/icons/lock.svg" alt="lock" />
                 </div>
               </div>
@@ -174,7 +160,7 @@ function DragonTigerGame(props) {
                 >
                   <img src="/assets/icons/btnCard2.svg" alt="btnCard" />
                 </button>
-                <div className={!isGameActive && "lockImgDiv"}>
+                <div className={!isGameActive ? "lockImgDiv" : "d-none"}>
                   <img src="/assets/icons/lock.svg" alt="lock" />
                 </div>
               </div>

@@ -142,3 +142,40 @@ export const card_value_name = {
   11: "q",
   12: "k",
 };
+
+// Lucky 77 games config
+export const gamesWsApi = {
+  dragon: "/bid/DragonTiger",
+  lucky7: "/bid/luck77",
+  teenpati: "",
+  card32: "",
+  andarBahar: "",
+  queen: "",
+  poker: "",
+  race20: "",
+};
+
+export const card_lh_type = {
+  low: 0,
+  high: 1,
+};
+
+export const cards_number_list = [
+  { value: 0, name: "A" },
+  { value: 1, name: "2" },
+  { value: 2, name: "3" },
+  { value: 3, name: "4" },
+  { value: 4, name: "5" },
+  { value: 5, name: "6" },
+  { value: 6, name: "7" },
+  { value: 7, name: "8" },
+  { value: 8, name: "9" },
+  { value: 9, name: "10" },
+  { value: 10, name: "J" },
+  { value: 11, name: "Q" },
+  { value: 12, name: "K" },
+];
+
+export const OEVal = { odd: 1, even: 0 };
+
+export const color_obj = { black: 1, red: 0 };

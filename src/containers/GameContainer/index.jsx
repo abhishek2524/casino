@@ -19,6 +19,7 @@ import {
   updateDragon,
   updatePastWin,
   resetAll,
+  updateResultCard,
 } from "./../../reducers/gameDataSlice";
 import { updateKeyObject } from "./../../reducers/localstorageSlice";
 import axios from "axios";
@@ -27,7 +28,7 @@ import Notification from "../../components/common/Notification";
 import { toast } from "react-toastify";
 import BetInputField from "../../components/GameComponent/DragonTigerGame/BetInputField";
 import Profile from "../../components/common/Header/Profile";
-import { fetchExpToken } from "../../utils/Utils";
+import { fetchExpToken, gamesWsApi } from "../../utils/Utils";
 class NotifyClass {
   constructor(text, type) {
     this.notifyText = text;
@@ -53,6 +54,7 @@ function GameContainer(props) {
     localstorage,
     updateKeyObject,
     placedBetCount,
+    updateResultCard,
   } = props;
   const [showSidebar, setShowSidebar] = useState(false);
   const [showModal, setShowModal] = useState(false);
@@ -122,11 +124,16 @@ function GameContainer(props) {
   };
   let wss = useRef(null);
   useEffect(() => {
-    wss.current = new W3CWebsocket(process.env.REACT_APP_WS_API);
-
+    if (wss.current && wss.current.readyState === WebSocket.OPEN) {
+      wss.current.close();
+      resetAll();
+    }
+    wss.current = new W3CWebsocket(
+      process.env.REACT_APP_WS_API + gamesWsApi[gameName]
+    );
     wss.current.onopen = () => {
-      console.log("wss connected");
-      fetchSectionId();
+      console.log("wss connected", wss.current);
+      // fetchSectionId();
     };
     wss.current.onmessage = (message) => {
       const data = JSON.parse(message.data);
@@ -157,22 +164,31 @@ function GameContainer(props) {
               updateGameStatus({ isGameActive: data.data.isGameActive });
             }
           }
-          if (data.data.Dragon) {
-            if (
-              JSON.stringify(dragonArr) !== JSON.stringify(data.data.Dragon)
-            ) {
-              // console.log("Update Dragon:;");
+          if (gameName === "dragon") {
+            console.log("Dragon Game:::");
+            if (data.data.Dragon) {
+              if (
+                JSON.stringify(dragonArr) !== JSON.stringify(data.data.Dragon)
+              ) {
+                // console.log("Update Dragon:;");
+                updateDragon({ dragonArr: data.data.Dragon });
+              }
               updateDragon({ dragonArr: data.data.Dragon });
             }
-            updateDragon({ dragonArr: data.data.Dragon });
-          }
 
-          if (data.data.Tiger) {
-            if (JSON.stringify(tigerArr) !== JSON.stringify(data.data.Tiger)) {
-              // console.log("Update Tiger:;");
+            if (data.data.Tiger) {
+              if (
+                JSON.stringify(tigerArr) !== JSON.stringify(data.data.Tiger)
+              ) {
+                // console.log("Update Tiger:;");
+                updateTiger({ tigerArr: data.data.Tiger });
+              }
               updateTiger({ tigerArr: data.data.Tiger });
             }
-            updateTiger({ tigerArr: data.data.Tiger });
+          } else {
+            if (data.data.card) {
+              updateResultCard({ card: data.data.card });
+            }
           }
 
           if (data.data.past_wins) {
@@ -185,14 +201,15 @@ function GameContainer(props) {
         }
       }
     };
-    wss.onclose = () => {
-      console.log("wss connection closed");
+    wss.current.onclose = () => {
+      console.log("wss connection closed", wss.current);
     };
     return () => {
       wss.current.close();
+      console.log("closing websocket after leaving page");
       resetAll();
     };
-  }, []);
+  }, [gameName]);
 
   // useEffect(() => {
   //   const notifyObj = new NotifyClass("Hi", "success");
@@ -224,8 +241,8 @@ function GameContainer(props) {
         [type]: value?.toString() ?? null,
         [`${type}_amount`]: betAmount,
         section_id: sessionId?.toString() ?? null,
-        Dragon: "[1,2]",
-        Tiger: "[1,2]",
+        // Dragon: "[1,2]",
+        // Tiger: "[1,2]",
         data: "dummy data",
         token: localStorage.getItem("access") ?? null,
       };
@@ -345,6 +362,7 @@ const mapDispatchToProps = {
   updatePastWin,
   resetAll,
   updateKeyObject,
+  updateResultCard,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(GameContainer);

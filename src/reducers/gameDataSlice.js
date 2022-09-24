@@ -8,6 +8,7 @@ const initValue = {
   past_win: [],
   dragonArr: [],
   tigerArr: [],
+  resultCard: [],
   placedBet: { count: 0, data: [] },
   gameType: { type: undefined, value: undefined, amount: 0 },
 };
@@ -64,6 +65,12 @@ export const gamesDataSlice = createSlice({
       const { tigerArr = [] } = payload;
       state.tigerArr = tigerArr;
     },
+    updateResultCard(state, action) {
+      const { payload } = action;
+      // console.log("updating Tiger", payload);
+      const { card = [] } = payload;
+      state.resultCard = card;
+    },
     updatePastWin(state, action) {
       const { payload } = action;
       const { past_win = [] } = payload;
@@ -90,5 +97,6 @@ export const {
   updateTiger,
   updatePastWin,
   updatePlacedBet,
+  updateResultCard,
 } = gamesDataSlice.actions;
 export default gamesDataSlice.reducer;

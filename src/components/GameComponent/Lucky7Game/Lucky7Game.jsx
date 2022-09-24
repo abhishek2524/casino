@@ -133,7 +133,7 @@ function Lucky7Game(props) {
             <GameButtons
               colClass="gameBtn col-lg-5 col-md-5 col-sm-5"
               btnText="Low Card"
-              topCount="2"
+              topCount="2.00"
               bottomCount="0"
               onClick={() => handle_high_low_game("low")}
               btnColor={
@@ -153,7 +153,7 @@ function Lucky7Game(props) {
             <GameButtons
               colClass="gameBtn col-lg-5 col-md-5 col-sm-5"
               btnText="High Card"
-              topCount="2"
+              topCount="2.00"
               bottomCount="0"
               onClick={() => handle_high_low_game("high")}
               btnColor={
@@ -171,7 +171,7 @@ function Lucky7Game(props) {
             <GameButtons
               colClass="gameBtn col-lg-6"
               btnText="Even"
-              topCount="2"
+              topCount="2.10"
               bottomCount="0"
               onClick={() => handleOEGame("card_oe", "even")}
               btnColor={
@@ -181,7 +181,7 @@ function Lucky7Game(props) {
             <GameButtons
               colClass="gameBtn col-lg-6"
               btnText="Odd"
-              topCount="2"
+              topCount="1.79"
               bottomCount="0"
               onClick={() => handleOEGame("card_oe", "odd")}
               btnColor={
@@ -194,7 +194,7 @@ function Lucky7Game(props) {
         <div className="col ms-2 oddEven">
           <div className="row">
             <div className="gameBtn col-lg-6 cardIconBtn">
-              <div className="text-center text">2</div>
+              <div className="text-center text">1.95</div>
               <div className="position-relative">
                 <button
                   role={isGameActive ? "button" : ""}
@@ -212,7 +212,7 @@ function Lucky7Game(props) {
               <div className="text-center text">0</div>
             </div>
             <div className="gameBtn col-lg-6 cardIconBtn">
-              <div className="text-center text">2</div>
+              <div className="text-center text">1.95</div>
               <div className="position-relative">
                 <button
                   role={isGameActive ? "button" : ""}
@@ -236,7 +236,7 @@ function Lucky7Game(props) {
 
       <div className="row displayCardsDiv">
         <div className="col">
-          <div className="text-center">2.00</div>
+          <div className="text-center">12.00</div>
           <div className="d-flex flex-wrap justify-content-center">
             {/* {new Array(12).fill(null).map(() => (
               <EachCards />

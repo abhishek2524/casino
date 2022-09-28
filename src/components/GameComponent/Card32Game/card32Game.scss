@@ -15,14 +15,14 @@
       top: 0;
       left: 0;
       display: flex;
-      background-color: #fff;
+      background-color: rgba($color: #000, $alpha: 0.7);
       padding: 16px;
       margin: 24px;
       border-radius: 12px;
       .cardWithNo {
         display: flex;
         align-items: flex-end;
-        padding: 15px 15px 0 0;
+        // padding: 15px 15px 0 0;
         span {
           position: absolute;
           right: 0;
@@ -40,9 +40,9 @@
       .card {
         height: 86px;
         width: 56px;
-        &:first-child {
-          margin-right: 14px;
-        }
+      }
+      &:first-child {
+        margin-right: 14px;
       }
     }
     .countNumber {
@@ -148,6 +148,9 @@
         display: flex;
         justify-content: center;
         align-items: center;
+      }
+      td {
+        background-color: #c7c7c7;
       }
     }
   }

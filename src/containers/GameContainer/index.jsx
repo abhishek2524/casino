@@ -20,6 +20,7 @@ import {
   updatePastWin,
   resetAll,
   updateResultCard,
+  updateCard32Cards,
 } from "./../../reducers/gameDataSlice";
 import { updateKeyObject } from "./../../reducers/localstorageSlice";
 import { toggleHamburger } from "./../../reducers/commonSlice";
@@ -57,6 +58,7 @@ function GameContainer(props) {
     placedBetCount,
     updateResultCard,
     toggleHamburger,
+    updateCard32Cards,
   } = props;
   const [showSidebar, setShowSidebar] = useState(false);
   const [showModal, setShowModal] = useState(false);
@@ -187,9 +189,22 @@ function GameContainer(props) {
               }
               updateTiger({ tigerArr: data.data.Tiger });
             }
-          } else {
+          } else if (gameName === "lucky7") {
             if (data.data.card) {
               updateResultCard({ card: data.data.card });
+            }
+          } else if (gameName === "card32") {
+            if (data.data.card8) {
+              updateCard32Cards({ card8: data.data.card8 });
+            }
+            if (data.data.card9) {
+              updateCard32Cards({ card9: data.data.card9 });
+            }
+            if (data.data.card10) {
+              updateCard32Cards({ card10: data.data.card10 });
+            }
+            if (data.data.card11) {
+              updateCard32Cards({ card11: data.data.card11 });
             }
           }
 
@@ -366,6 +381,7 @@ const mapDispatchToProps = {
   updateKeyObject,
   updateResultCard,
   toggleHamburger,
+  updateCard32Cards,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(GameContainer);

@@ -1,6 +1,5 @@
 import React from "react";
 import { connect } from "react-redux";
-import { NavLink } from "react-router-dom";
 import { updateGameType } from "../../../reducers/gameDataSlice";
 import {
   cards_number_list,
@@ -120,10 +119,6 @@ function Lucky7Game(props) {
             />
           )}
         </div>
-        {/* <div className="countNumber">
-          <div className="digit">0</div>
-          <div className="digit">1</div>
-        </div> */}
         <Timer />
       </div>
 
@@ -238,9 +233,6 @@ function Lucky7Game(props) {
         <div className="col">
           <div className="text-center">12.00</div>
           <div className="d-flex flex-wrap justify-content-center">
-            {/* {new Array(12).fill(null).map(() => (
-              <EachCards />
-            ))} */}
             {cards_number_list.map((card) => (
               <EachCards
                 detail={card}
@@ -256,23 +248,17 @@ function Lucky7Game(props) {
       <div className="lastResultDiv row">
         <div className="header">
           <span>Last Result</span>
-          {/* <NavLink to="/gameresult" state={{ path: "lucky7" }}>
-            View all
-          </NavLink> */}
         </div>
         <div className="content">
-          {past_win.map((data, index) =>
-            data ? (
-              <span key={`result-${index}`}>
-                {data.charAt(0).toUpperCase()}
-              </span>
-            ) : (
-              ""
-            )
+          {past_win.map(
+            (data, index) =>
+              data &&
+              !Number.isInteger(data) && (
+                <span key={`result-${index}`}>
+                  {data.charAt(0).toUpperCase()}
+                </span>
+              )
           )}
-          {/* <span>D</span>
-          <span>D</span>
-          <span className="text-danger">T</span> */}
         </div>
       </div>
     </div>

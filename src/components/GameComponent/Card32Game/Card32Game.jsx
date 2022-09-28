@@ -1,12 +1,22 @@
-import React from "react";
+import React, { memo } from "react";
+import { useEffect } from "react";
 import { connect } from "react-redux";
-import { NavLink } from "react-router-dom";
 import { updateGameType } from "../../../reducers/gameDataSlice";
+import { card_type_name, card_value_name } from "../../../utils/Utils";
 import Timer from "../DragonTigerGame/Timer";
 import "./card32Game.scss";
 
 function Card32Game(props) {
-  const { isGameActive = true, updateGameType } = props;
+  const {
+    isGameActive = true,
+    updateGameType,
+    past_win = [],
+    gameType = {},
+    card32Cards = {},
+  } = props;
+  const { card8 = [], card9 = [], card10 = [], card11 = [] } = card32Cards;
+  const { type: _gameType = undefined, value: _gameValue = undefined } =
+    gameType;
   const handleBlackClick = (player) => {
     const choosen_player = `select_${player}`;
     updateGameType({
@@ -38,7 +48,11 @@ function Card32Game(props) {
             <img src="/assets/icons/lock.svg" alt="lock" />
           </div>
           <td
-            className="flex-grow-1"
+            className={`flex-grow-1 ${
+              _gameType === `select_${playerProps.player}` &&
+              _gameValue == "0" &&
+              "bg-info"
+            }`}
             role={isGameActive ? "button" : ""}
             onClick={() => handleBlackClick(playerProps.player)}
           >
@@ -46,7 +60,11 @@ function Card32Game(props) {
             {playerProps.blackVal2}
           </td>
           <td
-            className="flex-grow-1"
+            className={`flex-grow-1 ${
+              _gameType === `select_${playerProps.player}` &&
+              _gameValue == "1" &&
+              "bg-info"
+            }`}
             role={isGameActive ? "button" : ""}
             onClick={() => handleLayClick(playerProps.player)}
           >
@@ -58,6 +76,7 @@ function Card32Game(props) {
       </tr>
     );
   };
+  useEffect(() => {}, []);
   return (
     <div className="card32GameDiv">
       <div className="topSlideDiv position-relative">
@@ -65,38 +84,98 @@ function Card32Game(props) {
         <div className="cards flex-column">
           <div className="d-flex mb-2">
             <div className="position-relative cardWithNo me-3">
-              <span>21</span>
+              {/* <span>21</span>
               <img
                 className="card"
                 src="/assets/images/cards/Queen_of_Hearts.png"
                 alt="cards"
-              />
+              /> */}
+              {card8.length === 0 ? (
+                <img
+                  className="card"
+                  src="/assets/images/cards/playing-card-ba.png"
+                  alt="cards"
+                />
+              ) : (
+                <img
+                  className="card"
+                  src={`/assets/cards/${card_type_name[card8[0]]}${
+                    card_value_name[card8[1]]
+                  }.png`}
+                  alt="cards"
+                />
+              )}
             </div>
             <div className="position-relative cardWithNo">
-              <span>21</span>
+              {/* <span>21</span>
               <img
                 className="card"
                 src="/assets/images/cards/Queen_of_Hearts.png"
                 alt="cards"
-              />
+              /> */}
+              {card9.length === 0 ? (
+                <img
+                  className="card"
+                  src="/assets/images/cards/playing-card-ba.png"
+                  alt="cards"
+                />
+              ) : (
+                <img
+                  className="card"
+                  src={`/assets/cards/${card_type_name[card9[0]]}${
+                    card_value_name[card9[1]]
+                  }.png`}
+                  alt="cards"
+                />
+              )}
             </div>
           </div>
           <div className="d-flex">
             <div className="position-relative cardWithNo me-3">
-              <span>21</span>
+              {/* <span>21</span>
               <img
                 className="card"
                 src="/assets/images/cards/Queen_of_Hearts.png"
                 alt="cards"
-              />
+              /> */}
+              {card10.length === 0 ? (
+                <img
+                  className="card"
+                  src="/assets/images/cards/playing-card-ba.png"
+                  alt="cards"
+                />
+              ) : (
+                <img
+                  className="card"
+                  src={`/assets/cards/${card_type_name[card10[0]]}${
+                    card_value_name[card10[1]]
+                  }.png`}
+                  alt="cards"
+                />
+              )}
             </div>
             <div className="position-relative cardWithNo">
-              <span>21</span>
+              {/* <span>21</span>
               <img
                 className="card"
                 src="/assets/images/cards/Queen_of_Hearts.png"
                 alt="cards"
-              />
+              /> */}
+              {card11.length === 0 ? (
+                <img
+                  className="card"
+                  src="/assets/images/cards/playing-card-ba.png"
+                  alt="cards"
+                />
+              ) : (
+                <img
+                  className="card"
+                  src={`/assets/cards/${card_type_name[card11[0]]}${
+                    card_value_name[card11[1]]
+                  }.png`}
+                  alt="cards"
+                />
+              )}
             </div>
           </div>
         </div>
@@ -158,17 +237,20 @@ function Card32Game(props) {
       <div className="lastResultDiv row">
         <div className="header">
           <span>Last Result</span>
-          <NavLink to="/gameresult" state={{ path: "card32" }}>
-            View all
-          </NavLink>
         </div>
         <div className="content">
-          <span>9</span>
-          <span>9</span>
-          <span className="text-danger">11</span>
-          <span>9</span>
-          <span>9</span>
-          <span>9</span>
+          {past_win.map((data, index) =>
+            data ? (
+              <span
+                className={data === 11 ? "text-danger" : ""}
+                key={`result-${index}`}
+              >
+                {data}
+              </span>
+            ) : (
+              ""
+            )
+          )}
         </div>
       </div>
     </div>
@@ -177,9 +259,12 @@ function Card32Game(props) {
 
 const mapStateToProps = ({ gamesData }) => ({
   isGameActive: gamesData.isGameActive,
+  past_win: gamesData.past_win,
+  gameType: gamesData.gameType,
+  card32Cards: gamesData.card32Cards,
 });
 const mapDispatchToProps = {
   updateGameType,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Card32Game);
+export default connect(mapStateToProps, mapDispatchToProps)(memo(Card32Game));

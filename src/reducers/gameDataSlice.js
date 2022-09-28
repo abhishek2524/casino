@@ -11,6 +11,7 @@ const initValue = {
   resultCard: [],
   placedBet: { count: 0, data: [] },
   gameType: { type: undefined, value: undefined, amount: 0 },
+  card32Cards: { card8: [], card9: [], card10: [], card11: [] },
 };
 
 export const gamesDataSlice = createSlice({
@@ -82,6 +83,12 @@ export const gamesDataSlice = createSlice({
       state.placedBet.count = data.length;
       state.placedBet.data = data;
     },
+    updateCard32Cards(state, action) {
+      const { payload } = action;
+      // const { data = {} } = payload;
+      const newObj = { ...state.card32Cards, ...payload };
+      state.card32Cards = newObj;
+    },
   },
 });
 
@@ -98,5 +105,6 @@ export const {
   updatePastWin,
   updatePlacedBet,
   updateResultCard,
+  updateCard32Cards,
 } = gamesDataSlice.actions;
 export default gamesDataSlice.reducer;

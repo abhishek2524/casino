@@ -378,14 +378,18 @@ function DragonTigerGame(props) {
           </NavLink> */}
         </div>
         <div className="content">
-          {past_win.map((data, index) => (
-            <span
-              key={`result-${index}`}
-              className={data.toUpperCase() === "Tie" && "text-primary"}
-            >
-              {data.charAt(0).toUpperCase()}
-            </span>
-          ))}
+          {past_win.map(
+            (data, index) =>
+              data &&
+              !Number.isInteger(data) && (
+                <span
+                  key={`result-${index}`}
+                  className={data.toUpperCase() === "Tie" && "text-primary"}
+                >
+                  {data.charAt(0).toUpperCase()}
+                </span>
+              )
+          )}
           {/* <span>D</span>
           <span>D</span>
           <span className="text-primary">T</span>

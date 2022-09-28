@@ -28,7 +28,7 @@ function Layout() {
   return (
     <>
       <MainHeader />
-      {!gameName && <Sidebar />}
+      {<Sidebar />}
       {subHeader && (
         <div className="subHeader">
           <div className="container">

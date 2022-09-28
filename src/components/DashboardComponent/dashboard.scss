@@ -51,7 +51,7 @@
   .logo {
     height: 44px;
     position: absolute;
-    left: 60px;
+    left: 14px;
     img {
       height: 100%;
     }
@@ -64,7 +64,7 @@
     align-items: center;
   }
 }
-@media screen and (max-width: map-get($breakpoints,"mdl")) {
+@media screen and (max-width: map-get($breakpoints,"lg")) {
   .slide {
     margin-top: 0 !important;
     margin-bottom: 32px !important;

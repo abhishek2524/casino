@@ -148,7 +148,7 @@ export const gamesWsApi = {
   dragon: "/bid/DragonTiger",
   lucky7: "/bid/luck77",
   teenpati: "",
-  card32: "",
+  card32: "/bid/Card32/",
   andarBahar: "",
   queen: "",
   poker: "",

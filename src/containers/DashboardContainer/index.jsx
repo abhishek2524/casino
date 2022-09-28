@@ -4,11 +4,12 @@ import { connect } from "react-redux";
 import DashboardComponent from "../../components/DashboardComponent/DashboardComponent";
 import { fetchExpToken } from "./../../utils/Utils";
 import { updateKeyObject } from "./../../reducers/localstorageSlice";
+import { toggleHamburger } from "./../../reducers/commonSlice";
 import Profile from "../../components/common/Header/Profile";
 import { NavLink } from "react-router-dom";
 
 function DashboardContainer(props) {
-  const { updateKeyObject } = props;
+  const { updateKeyObject, toggleHamburger } = props;
   const fetchToken = async () => {
     const res = await fetchExpToken();
 
@@ -32,7 +33,7 @@ function DashboardContainer(props) {
             </NavLink>
           </div>
           <div className="dashboardMobileHeader">
-            <Profile />
+            <Profile toggleHamburger={toggleHamburger} />
           </div>
         </div>
         <DashboardComponent />
@@ -43,6 +44,7 @@ function DashboardContainer(props) {
 
 const mapDispatchToProps = {
   updateKeyObject,
+  toggleHamburger,
 };
 
 export default connect(null, mapDispatchToProps)(DashboardContainer);

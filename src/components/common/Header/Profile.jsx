@@ -2,11 +2,12 @@ import React from "react";
 import { useEffect } from "react";
 import { useLayoutEffect } from "react";
 import { useState } from "react";
-import { useSelector } from "react-redux";
+import { connect, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { toggleHamburger } from "./../../../reducers/commonSlice";
 
 function Profile(props) {
-  const { dropdown = false } = props;
+  const { dropdown = false, toggleHamburger = () => {} } = props;
   const navigate = useNavigate();
   const localstorage = useSelector((state) => state.localstorage);
   const userData = localstorage.user
@@ -20,7 +21,7 @@ function Profile(props) {
     <div className="profileDiv">
       <div className="profileImage">
         <img
-          onClick={() => navigate("/")}
+          onClick={() => toggleHamburger()}
           src="/assets/tempImages/avatar.svg"
           alt=""
         />
@@ -37,4 +38,4 @@ function Profile(props) {
   );
 }
 
-export default Profile;
+export default connect(null, {})(Profile);

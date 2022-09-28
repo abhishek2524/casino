@@ -1,8 +1,63 @@
 import React from "react";
+import { connect } from "react-redux";
 import { NavLink } from "react-router-dom";
+import { updateGameType } from "../../../reducers/gameDataSlice";
+import Timer from "../DragonTigerGame/Timer";
 import "./card32Game.scss";
 
-function Card32Game() {
+function Card32Game(props) {
+  const { isGameActive = true, updateGameType } = props;
+  const handleBlackClick = (player) => {
+    const choosen_player = `select_${player}`;
+    updateGameType({
+      type: choosen_player,
+      value: 0,
+      amount: 0,
+    });
+    console.log("handleBlackClick::", choosen_player);
+  };
+  const handleLayClick = (player) => {
+    const choosen_player = `select_${player}`;
+    console.log("handleLayClick::", choosen_player);
+    updateGameType({
+      type: choosen_player,
+      value: 1,
+      amount: 0,
+    });
+  };
+  const EachPlayer = (playerProps) => {
+    return (
+      <tr>
+        <td>
+          {playerProps.name}
+          <br />
+          {playerProps.nameVal}
+        </td>
+        <div className="d-flex position-relative eachPlayerBtnDiv">
+          <div className={!isGameActive ? "lockImgDiv" : "d-none"}>
+            <img src="/assets/icons/lock.svg" alt="lock" />
+          </div>
+          <td
+            className="flex-grow-1"
+            role={isGameActive ? "button" : ""}
+            onClick={() => handleBlackClick(playerProps.player)}
+          >
+            {playerProps.blackVal1} <br />
+            {playerProps.blackVal2}
+          </td>
+          <td
+            className="flex-grow-1"
+            role={isGameActive ? "button" : ""}
+            onClick={() => handleLayClick(playerProps.player)}
+          >
+            {playerProps.layVal1}
+            <br />
+            {playerProps.layVal2}
+          </td>
+        </div>
+      </tr>
+    );
+  };
   return (
     <div className="card32GameDiv">
       <div className="topSlideDiv position-relative">
@@ -45,10 +100,7 @@ function Card32Game() {
             </div>
           </div>
         </div>
-        <div className="countNumber">
-          <div className="digit">0</div>
-          <div className="digit">1</div>
-        </div>
+        <Timer />
       </div>
 
       <div className="minMaxDiv">
@@ -56,37 +108,49 @@ function Card32Game() {
           <thead>
             <tr>
               <th>Min: 100 Max: 300000</th>
-              <th>BACK</th>
-              <th>Lay</th>
+              <div className="d-flex ">
+                <th className="flex-grow-1">Black</th>
+                <th className="flex-grow-1">Lay</th>
+              </div>
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>
-                Player 8 <br />0
-              </td>
-              <td>
-                12.20 <br />
-                10000000
-              </td>
-              <td>
-                13.70 <br />
-                10000000
-              </td>
-            </tr>
-            <tr>
-              <td>
-                Player 9 <br />0
-              </td>
-              <td>
-                12.20 <br />
-                10000000
-              </td>
-              <td>
-                13.70 <br />
-                10000000
-              </td>
-            </tr>
+            <EachPlayer
+              name="Player 8"
+              nameVal="0"
+              blackVal1="12.20"
+              blackVal2="10000000"
+              layVal1="13.70"
+              layVal2="10000000"
+              player="8"
+            />
+            <EachPlayer
+              name="Player 9"
+              nameVal="0"
+              blackVal1="12.20"
+              blackVal2="10000000"
+              layVal1="13.70"
+              layVal2="10000000"
+              player="9"
+            />
+            <EachPlayer
+              name="Player 10"
+              nameVal="0"
+              blackVal1="12.20"
+              blackVal2="10000000"
+              layVal1="13.70"
+              layVal2="10000000"
+              player="10"
+            />
+            <EachPlayer
+              name="Player 11"
+              nameVal="0"
+              blackVal1="12.20"
+              blackVal2="10000000"
+              layVal1="13.70"
+              layVal2="10000000"
+              player="11"
+            />
           </tbody>
         </table>
       </div>
@@ -111,4 +175,11 @@ function Card32Game() {
   );
 }
 
-export default Card32Game;
+const mapStateToProps = ({ gamesData }) => ({
+  isGameActive: gamesData.isGameActive,
+});
+const mapDispatchToProps = {
+  updateGameType,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Card32Game);

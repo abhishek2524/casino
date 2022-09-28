@@ -22,6 +22,7 @@ import {
   updateResultCard,
 } from "./../../reducers/gameDataSlice";
 import { updateKeyObject } from "./../../reducers/localstorageSlice";
+import { toggleHamburger } from "./../../reducers/commonSlice";
 import axios from "axios";
 import { useRef } from "react";
 import Notification from "../../components/common/Notification";
@@ -55,6 +56,7 @@ function GameContainer(props) {
     updateKeyObject,
     placedBetCount,
     updateResultCard,
+    toggleHamburger,
   } = props;
   const [showSidebar, setShowSidebar] = useState(false);
   const [showModal, setShowModal] = useState(false);
@@ -97,21 +99,21 @@ function GameContainer(props) {
     });
   };
 
-  const fetchSectionId = async () => {
-    const apiURL = `${process.env.REACT_APP_BACKEND_API}/game/dragon_tiger_session/`;
-    const res = await axios({
-      method: "GET",
-      url: apiURL,
+  // const fetchSectionId = async () => {
+  //   const apiURL = `${process.env.REACT_APP_BACKEND_API}/game/dragon_tiger_session/`;
+  //   const res = await axios({
+  //     method: "GET",
+  //     url: apiURL,
 
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem("access")}`,
-      },
-      // data: { username, password },
-    });
-    if (res.status === 200) {
-      return updateSessionId({ sessionId: res.data });
-    }
-  };
+  //     headers: {
+  //       Authorization: `Bearer ${localStorage.getItem("access")}`,
+  //     },
+  //     // data: { username, password },
+  //   });
+  //   if (res.status === 200) {
+  //     return updateSessionId({ sessionId: res.data });
+  //   }
+  // };
   const fetchToken = async () => {
     const res = await fetchExpToken();
 
@@ -282,7 +284,7 @@ function GameContainer(props) {
               <img src="/logo.png" alt="" />
             </NavLink>
           </div>
-          <Profile />
+          <Profile toggleHamburger={toggleHamburger} />
         </div>
         <div className="container d-flex justify-content-between align-items-center">
           <div className="linkDiv">
@@ -363,6 +365,7 @@ const mapDispatchToProps = {
   resetAll,
   updateKeyObject,
   updateResultCard,
+  toggleHamburger,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(GameContainer);

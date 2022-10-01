@@ -1,7 +1,107 @@
-import React from "react";
-import { NavLink } from "react-router-dom";
+import React, { useEffect } from "react";
+import { connect } from "react-redux";
+import {
+  updateGameType,
+  updatePlacedBet,
+} from "../../../reducers/gameDataSlice";
+import Timer from "../DragonTigerGame/Timer";
 import "./teenpati.scss";
-function Teenpati() {
+import {
+  card_type_name,
+  card_value_name,
+  fetchTeenpatiBet,
+} from "../../../utils/Utils";
+
+function Teenpati(props) {
+  const {
+    isGameActive = true,
+    updateGameType,
+    gameType = {},
+    past_win = [],
+    teenpatiCards = {},
+    updatePlacedBet,
+    placedBet,
+  } = props;
+  const { type: _gameType = undefined, value: _gameValue = undefined } =
+    gameType;
+  const { cardA1 = [], cardA2 = [], cardA3 = [] } = teenpatiCards;
+
+  const handleBlackClick = (player) => {
+    const choosen_player = `select_${player}`;
+    updateGameType({
+      type: choosen_player,
+      value: 1,
+      amount: 0,
+    });
+    console.log("handleBlackClick::", choosen_player);
+  };
+  const handleLayClick = (player) => {
+    const choosen_player = `select_${player}`;
+    console.log("handleLayClick::", choosen_player);
+    updateGameType({
+      type: choosen_player,
+      value: 0,
+      amount: 0,
+    });
+  };
+  const EachPlayer = (playerProps) => {
+    return (
+      <tr>
+        <td>
+          {playerProps.name}
+          <br />
+          {playerProps.nameVal}
+        </td>
+        <div className="d-flex position-relative eachPlayerBtnDiv">
+          <div className={!isGameActive ? "lockImgDiv" : "d-none"}>
+            <img src="/assets/icons/lock.svg" alt="lock" />
+          </div>
+          <td
+            className={`w-50 ${
+              _gameType === `select_${playerProps.player}` &&
+              _gameValue == "1" &&
+              "bg-info"
+            }`}
+            role={isGameActive ? "button" : ""}
+            onClick={() => handleBlackClick(playerProps.player)}
+          >
+            {playerProps.blackVal1} <br />
+            {playerProps.blackVal2}
+          </td>
+          <td
+            className={`w-50 ${
+              _gameType === `select_${playerProps.player}` &&
+              _gameValue == "0" &&
+              "bg-info"
+            }`}
+            role={isGameActive ? "button" : ""}
+            onClick={() => handleLayClick(playerProps.player)}
+          >
+            {playerProps.layVal1}
+            <br />
+            {playerProps.layVal2}
+          </td>
+        </div>
+      </tr>
+    );
+  };
+
+  const fetchBet = async () => {
+    const res = await fetchTeenpatiBet();
+
+    const { status, data } = res;
+    if (status === 200) {
+      updatePlacedBet({ data });
+      return;
+    }
+    return;
+  };
+
+  useEffect(() => {
+    if (!placedBet.count) {
+      fetchBet();
+    }
+  }, []);
   return (
     <div className="teenpatiDiv">
       <div className="topSlideDiv position-relative">
@@ -12,11 +112,21 @@ function Teenpati() {
         />
         <div className="cards flex-column">
           <div className="d-flex mb-2">
-            <img
-              className="card"
-              src="/assets/images/cards/Queen_of_Hearts.png"
-              alt="cards"
-            />
+            {cardA1.length === 0 ? (
+              <img
+                className="card"
+                src="/assets/images/cards/playing-card-ba.png"
+                alt="cards"
+              />
+            ) : (
+              <img
+                className="card"
+                src={`/assets/cards/${card_type_name[cardA1[0]]}${
+                  card_value_name[cardA1[1]]
+                }.png`}
+                alt="cards"
+              />
+            )}
             <img
               className="card"
               src="/assets/images/cards/playing-card-ba.png"
@@ -29,16 +139,36 @@ function Teenpati() {
             />
           </div>
           <div className="d-flex">
-            <img
-              className="card"
-              src="/assets/images/cards/Queen_of_Hearts.png"
-              alt="cards"
-            />
-            <img
-              className="card"
-              src="/assets/images/cards/Queen_of_Hearts.png"
-              alt="cards"
-            />
+            {cardA2.length === 0 ? (
+              <img
+                className="card"
+                src="/assets/images/cards/playing-card-ba.png"
+                alt="cards"
+              />
+            ) : (
+              <img
+                className="card"
+                src={`/assets/cards/${card_type_name[cardA2[0]]}${
+                  card_value_name[cardA2[1]]
+                }.png`}
+                alt="cards"
+              />
+            )}
+            {cardA3.length === 0 ? (
+              <img
+                className="card"
+                src="/assets/images/cards/playing-card-ba.png"
+                alt="cards"
+              />
+            ) : (
+              <img
+                className="card"
+                src={`/assets/cards/${card_type_name[cardA3[0]]}${
+                  card_value_name[cardA3[1]]
+                }.png`}
+                alt="cards"
+              />
+            )}
             <img
               className="card"
               src="/assets/images/cards/playing-card-ba.png"
@@ -46,10 +176,7 @@ function Teenpati() {
             />
           </div>
         </div>
-        <div className="countNumber">
-          <div className="digit">0</div>
-          <div className="digit">1</div>
-        </div>
+        <Timer />
       </div>
 
       <div className="minMaxDiv">
@@ -57,34 +184,31 @@ function Teenpati() {
           <thead>
             <tr>
               <th>Min: 100 Max: 300000</th>
-              <th colSpan={2}>Back</th>
+              <div className="d-flex ">
+                <th className="flex-grow-1">Black</th>
+                <th className="flex-grow-1">Lay</th>
+              </div>
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>Player A</td>
-              <div className="points locked">
-                <td>
-                  1.98 <br />0
-                </td>
-                <td>
-                  Pair Plus A <br />0
-                </td>
-                <img src="/assets/icons/lock.svg" alt="lock" />
-              </div>
-            </tr>
-            <tr>
-              <td>Player A</td>
-              <div className="points locked">
-                <td>
-                  1.98 <br />0
-                </td>
-                <td>
-                  Pair Plus A <br />0
-                </td>
-                <img src="/assets/icons/lock.svg" alt="lock" />
-              </div>
-            </tr>
+            <EachPlayer
+              name="Player A"
+              nameVal="0"
+              blackVal1="1.98"
+              blackVal2="0"
+              layVal1="Pair Plus A"
+              layVal2="0"
+              player="A"
+            />
+            <EachPlayer
+              name="Player B"
+              nameVal="0"
+              blackVal1="1.98"
+              blackVal2="0"
+              layVal1="Pair Plus B"
+              layVal2="0"
+              player="B"
+            />
           </tbody>
         </table>
       </div>
@@ -92,21 +216,24 @@ function Teenpati() {
       <div className="resultDiv row">
         <div className="header">
           <span>Last Result</span>
-          <NavLink to="/gameresult" state={{ path: "teenpati" }}>
-            View all
-          </NavLink>
         </div>
         <div className="content">
-          <span>A</span>
-          <span>A</span>
-          <span className="text-danger">B</span>
-          <span>A</span>
-          <span>A</span>
-          <span>A</span>
+          {past_win.map(
+            (data, index) =>
+              data &&
+              !Number.isInteger(data) && (
+                <span
+                  key={`result-${index}`}
+                  className={data.toUpperCase() === "B" && "text-dange"}
+                >
+                  {data.charAt(0).toUpperCase()}
+                </span>
+              )
+          )}
         </div>
       </div>
 
-      <div className="pairResult">
+      {/* <div className="pairResult">
         <div className="header">Last Result</div>
         <div className="subheader">Pair Plus</div>
         <table className="pairTable">
@@ -133,9 +260,22 @@ function Teenpati() {
             </tr>
           </tbody>
         </table>
-      </div>
+      </div> */}
     </div>
   );
 }
 
-export default Teenpati;
+const mapStateToProps = ({ gamesData }) => ({
+  isGameActive: gamesData.isGameActive,
+  past_win: gamesData.past_win,
+  gameType: gamesData.gameType,
+  placedBet: gamesData.placedBet,
+  teenpatiCards: gamesData.teenpatiCards,
+});
+
+const mapDispatchToProps = {
+  updateGameType,
+  updatePlacedBet,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Teenpati);

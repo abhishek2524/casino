@@ -21,6 +21,7 @@ import {
   resetAll,
   updateResultCard,
   updateCard32Cards,
+  updateTeenPatiCards,
 } from "./../../reducers/gameDataSlice";
 import { updateKeyObject } from "./../../reducers/localstorageSlice";
 import { toggleHamburger } from "./../../reducers/commonSlice";
@@ -59,6 +60,7 @@ function GameContainer(props) {
     updateResultCard,
     toggleHamburger,
     updateCard32Cards,
+    updateTeenPatiCards,
   } = props;
   const [showSidebar, setShowSidebar] = useState(false);
   const [showModal, setShowModal] = useState(false);
@@ -206,6 +208,16 @@ function GameContainer(props) {
             if (data.data.card11) {
               updateCard32Cards({ card11: data.data.card11 });
             }
+          } else if (gameName === "teenpati") {
+            if (data.data.cardA1) {
+              updateTeenPatiCards({ cardA1: data.data.cardA1 });
+            }
+            if (data.data.cardA2) {
+              updateTeenPatiCards({ cardA2: data.data.cardA2 });
+            }
+            if (data.data.cardA3) {
+              updateTeenPatiCards({ cardA3: data.data.cardA3 });
+            }
           }
 
           if (data.data.past_wins) {
@@ -347,7 +359,7 @@ function GameContainer(props) {
           </div>
 
           <div className="contentDiv">
-            {placeBet && <PlacedBet />}
+            {placeBet && <PlacedBet gameName={gameName} />}
             {!placeBet && <GameComponent />}
           </div>
         </div>
@@ -382,6 +394,7 @@ const mapDispatchToProps = {
   updateResultCard,
   toggleHamburger,
   updateCard32Cards,
+  updateTeenPatiCards,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(GameContainer);

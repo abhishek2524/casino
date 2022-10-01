@@ -1,12 +1,16 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { connect } from "react-redux";
-import { updateGameType } from "../../../reducers/gameDataSlice";
+import {
+  updateGameType,
+  updatePlacedBet,
+} from "../../../reducers/gameDataSlice";
 import {
   cards_number_list,
   card_lh_type,
   card_type_name,
   card_value_name,
   color_obj,
+  fetchLuck7Bet,
   OEVal,
 } from "../../../utils/Utils";
 import Timer from "../DragonTigerGame/Timer";
@@ -17,6 +21,8 @@ function Lucky7Game(props) {
     updateGameType,
     resultCard = [],
     past_win = [],
+    updatePlacedBet,
+    placedBet,
   } = props;
   const { type: _gameType = undefined, value: _gameValue = undefined } =
     props.gameType;
@@ -98,6 +104,23 @@ function Lucky7Game(props) {
       amount: 0,
     });
   };
+
+  const fetchBet = async () => {
+    const res = await fetchLuck7Bet();
+
+    const { status, data } = res;
+    if (status === 200) {
+      updatePlacedBet({ data });
+      return;
+    }
+    return;
+  };
+
+  useEffect(() => {
+    if (!placedBet.count) {
+      fetchBet();
+    }
+  }, []);
   return (
     <div className="lucky7GameDiv">
       <div className="topSlideDiv position-relative">
@@ -275,9 +298,11 @@ const mapStateToProps = ({ gamesData }) => ({
   gameType: gamesData.gameType,
   resultCard: gamesData.resultCard,
   past_win: gamesData.past_win,
+  placedBet: gamesData.placedBet,
 });
 const mapDispatchToProps = {
   updateGameType,
+  updatePlacedBet,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Lucky7Game);

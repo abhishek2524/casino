@@ -1,8 +1,15 @@
 import React, { memo } from "react";
 import { useEffect } from "react";
 import { connect } from "react-redux";
-import { updateGameType } from "../../../reducers/gameDataSlice";
-import { card_type_name, card_value_name } from "../../../utils/Utils";
+import {
+  updateGameType,
+  updatePlacedBet,
+} from "../../../reducers/gameDataSlice";
+import {
+  card_type_name,
+  card_value_name,
+  fetchCard32Bet,
+} from "../../../utils/Utils";
 import Timer from "../DragonTigerGame/Timer";
 import "./card32Game.scss";
 
@@ -13,6 +20,8 @@ function Card32Game(props) {
     past_win = [],
     gameType = {},
     card32Cards = {},
+    placedBet,
+    updatePlacedBet,
   } = props;
   const { card8 = [], card9 = [], card10 = [], card11 = [] } = card32Cards;
   const { type: _gameType = undefined, value: _gameValue = undefined } =
@@ -21,7 +30,7 @@ function Card32Game(props) {
     const choosen_player = `select_${player}`;
     updateGameType({
       type: choosen_player,
-      value: 0,
+      value: 1,
       amount: 0,
     });
     console.log("handleBlackClick::", choosen_player);
@@ -31,7 +40,7 @@ function Card32Game(props) {
     console.log("handleLayClick::", choosen_player);
     updateGameType({
       type: choosen_player,
-      value: 1,
+      value: 0,
       amount: 0,
     });
   };
@@ -50,7 +59,7 @@ function Card32Game(props) {
           <td
             className={`flex-grow-1 ${
               _gameType === `select_${playerProps.player}` &&
-              _gameValue == "0" &&
+              _gameValue == "1" &&
               "bg-info"
             }`}
             role={isGameActive ? "button" : ""}
@@ -62,7 +71,7 @@ function Card32Game(props) {
           <td
             className={`flex-grow-1 ${
               _gameType === `select_${playerProps.player}` &&
-              _gameValue == "1" &&
+              _gameValue == "0" &&
               "bg-info"
             }`}
             role={isGameActive ? "button" : ""}
@@ -76,7 +85,22 @@ function Card32Game(props) {
       </tr>
     );
   };
-  useEffect(() => {}, []);
+  const fetchBet = async () => {
+    const res = await fetchCard32Bet();
+
+    const { status, data } = res;
+    if (status === 200) {
+      updatePlacedBet({ data });
+      return;
+    }
+    return;
+  };
+
+  useEffect(() => {
+    if (!placedBet.count) {
+      fetchBet();
+    }
+  }, []);
   return (
     <div className="card32GameDiv">
       <div className="topSlideDiv position-relative">
@@ -262,9 +286,11 @@ const mapStateToProps = ({ gamesData }) => ({
   past_win: gamesData.past_win,
   gameType: gamesData.gameType,
   card32Cards: gamesData.card32Cards,
+  placedBet: gamesData.placedBet,
 });
 const mapDispatchToProps = {
   updateGameType,
+  updatePlacedBet,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(memo(Card32Game));

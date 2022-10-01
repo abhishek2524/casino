@@ -12,6 +12,11 @@ const initValue = {
   placedBet: { count: 0, data: [] },
   gameType: { type: undefined, value: undefined, amount: 0 },
   card32Cards: { card8: [], card9: [], card10: [], card11: [] },
+  teenpatiCards: {
+    cardA1: [],
+    cardA2: [],
+    cardA3: [],
+  },
 };
 
 export const gamesDataSlice = createSlice({
@@ -89,6 +94,12 @@ export const gamesDataSlice = createSlice({
       const newObj = { ...state.card32Cards, ...payload };
       state.card32Cards = newObj;
     },
+    updateTeenPatiCards(state, action) {
+      const { payload } = action;
+      // const { data = {} } = payload;
+      const newObj = { ...state.teenpatiCards, ...payload };
+      state.teenpatiCards = newObj;
+    },
   },
 });
 
@@ -106,5 +117,6 @@ export const {
   updatePlacedBet,
   updateResultCard,
   updateCard32Cards,
+  updateTeenPatiCards,
 } = gamesDataSlice.actions;
 export default gamesDataSlice.reducer;

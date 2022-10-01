@@ -28,6 +28,11 @@ const card_value_type = {
   2: "pair",
 };
 
+const card_lh_value_type = {
+  0: "low",
+  1: "high",
+};
+
 export const fetchExpToken = async () => {
   try {
     const apiURL = `${process.env.REACT_APP_BACKEND_API}/api/user/token`;
@@ -120,6 +125,171 @@ export const fetchPlacedBet = async () => {
   }
 };
 
+export const fetchLuck7Bet = async () => {
+  try {
+    const apiURL = `${process.env.REACT_APP_BACKEND_API}/game/luck77_model_place_bid`;
+    const res = await axios({
+      method: "get",
+      url: apiURL,
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("access")}`,
+      },
+    });
+    const { data, status } = res;
+    if (status === 200) {
+      res.data = data
+        .map((d, i) => {
+          let gamePLayed = null,
+            gameAmount = null,
+            gameWinStatus = null;
+          if (d.card_lh !== "False") {
+            gamePLayed = card_lh_value_type[d.card_lh];
+            gameAmount = d.card_lh_amount.toString();
+            gameWinStatus = d.card_lh_win ? "Won" : "Loss";
+          } else if (d.card_oe !== "False") {
+            gamePLayed = d.card_oe == 0 ? "Luck7 Even" : "Luck7 Odd";
+            gameAmount = d.card_oe_amount.toString();
+            gameWinStatus = d.card_oe_win ? "Won" : "Loss";
+          } else if (d.card_colour !== "False") {
+            gamePLayed = d.card_colour == 0 ? "Luck7 Red" : "Luck7 Black";
+            gameAmount = d.card_colour_amount.toString();
+            gameWinStatus = d.card_colour_win ? "Won" : "Loss";
+          } else if (d.card_number !== "False") {
+            gamePLayed = `Luck7 ${card_value_name[d.card_number]}`;
+            gameAmount = d.card_number_amount.toString();
+            gameWinStatus = d.card_number_win ? "Won" : "Loss";
+          }
+          return {
+            gamePLayed,
+            gameAmount,
+            gameWinStatus,
+            date: d.date,
+            id: i,
+          };
+        })
+        .filter((d) => {
+          return d.gamePLayed;
+        });
+    }
+    return res;
+  } catch (err) {
+    console.log("Error while fetching token1 in luck7::", err.response);
+    if (err.response.status === 401) {
+      localStorage.clear();
+      window.location.reload();
+      return;
+    }
+  }
+};
+
+export const fetchCard32Bet = async () => {
+  try {
+    const apiURL = `${process.env.REACT_APP_BACKEND_API}/game/Card32_place_bid`;
+    const res = await axios({
+      method: "get",
+      url: apiURL,
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("access")}`,
+      },
+    });
+    const { data, status } = res;
+    if (status === 200) {
+      res.data = data
+        .map((d, i) => {
+          let gamePLayed = null,
+            gameAmount = null,
+            gameWinStatus = null;
+          if (d.select_8 !== "False") {
+            gamePLayed = d.select_8 == "0" ? "Player 8 Lay" : "Player 8 Black";
+            gameAmount = d.select_8_amount.toString();
+            gameWinStatus = d.select_8_win ? "Won" : "Loss";
+          } else if (d.select_9 !== "False") {
+            gamePLayed = d.select_9 == "0" ? "Player 9 Lay" : "Player 9 Black";
+            gameAmount = d.select_9_amount.toString();
+            gameWinStatus = d.select_9_win ? "Won" : "Loss";
+          } else if (d.select_10 !== "False") {
+            gamePLayed =
+              d.select_10 == "0" ? "Player 10 Lay" : "Player 10 Black";
+            gameAmount = d.select_10_amount.toString();
+            gameWinStatus = d.select_10_win ? "Won" : "Loss";
+          } else if (d.select_11 !== "False") {
+            gamePLayed =
+              d.select_11 == "0" ? "Player 11 Lay" : "Player 11 Black";
+            gameAmount = d.select_11_amount.toString();
+            gameWinStatus = d.select_11_win ? "Won" : "Loss";
+          }
+          return {
+            gamePLayed,
+            gameAmount,
+            gameWinStatus,
+            date: d.date,
+            id: i,
+          };
+        })
+        .filter((d) => {
+          return d.gamePLayed;
+        });
+    }
+    return res;
+  } catch (err) {
+    console.log("Error while fetching token1 in card32::", err.response);
+    if (err.response.status === 401) {
+      localStorage.clear();
+      window.location.reload();
+      return;
+    }
+  }
+};
+
+export const fetchTeenpatiBet = async () => {
+  try {
+    const apiURL = `${process.env.REACT_APP_BACKEND_API}/game/teenpatti_place_bid`;
+    const res = await axios({
+      method: "get",
+      url: apiURL,
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("access")}`,
+      },
+    });
+    const { data, status } = res;
+    if (status === 200) {
+      res.data = data
+        .map((d, i) => {
+          let gamePLayed = null,
+            gameAmount = null,
+            gameWinStatus = null;
+          if (d.select_A !== "False") {
+            gamePLayed = d.select_A == "0" ? "Player A Lay" : "Player A Black";
+            gameAmount = d.select_A_amount.toString();
+            gameWinStatus = d.select_A_win ? "Won" : "Loss";
+          } else if (d.select_B !== "False") {
+            gamePLayed = d.select_B == "0" ? "Player A Lay" : "Player A Black";
+            gameAmount = d.select_B_amount.toString();
+            gameWinStatus = d.select_B_win ? "Won" : "Loss";
+          }
+          return {
+            gamePLayed,
+            gameAmount,
+            gameWinStatus,
+            date: d.date,
+            id: i,
+          };
+        })
+        .filter((d) => {
+          return d.gamePLayed;
+        });
+    }
+    return res;
+  } catch (err) {
+    console.log("Error while fetching token1 in teenpati::", err.response);
+    if (err.response.status === 401) {
+      localStorage.clear();
+      window.location.reload();
+      return;
+    }
+  }
+};
+
 export const card_type_name = {
   0: "spades/p",
   1: "diamonds/l",
@@ -147,8 +317,8 @@ export const card_value_name = {
 export const gamesWsApi = {
   dragon: "/bid/DragonTiger",
   lucky7: "/bid/luck77",
-  teenpati: "",
   card32: "/bid/Card32/",
+  teenpati: "/bid/TeenPatti/",
   andarBahar: "",
   queen: "",
   poker: "",

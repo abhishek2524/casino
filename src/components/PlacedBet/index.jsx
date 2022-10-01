@@ -1,11 +1,17 @@
 import { useEffect, useState } from "react";
 import { connect } from "react-redux";
-import { fetchPlacedBet } from "../../utils/Utils";
+import {
+  fetchCard32Bet,
+  fetchLuck7Bet,
+  fetchPlacedBet,
+  fetchTeenpatiBet,
+} from "../../utils/Utils";
 import CustomTable from "../common/CustomTable";
 import { updatePlacedBet } from "./../../reducers/gameDataSlice";
+import "./placedBet.scss";
 
 function PlacedBet(props) {
-  const { updatePlacedBet, placedBet } = props;
+  const { updatePlacedBet, placedBet, gameName = "dragon" } = props;
   const [columns, setColumns] = useState([]);
   const [defaultSorted, setDefaultSorted] = useState([]);
   const [data, setData] = useState([]);
@@ -29,7 +35,23 @@ function PlacedBet(props) {
     );
   };
   const fetchBet = async () => {
-    const res = await fetchPlacedBet();
+    let res;
+    switch (gameName) {
+      case "dragon":
+        res = await fetchPlacedBet();
+        break;
+      case "lucky7":
+        res = await fetchLuck7Bet();
+        break;
+      case "card32":
+        res = await fetchCard32Bet();
+        break;
+      case "teenpati":
+        res = await fetchTeenpatiBet();
+        break;
+      default:
+        break;
+    }
     const { status, data } = res;
     if (status === 200) {
       updatePlacedBet({ data });

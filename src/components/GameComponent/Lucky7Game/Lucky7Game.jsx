@@ -101,7 +101,12 @@ function Lucky7Game(props) {
   return (
     <div className="lucky7GameDiv">
       <div className="topSlideDiv position-relative">
-        <img className="topBanner" src="/assets/images/lucky7Game.png" alt="" />
+        <div className="topBanner">
+          <video width="320" height="240" autoPlay loop muted>
+            <source src="/assets/video/lucky7.mp4" type="video/mp4" />
+          </video>
+        </div>
+        {/* <img className="topBanner" src="/assets/images/lucky7Game.png" alt="" /> */}
         <div className="cards">
           {resultCard.length === 0 ? (
             <img
@@ -137,7 +142,7 @@ function Lucky7Game(props) {
             />
             <div className="col-lg-2 col-md-2 col-sm-2 d-flex justify-content-center align-items-center highLowCard">
               <div className="gameCard">
-                <span>A</span>
+                <span>7</span>
                 <img
                   className="cardImg"
                   src="/assets/images/cards/cards-1.png"

@@ -128,19 +128,19 @@ export const card_type_name = {
 };
 
 export const card_value_name = {
-  0: "a",
-  1: "2",
-  2: "3",
-  3: "4",
-  4: "5",
-  5: "6",
-  6: "7",
-  7: "8",
-  8: "9",
-  9: "10",
-  10: "j",
-  11: "q",
-  12: "k",
+  0: "2",
+  1: "3",
+  2: "4",
+  3: "5",
+  4: "6",
+  5: "7",
+  6: "8",
+  7: "9",
+  8: "10",
+  9: "j",
+  10: "q",
+  11: "k",
+  12: "a",
 };
 
 // Lucky 77 games config
@@ -161,19 +161,19 @@ export const card_lh_type = {
 };
 
 export const cards_number_list = [
-  { value: 0, name: "A" },
-  { value: 1, name: "2" },
-  { value: 2, name: "3" },
-  { value: 3, name: "4" },
-  { value: 4, name: "5" },
-  { value: 5, name: "6" },
-  { value: 6, name: "7" },
-  { value: 7, name: "8" },
-  { value: 8, name: "9" },
-  { value: 9, name: "10" },
-  { value: 10, name: "J" },
-  { value: 11, name: "Q" },
-  { value: 12, name: "K" },
+  { value: 0, name: "2" },
+  { value: 1, name: "3" },
+  { value: 2, name: "4" },
+  { value: 3, name: "5" },
+  { value: 4, name: "6" },
+  { value: 5, name: "7" },
+  { value: 6, name: "8" },
+  { value: 7, name: "9" },
+  { value: 8, name: "10" },
+  { value: 9, name: "J" },
+  { value: 10, name: "Q" },
+  { value: 11, name: "K" },
+  { value: 12, name: "A" },
 ];
 
 export const OEVal = { odd: 1, even: 0 };

@@ -10,7 +10,7 @@ const initValue = {
   tigerArr: [],
   resultCard: [],
   placedBet: { count: 0, data: [] },
-  gameType: { type: undefined, value: undefined, amount: 0 },
+  gameType: { type: undefined, value: undefined, amount: undefined },
   card32Cards: { card8: [], card9: [], card10: [], card11: [] },
   teenpatiCards: {
     cardA1: [],

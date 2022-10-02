@@ -11,7 +11,7 @@ import "./betInputField.scss";
 function BetInputField(props) {
   const { updateGameType, gamesData, show, resetGameType } = props;
   const { isGameActive = false } = gamesData;
-  const { type = undefined, amount = 0 } = gamesData.gameType;
+  const { type = undefined, amount = undefined } = gamesData.gameType;
   const { handleBetPlacedSocket = undefined } = props;
   const [betAmount, setBetAmount] = useState(amount);
   const [error, setError] = useState(false);

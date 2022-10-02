@@ -58,9 +58,9 @@ function Teenpati(props) {
           </div>
           <td
             className={`w-50 ${
-              _gameType === `select_${playerProps.player}` &&
-              _gameValue == "1" &&
-              "bg-info"
+              _gameType === `select_${playerProps.player}` && _gameValue == "1"
+                ? ""
+                : "bg-info"
             }`}
             role={isGameActive ? "button" : ""}
             onClick={() => handleBlackClick(playerProps.player)}
@@ -70,9 +70,9 @@ function Teenpati(props) {
           </td>
           <td
             className={`w-50 ${
-              _gameType === `select_${playerProps.player}` &&
-              _gameValue == "0" &&
-              "bg-info"
+              _gameType === `select_${playerProps.player}` && _gameValue == "0"
+                ? ""
+                : "bg-pink"
             }`}
             role={isGameActive ? "button" : ""}
             onClick={() => handleLayClick(playerProps.player)}
@@ -105,11 +105,16 @@ function Teenpati(props) {
   return (
     <div className="teenpatiDiv">
       <div className="topSlideDiv position-relative">
-        <img
+        <div className="topBanner">
+          <video width="320" height="240" autoPlay loop muted>
+            <source src="/assets/video/teenpatti.mp4" type="video/mp4" />
+          </video>
+        </div>
+        {/* <img
           className="topBanner"
           src="/assets/images/teenpatiSlide.png"
           alt=""
-        />
+        /> */}
         <div className="cards flex-column">
           <div className="d-flex mb-2">
             {cardA1.length === 0 ? (

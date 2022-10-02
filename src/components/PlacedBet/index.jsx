@@ -79,7 +79,7 @@ function PlacedBet(props) {
 
     setDefaultSorted([
       {
-        dataField: "id",
+        dataField: "date",
         order: "desc",
       },
     ]);

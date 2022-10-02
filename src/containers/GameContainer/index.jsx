@@ -42,7 +42,7 @@ function GameContainer(props) {
   const {
     type = undefined,
     value = undefined,
-    amount = 0,
+    amount = undefined,
     isGameActive = false,
     updateSessionId,
     sessionId,
@@ -211,12 +211,18 @@ function GameContainer(props) {
           } else if (gameName === "teenpati") {
             if (data.data.cardA1) {
               updateTeenPatiCards({ cardA1: data.data.cardA1 });
+            } else {
+              updateTeenPatiCards({ cardA1: [] });
             }
             if (data.data.cardA2) {
               updateTeenPatiCards({ cardA2: data.data.cardA2 });
+            } else {
+              updateTeenPatiCards({ cardA2: [] });
             }
             if (data.data.cardA3) {
               updateTeenPatiCards({ cardA3: data.data.cardA3 });
+            } else {
+              updateTeenPatiCards({ cardA3: [] });
             }
           }
 

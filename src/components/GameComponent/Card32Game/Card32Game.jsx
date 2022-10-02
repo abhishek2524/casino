@@ -58,9 +58,9 @@ function Card32Game(props) {
           </div>
           <td
             className={`flex-grow-1 ${
-              _gameType === `select_${playerProps.player}` &&
-              _gameValue == "1" &&
-              "bg-info"
+              _gameType === `select_${playerProps.player}` && _gameValue == "1"
+                ? ""
+                : "bg-info"
             }`}
             role={isGameActive ? "button" : ""}
             onClick={() => handleBlackClick(playerProps.player)}
@@ -70,9 +70,9 @@ function Card32Game(props) {
           </td>
           <td
             className={`flex-grow-1 ${
-              _gameType === `select_${playerProps.player}` &&
-              _gameValue == "0" &&
-              "bg-info"
+              _gameType === `select_${playerProps.player}` && _gameValue == "0"
+                ? ""
+                : "bg-pink"
             }`}
             role={isGameActive ? "button" : ""}
             onClick={() => handleLayClick(playerProps.player)}
@@ -104,7 +104,12 @@ function Card32Game(props) {
   return (
     <div className="card32GameDiv">
       <div className="topSlideDiv position-relative">
-        <img className="topBanner" src="/assets/images/card32Game.png" alt="" />
+        <div className="topBanner">
+          <video width="320" height="240" autoPlay loop muted>
+            <source src="/assets/video/card32.mp4" type="video/mp4" />
+          </video>
+        </div>
+        {/* <img className="topBanner" src="/assets/images/card32Game.png" alt="" /> */}
         <div className="cards flex-column">
           <div className="d-flex mb-2">
             <div className="position-relative cardWithNo me-3">
@@ -230,27 +235,27 @@ function Card32Game(props) {
             <EachPlayer
               name="Player 9"
               nameVal="0"
-              blackVal1="12.20"
+              blackVal1="5.95"
               blackVal2="10000000"
-              layVal1="13.70"
+              layVal1="6.45"
               layVal2="10000000"
               player="9"
             />
             <EachPlayer
               name="Player 10"
               nameVal="0"
-              blackVal1="12.20"
+              blackVal1="3.20"
               blackVal2="10000000"
-              layVal1="13.70"
+              layVal1="3.45"
               layVal2="10000000"
               player="10"
             />
             <EachPlayer
               name="Player 11"
               nameVal="0"
-              blackVal1="12.20"
+              blackVal1="2.08"
               blackVal2="10000000"
-              layVal1="13.70"
+              layVal1="2.18"
               layVal2="10000000"
               player="11"
             />

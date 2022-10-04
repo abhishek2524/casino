@@ -6,9 +6,13 @@ import { useNavigate } from "react-router-dom";
 import { updateGameType } from "./../../../reducers/gameDataSlice";
 
 function TopSidebar(props) {
-  const { updateGameType, gamesData } = props;
+  const { updateGameType, gamesData, scrollRef = null } = props;
   const { isGameActive = false } = gamesData;
-  const { type = undefined, amount = undefined } = gamesData.gameType;
+  const {
+    type = undefined,
+    amount = undefined,
+    value = undefined,
+  } = gamesData.gameType;
   const { handleBetPlacedSocket = undefined } = props;
   const [betAmount, setBetAmount] = useState(amount);
   const [error, setError] = useState(false);
@@ -27,9 +31,10 @@ function TopSidebar(props) {
     });
   };
 
-  // useEffect(() => {
-  //   setBetAmount(betAmount);
-  // }, []);
+  useEffect(() => {
+    scrollRef.current.scrollTo(0, 0);
+  }, [value]);
+
   const img = <img src="/assets/icons/coins.svg" alt="coins" />;
   const navigate = useNavigate();
   return (

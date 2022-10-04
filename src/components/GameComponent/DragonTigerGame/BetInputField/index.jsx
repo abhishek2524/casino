@@ -13,7 +13,7 @@ function BetInputField(props) {
   const { isGameActive = false } = gamesData;
   const { type = undefined, amount = undefined } = gamesData.gameType;
   const { handleBetPlacedSocket = undefined } = props;
-  const [betAmount, setBetAmount] = useState(amount);
+  const [betAmount, setBetAmount] = useState(undefined);
   const [error, setError] = useState(false);
   const handleBid = () => {
     console.log("handleBid::::::");

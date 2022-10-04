@@ -14,7 +14,7 @@ function GameResultContainer() {
   const [gameName, setGameName] = useState(gName);
   const gameFullName = {
     dragon: "20-20 Dragon Tiger",
-    lucky7: "Luck7 7 - B",
+    lucky7: "Luck7 - B",
     teenpati: "20-20 Teenpatti",
     card32: "32 Cards",
     andarBahar: "Andar Bahar",
@@ -24,7 +24,7 @@ function GameResultContainer() {
   };
   const selectOption = [
     { value: "dragon", label: "20-20 Dragon Tiger" },
-    { value: "lucky7", label: "Luck7 7 - B" },
+    { value: "lucky7", label: "Luck7 - B" },
     { value: "teenpati", label: "20-20 Teenpatti" },
     { value: "card32", label: "32 Cards" },
   ];

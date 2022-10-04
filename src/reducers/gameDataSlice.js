@@ -16,6 +16,9 @@ const initValue = {
     cardA1: [],
     cardA2: [],
     cardA3: [],
+    cardB1: [],
+    cardB2: [],
+    cardB3: [],
   },
 };
 

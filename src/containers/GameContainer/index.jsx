@@ -70,7 +70,7 @@ function GameContainer(props) {
   const availableGames = ["dragon", "lucky7", "teenpati", "card32"];
   const gameFullName = {
     dragon: "20-20 Dragon Tiger",
-    lucky7: "Luck7 7 - B",
+    lucky7: "Luck7 - B",
     teenpati: "20-20 Teenpatti",
     card32: "32 Cards",
     andarBahar: "Andar Bahar",
@@ -223,6 +223,22 @@ function GameContainer(props) {
               updateTeenPatiCards({ cardA3: data.data.cardA3 });
             } else {
               updateTeenPatiCards({ cardA3: [] });
+            }
+
+            if (data.data.cardB1) {
+              updateTeenPatiCards({ cardB1: data.data.cardB1 });
+            } else {
+              updateTeenPatiCards({ cardB1: [] });
+            }
+            if (data.data.cardB2) {
+              updateTeenPatiCards({ cardB2: data.data.cardB2 });
+            } else {
+              updateTeenPatiCards({ cardB2: [] });
+            }
+            if (data.data.cardB3) {
+              updateTeenPatiCards({ cardB3: data.data.cardB3 });
+            } else {
+              updateTeenPatiCards({ cardB3: [] });
             }
           }
 

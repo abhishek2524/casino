@@ -34,7 +34,7 @@ function BottomSidebar(props) {
       link: "/game/dragon",
     },
     {
-      label: "Luck7 7 - B",
+      label: "Luck7 - B",
       link: "/game/lucky7",
     },
     {

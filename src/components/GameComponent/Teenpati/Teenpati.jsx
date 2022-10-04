@@ -24,7 +24,14 @@ function Teenpati(props) {
   } = props;
   const { type: _gameType = undefined, value: _gameValue = undefined } =
     gameType;
-  const { cardA1 = [], cardA2 = [], cardA3 = [] } = teenpatiCards;
+  const {
+    cardA1 = [],
+    cardA2 = [],
+    cardA3 = [],
+    cardB1 = [],
+    cardB2 = [],
+    cardB3 = [],
+  } = teenpatiCards;
 
   const handleBlackClick = (player) => {
     const choosen_player = `select_${player}`;
@@ -132,18 +139,6 @@ function Teenpati(props) {
                 alt="cards"
               />
             )}
-            <img
-              className="card"
-              src="/assets/images/cards/playing-card-ba.png"
-              alt="cards"
-            />
-            <img
-              className="card"
-              src="/assets/images/cards/playing-card-ba.png"
-              alt="cards"
-            />
-          </div>
-          <div className="d-flex">
             {cardA2.length === 0 ? (
               <img
                 className="card"
@@ -174,11 +169,63 @@ function Teenpati(props) {
                 alt="cards"
               />
             )}
-            <img
+            {/* <img
               className="card"
               src="/assets/images/cards/playing-card-ba.png"
               alt="cards"
             />
+            <img
+              className="card"
+              src="/assets/images/cards/playing-card-ba.png"
+              alt="cards"
+            /> */}
+          </div>
+          <div className="d-flex">
+            {cardB1.length === 0 ? (
+              <img
+                className="card"
+                src="/assets/images/cards/playing-card-ba.png"
+                alt="cards"
+              />
+            ) : (
+              <img
+                className="card"
+                src={`/assets/cards/${card_type_name[cardB1[0]]}${
+                  card_value_name[cardB1[1]]
+                }.png`}
+                alt="cards"
+              />
+            )}
+            {cardB2.length === 0 ? (
+              <img
+                className="card"
+                src="/assets/images/cards/playing-card-ba.png"
+                alt="cards"
+              />
+            ) : (
+              <img
+                className="card"
+                src={`/assets/cards/${card_type_name[cardB2[0]]}${
+                  card_value_name[cardB2[1]]
+                }.png`}
+                alt="cards"
+              />
+            )}
+            {cardB3.length === 0 ? (
+              <img
+                className="card"
+                src="/assets/images/cards/playing-card-ba.png"
+                alt="cards"
+              />
+            ) : (
+              <img
+                className="card"
+                src={`/assets/cards/${card_type_name[cardB3[0]]}${
+                  card_value_name[cardB3[1]]
+                }.png`}
+                alt="cards"
+              />
+            )}
           </div>
         </div>
         <Timer />

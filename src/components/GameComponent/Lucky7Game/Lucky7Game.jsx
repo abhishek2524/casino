@@ -8,7 +8,7 @@ import {
   cards_number_list,
   card_lh_type,
   card_type_name,
-  card_value_name,
+  card_value_name_A_top,
   color_obj,
   fetchLuck7Bet,
   OEVal,
@@ -141,7 +141,7 @@ function Lucky7Game(props) {
             <img
               className="card"
               src={`/assets/cards/${card_type_name[resultCard[0]]}${
-                card_value_name[resultCard[1]]
+                card_value_name_A_top[resultCard[1]]
               }.png`}
               alt="cards"
             />

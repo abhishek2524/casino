@@ -7,7 +7,7 @@ import {
 } from "../../../reducers/gameDataSlice";
 import {
   card_type_name,
-  card_value_name,
+  card_value_name_A_top,
   fetchCard32Bet,
 } from "../../../utils/Utils";
 import Timer from "../DragonTigerGame/Timer";
@@ -129,7 +129,7 @@ function Card32Game(props) {
                 <img
                   className="card"
                   src={`/assets/cards/${card_type_name[card8[0]]}${
-                    card_value_name[card8[1]]
+                    card_value_name_A_top[card8[1]]
                   }.png`}
                   alt="cards"
                 />
@@ -152,7 +152,7 @@ function Card32Game(props) {
                 <img
                   className="card"
                   src={`/assets/cards/${card_type_name[card9[0]]}${
-                    card_value_name[card9[1]]
+                    card_value_name_A_top[card9[1]]
                   }.png`}
                   alt="cards"
                 />
@@ -177,7 +177,7 @@ function Card32Game(props) {
                 <img
                   className="card"
                   src={`/assets/cards/${card_type_name[card10[0]]}${
-                    card_value_name[card10[1]]
+                    card_value_name_A_top[card10[1]]
                   }.png`}
                   alt="cards"
                 />
@@ -200,7 +200,7 @@ function Card32Game(props) {
                 <img
                   className="card"
                   src={`/assets/cards/${card_type_name[card11[0]]}${
-                    card_value_name[card11[1]]
+                    card_value_name_A_top[card11[1]]
                   }.png`}
                   alt="cards"
                 />

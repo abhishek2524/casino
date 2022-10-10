@@ -176,7 +176,6 @@ function GameContainer(props) {
               if (
                 JSON.stringify(dragonArr) !== JSON.stringify(data.data.Dragon)
               ) {
-                // console.log("Update Dragon:;");
                 updateDragon({ dragonArr: data.data.Dragon });
               }
               updateDragon({ dragonArr: data.data.Dragon });
@@ -186,7 +185,6 @@ function GameContainer(props) {
               if (
                 JSON.stringify(tigerArr) !== JSON.stringify(data.data.Tiger)
               ) {
-                // console.log("Update Tiger:;");
                 updateTiger({ tigerArr: data.data.Tiger });
               }
               updateTiger({ tigerArr: data.data.Tiger });

@@ -13,7 +13,11 @@ import axios from "axios";
 //   }
 //   return false;
 // };
-
+const logout = () => {
+  localStorage.clear();
+  window.location.reload();
+  return;
+};
 export const card_type = {
   dragon: -1,
   tiger: 1,
@@ -287,6 +291,50 @@ export const fetchTeenpatiBet = async () => {
       window.location.reload();
       return;
     }
+  }
+};
+
+export const fetchButtonValue = async () => {
+  try {
+    const apiURL = `${process.env.REACT_APP_BACKEND_API}/game/button_value`;
+    const res = await axios({
+      method: "get",
+      url: apiURL,
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("access")}`,
+      },
+    });
+    const { data, status } = res;
+    if (status === 200) {
+      return data;
+    }
+    logout();
+  } catch (error) {
+    console.log("Error while fetching Button Value::");
+    logout();
+  }
+};
+
+export const updateButtonValueApi = async (formData) => {
+  try {
+    const apiURL = `${process.env.REACT_APP_BACKEND_API}/game/button_value/`;
+    const res = await axios({
+      method: "post",
+      url: apiURL,
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("access")}`,
+        "Content-Type": "multipart/form-data",
+      },
+      data: formData,
+    });
+    const { data, status } = res;
+    if (status === 200) {
+      return data;
+    }
+    // logout();
+  } catch (error) {
+    console.log("Error while updating Button Value::", error);
+    // logout();
   }
 };
 

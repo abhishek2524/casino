@@ -8,7 +8,6 @@ import {
 } from "./../../../../reducers/commonSlice";
 import "./sidebar.scss";
 function Sidebar(props) {
-  console.log("ttttttttttttt", props);
   const { openSidebar, toggleHamburger, closeSideBar } = props;
   const navigate = useNavigate();
   // const [openSidebar, setOpenSidebar] = useState(false);

@@ -63,20 +63,17 @@ export const gamesDataSlice = createSlice({
     },
     updateDragon(state, action) {
       const { payload } = action;
-      // console.log("updating Dragon", payload);
       const { dragonArr = [] } = payload;
 
       state.dragonArr = dragonArr;
     },
     updateTiger(state, action) {
       const { payload } = action;
-      // console.log("updating Tiger", payload);
       const { tigerArr = [] } = payload;
       state.tigerArr = tigerArr;
     },
     updateResultCard(state, action) {
       const { payload } = action;
-      // console.log("updating Tiger", payload);
       const { card = [] } = payload;
       state.resultCard = card;
     },

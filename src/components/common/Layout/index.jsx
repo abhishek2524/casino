@@ -22,7 +22,6 @@ function Layout() {
   };
 
   useEffect(() => {
-    // console.log("path::", pathname.includes("/betHistory"), pathname);
     setSubHeader(getSubHeader(pathname));
   }, [pathname]);
   return (

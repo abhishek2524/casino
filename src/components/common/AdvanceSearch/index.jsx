@@ -10,6 +10,12 @@ function AdvanceSearch(props) {
     selectOptions = [],
     onChange,
     value = { value: "", label: "" },
+    startDate = new Date(),
+    endDate = new Date(),
+    setStartDate = () => {},
+    setEndDate = () => {},
+    handleSubmit = () => {},
+    fetching = false,
   } = props;
   const customStyle = {
     control: () => ({
@@ -43,12 +49,16 @@ function AdvanceSearch(props) {
           <ReactDatePicker
             className="input"
             placeholderText="Select date"
-            onChange={(e) => console.log(e)}
-            selected={new Date()}
+            onChange={(date) => {
+              setStartDate(date);
+              if (date.getTime() > endDate.getTime()) setEndDate(date);
+            }}
+            selected={startDate}
             showPopperArrow={false}
             name="startDate"
             popperPlacement="bottom-right"
             popperClassName="customPopper"
+            maxDate={new Date()}
           />
           <img src="/assets/icons/cal.svg" className="calDiv" alt="cal" />
         </div>
@@ -57,12 +67,14 @@ function AdvanceSearch(props) {
             <ReactDatePicker
               className="input "
               placeholderText="Select date"
-              onChange={(e) => console.log(e)}
-              selected={new Date()}
+              onChange={(e) => setEndDate(e)}
+              selected={endDate}
               showPopperArrow={false}
               name="endDate"
               popperPlacement="bottom-left"
               popperClassName="customPopper"
+              minDate={startDate}
+              maxDate={new Date()}
             />
             <img src="/assets/icons/cal.svg" className="calDiv" alt="cal" />
           </div>
@@ -74,7 +86,13 @@ function AdvanceSearch(props) {
         )}
       </div>
       <div className="searchBtn">
-        <button className="btn btn-primary">Submit</button>
+        <button
+          disabled={fetching}
+          className="btn btn-primary"
+          onClick={handleSubmit}
+        >
+          Submit
+        </button>
       </div>
     </div>
   );

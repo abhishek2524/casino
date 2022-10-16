@@ -22,16 +22,6 @@ function DropdownOption() {
         </Link>
       </li>
       <li>
-        <Link className="dropdown-item" to="/unSettledBet">
-          Un-Settled Bet
-        </Link>
-      </li>
-      <li>
-        <Link className="dropdown-item" to="/transactionHistory">
-          Transaction History
-        </Link>
-      </li>
-      <li>
         <Link className="dropdown-item" to="/setButtonValue">
           Set Button Values
         </Link>

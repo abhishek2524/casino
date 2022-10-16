@@ -11,9 +11,7 @@ function Layout() {
   const [subHeader, setSubHeader] = useState("abc");
   const subHeaderObj = {
     "/betHistory": "Bet History",
-    "/transactionHistory": "Transaction History",
     "/profitLoss": "Profit/ Loss Report",
-    "/unSettledBet": "Un-Settled Bet",
     "/setButtonValue": "Set Button Values",
     "/changePassword": "Change Password",
   };

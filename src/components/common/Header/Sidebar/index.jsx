@@ -57,19 +57,6 @@ function Sidebar(props) {
                   </Link>
                 </li>
                 <li className="sidebar-item">
-                  <Link onClick={() => closeSideBar(false)} to="/unSettledBet">
-                    Un-Settled Bet
-                  </Link>
-                </li>
-                <li className="sidebar-item">
-                  <Link
-                    onClick={() => closeSideBar(false)}
-                    to="/transactionHistory"
-                  >
-                    Transaction History
-                  </Link>
-                </li>
-                <li className="sidebar-item">
                   <Link
                     onClick={() => closeSideBar(false)}
                     to="/setButtonValue"

@@ -48,7 +48,7 @@ function Profile(props) {
         <div className="userName text-capitalize">{userData.username}</div>
         <div className="userCode text-capitalize">
           {!dropdown
-            ? `${localstorage.exposure_token} | ${amount}`
+            ? `${Math.floor(localstorage.exposure_token)} | ${amount}`
             : `${userData.name} | ${userData.coupon}`}
         </div>
       </div>

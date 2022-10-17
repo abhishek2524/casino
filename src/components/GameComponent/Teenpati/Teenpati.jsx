@@ -237,7 +237,7 @@ function Teenpati(props) {
             <tr>
               <th>Min: 100 Max: 300000</th>
               <div className="d-flex ">
-                <th className="flex-grow-1">Black</th>
+                <th className="flex-grow-1">Back</th>
                 <th className="flex-grow-1">Lay</th>
               </div>
             </tr>

@@ -204,21 +204,21 @@ export const fetchCard32Bet = async () => {
             gameAmount = null,
             gameWinStatus = null;
           if (d.select_8 !== "False") {
-            gamePLayed = d.select_8 == "0" ? "Player 8 Lay" : "Player 8 Black";
+            gamePLayed = d.select_8 == "0" ? "Player 8 Lay" : "Player 8 Back";
             gameAmount = d.select_8_amount.toString();
             gameWinStatus = d.select_8_win ? "Won" : "Loss";
           } else if (d.select_9 !== "False") {
-            gamePLayed = d.select_9 == "0" ? "Player 9 Lay" : "Player 9 Black";
+            gamePLayed = d.select_9 == "0" ? "Player 9 Lay" : "Player 9 Back";
             gameAmount = d.select_9_amount.toString();
             gameWinStatus = d.select_9_win ? "Won" : "Loss";
           } else if (d.select_10 !== "False") {
             gamePLayed =
-              d.select_10 == "0" ? "Player 10 Lay" : "Player 10 Black";
+              d.select_10 == "0" ? "Player 10 Lay" : "Player 10 Back";
             gameAmount = d.select_10_amount.toString();
             gameWinStatus = d.select_10_win ? "Won" : "Loss";
           } else if (d.select_11 !== "False") {
             gamePLayed =
-              d.select_11 == "0" ? "Player 11 Lay" : "Player 11 Black";
+              d.select_11 == "0" ? "Player 11 Lay" : "Player 11 Back";
             gameAmount = d.select_11_amount.toString();
             gameWinStatus = d.select_11_win ? "Won" : "Loss";
           }
@@ -263,11 +263,11 @@ export const fetchTeenpatiBet = async () => {
             gameAmount = null,
             gameWinStatus = null;
           if (d.select_A !== "False") {
-            gamePLayed = d.select_A == "0" ? "Player A Lay" : "Player A Black";
+            gamePLayed = d.select_A == "0" ? "Player A Lay" : "Player A Back";
             gameAmount = d.select_A_amount.toString();
             gameWinStatus = d.select_A_win ? "Won" : "Loss";
           } else if (d.select_B !== "False") {
-            gamePLayed = d.select_B == "0" ? "Player A Lay" : "Player A Black";
+            gamePLayed = d.select_B == "0" ? "Player A Lay" : "Player A Back";
             gameAmount = d.select_B_amount.toString();
             gameWinStatus = d.select_B_win ? "Won" : "Loss";
           }

@@ -79,7 +79,7 @@ function Teenpati(props) {
             className={`w-50 ${
               _gameType === `select_${playerProps.player}` && _gameValue == "0"
                 ? ""
-                : "bg-pink"
+                : "bg-info"
             }`}
             role={isGameActive ? "button" : ""}
             onClick={() => handleLayClick(playerProps.player)}
@@ -237,8 +237,10 @@ function Teenpati(props) {
             <tr>
               <th>Min: 100 Max: 300000</th>
               <div className="d-flex ">
-                <th className="flex-grow-1">Back</th>
-                <th className="flex-grow-1">Lay</th>
+                <th colSpan={2} className="flex-grow-1 text-center">
+                  Back
+                </th>
+                {/* <th className="flex-grow-1">Lay</th> */}
               </div>
             </tr>
           </thead>
@@ -276,7 +278,7 @@ function Teenpati(props) {
               !Number.isInteger(data) && (
                 <span
                   key={`result-${index}`}
-                  className={data.toUpperCase() === "B" && "text-dange"}
+                  className={data.toUpperCase() === "B" && "text-danger"}
                 >
                   {data.charAt(0).toUpperCase()}
                 </span>
